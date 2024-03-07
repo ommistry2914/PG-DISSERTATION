@@ -9,9 +9,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --color-lavender:#DFC5FE;
-  --color-black:black;
-  --color-white:white;
+  --primary-color:#B691D2;
+  --secondary-color-1:#8230C6;
+  --secondary-color-2: #D1AEF9;
+  --secondary-color-3: #EBFF00;
+  --text-color-black: black;
+  --text-color-white:white;
+  --background-color:#E2E2E2;
+  --surface-color: white;
 }
 
 a {
