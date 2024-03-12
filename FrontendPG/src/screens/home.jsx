@@ -6,9 +6,11 @@ import Footer from '../components/Layout/Footer'
 const Home = () => {
   return (
     <div>
+      <Head/>
+      <br />
+
       <MSUDescription/>
       {/* <Footer/> */}
-      {/* <Head/> */}
       {/* <MSUDescription/> */}
 
     </div>

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Upload, message, Row, Col, Select, Checkbox } from 'antd';
 import { UserOutlined, UploadOutlined } from '@ant-design/icons';
 
+import Lottie from 'lottie-react';
+import HeadAnim from '../../../assests/HeadAnimation.json';
+
+
 import './Signup.css';
 
 const { Option } = Select;
@@ -36,7 +40,17 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-form">
+    <>
+    <div className="sign-main">
+      
+      <div className="sign-left">
+        <div className="anim-div">
+      <Lottie animationData={HeadAnim}/>
+        </div>
+      </div>
+
+      <div className="sign-right">
+      <div className="signup-form">
       <h2>Sign Up for Student</h2>
       <Form form={form} layout='vertical' onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <Row gutter={[16, 16]}>
@@ -159,6 +173,15 @@ const Signup = () => {
         </Form.Item>
       </Form>
     </div>
+      </div>
+
+    
+
+  </div>
+
+
+    </>
+    
   );
 };
 

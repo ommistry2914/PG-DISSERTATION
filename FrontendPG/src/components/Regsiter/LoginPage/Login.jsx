@@ -3,6 +3,10 @@ import clg from '../../../assests/techo-home.png';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 
+import Lottie from 'lottie-react';
+import HeadAnim from '../../../assests/HeadAnimation.json';
+
+
 import './Login.css'
 
 const Login = () => {
@@ -11,13 +15,10 @@ const Login = () => {
       <div className="form-main">
 
         <div className="form-left">
-          <h2>Welcome Back !</h2>
-          <div className="form-img">
-            <img src={clg} alt="website image" />
+          <div className="anim-div">
+          <Lottie animationData={HeadAnim}/>
           </div>
-          <div className="info-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi corrupti ratione maiores quaerat nam aliquid animi delectus magnam et quam?</p>
-          </div>
+          
         </div>
 
         <div className="form-right">

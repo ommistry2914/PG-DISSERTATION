@@ -1,6 +1,7 @@
 
-.container-head{
+.container-om1{
     max-width: 100%;
+    /* width: 90vw; */
     height: 500px;
     margin: 0 auto;
     /* border: 2px solid red; */
@@ -8,11 +9,11 @@
     grid-template-columns: 50% 50%;
     gap: 1rem;
     padding: 2rem;
-    background-color: var(--color-lavender);
+    /* background-color: var(--color-lavender); */
 
 }
 
-.head-data{
+.desc-data1{
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -20,50 +21,51 @@
     /* border: 2px solid green; */
     padding: 2px;
 }
-.Head-head{
+.desc-head1{
     font-size: 20px;
 
 }
-.head-para{
-    max-width: 100%;
-    margin-top: 1.5rem;
+.desc-para1{
+    max-width: 500px;
+    margin-top: 0rem;
     margin-bottom: 2rem;
-    margin-right: 1.3rem;
+    margin-left: 1.3rem;
     text-align: justify;
     font-size: 1rem;
     font-weight: 500;
 }
-.read-link{
+.read-link1{
     text-align: left;
     margin-left: 1.3rem;
     font-size: 1rem;
     font-weight: 500;
 
 }
-.head-image{
+.desc-image1{
     display: flex;
     justify-content: center;
     align-items: center;
     /* border: 1px solid black; */
+    overflow: hidden;
 }
-.head-image .techo-img{
+.desc-image1 .techo-img{
     object-fit: contain;
     width: 90%;
     max-width: 100%;
 }
 
 @media screen and (max-width: 786px) {
-    .container-head{
+    .container-om1{
         grid-template-columns: 100%;
         height: auto;
         margin-left: 0;
     }
-    .head-data{
+    .desc-data1{
         width: 100%;
     }
-    .head-para,
-    .read-link {
-      margin-right: 0;
+    .desc-para1,
+    .read-link1 {
+      margin-left: 0;
       padding: 0.5rem;
       margin-top: 0;
       margin-bottom: 0;
