@@ -1,0 +1,35 @@
+.signup-form {
+  margin: 0 auto;
+  padding: 50px;
+  border: 1px solid #4606f4;
+  border-radius: 5px;
+  max-width: 600px; /* Adjust as needed */
+}
+
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.signup-form h2::after {
+  content: '';
+  position: absolute;
+  width: 65%;
+  border-bottom: 5px solid #0b0ef1;
+  top: 2.8rem;
+  bottom: 0;
+  left: 5.4rem;
+}
+
+.ant-form-item-label {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .ant-col {
+    width: 100%;
+  }
+}

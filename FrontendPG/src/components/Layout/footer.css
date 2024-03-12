@@ -1,0 +1,323 @@
+/* *************   Styling in Footer(Contact) *************** */
+
+#footer {
+    background-color: whitesmoke;
+    border: 1px solid #3a343461;
+    margin-top: 2rem;
+  color: var(--color-lavender);
+  }
+  
+  #footer .row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+  }
+  
+  
+  
+  /*  ---------- Styling in Newslwtter ---------- */
+  
+  #footer_div_newsLetter {
+    display: flex;
+    flex-direction: column;
+    /* gap: 2em; */
+    /* padding: 1.56em 0px 1.56em 1.56em; */
+    
+  }
+  
+  #newsletter_info {
+    /* margin: 1.19em 0em;   */
+    /* margin: 0; */
+    width: 100%;
+    font-size: 1.12em;
+    /* letter-spacing: 1px; */
+    color: black;
+    text-align: justify;
+  }
+  
+  #footer_form {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    /* background-color: #1b3438; */
+    /* background-color:#161717db; */
+    border-radius: 7px;
+    flex-wrap: wrap;
+    background-color: white;
+  }
+  
+  #email-textbox {
+    width: 100%;
+    height: 2.62em;
+    padding: 0em 0.625em;
+    border: 1px var(--color-lavender);
+    outline: none;
+    font-size: 1.125em;
+    letter-spacing: 2px;
+    /* color: var(--color-lavender); */
+    background-color: white;
+    border-radius: 5px;
+  }
+  
+  #div_mail {
+    flex-grow: 2;
+  }
+  
+  ::placeholder {
+    color: var(--color-lavender);
+    font-weight: 100;
+    opacity: 1;
+  }
+  
+  .footer_btn {
+    margin: 0.06em 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6.06em;
+    height: 2.5em;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    color: var(--color-white);
+    /* border-radius: 5px; */
+    cursor: pointer;
+    background-color: var(--color-lavender);
+  }
+  
+  
+  /*  ---------- Styling in ImagePart ---------- */
+  
+  #footer_div_image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0px 0px 0px;
+  }
+  
+  .footer_msu_logo {
+    margin-top: 4em;
+    margin-bottom: 1em;
+    /* margin-left: 0; */
+  }
+  
+  #img_msulogo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* filter: invert(100%); */
+  }
+  .footer_social_media {
+    width: 78%;
+    margin-top: 0.75em;
+  }
+  .media_icons {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0px;
+  }
+  
+  .social {
+    font-size: 1.62em;
+    transition: all 0.2s;
+    color: var(--color-black);
+  }
+  
+  .social:hover {
+    color: var(--color-lavender);
+    transform: scale(1.5);
+  }
+  
+  /*  ---------- Styling in Contact ---------- */
+  #head_CI{
+    margin-top: 16px;
+    /* margin-right: 1em; */
+    color: black;
+  }
+  /* .header h2::after{
+    content: "";
+    position: absolute;
+    top: 35%;
+    left: 42%;
+    height: 2px;
+    width: 16rem;
+    background-color: black;
+  } */
+
+.head_NL{
+    color: black;
+}
+/* .head_NL h2::after{
+  content: "";
+    position: absolute;
+    top: 35%;
+    left: 68%;
+    height: 2px;
+    width: 16rem;
+    background-color: black;
+} */
+  #footer_div_contact {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.12em;
+    padding: 10px;
+    padding-left: 20px;
+
+  }
+  
+  
+  .Parent_Footer_Col3 {
+    font-size: 16px;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border-right: 1px solid green;
+    line-height: 3rem;
+    border-left: 1px solid green;
+    border-width: 2px;
+  padding-left: 20px;  
+    
+    
+  }
+  
+  #webTeamBtn {
+    width: 7em;
+    height: 2em;
+    font-size: 1.2em;
+  }
+  
+  #div_teambtn {
+    flex-grow: 2;
+    justify-content: end;
+    display: flex;
+  }
+ 
+  /* -------  Utility classes --------  */
+  
+  /* Important : Parent Class Of all Footer Element */
+  
+  .Parent_Footer {
+    font-size: 16px;
+  }
+  
+  .Parent_Footer_Col3 {
+    font-size: 16px;
+    
+  }
+  
+  /* Styling in Item */
+  .footer_Item {
+    padding: 1.56em;
+  }
+/*   
+  .footer_header {
+    color: black;
+    font-size: 2.3em;
+    letter-spacing: 3px;
+    padding-bottom: 5px;
+  } */
+  
+  .footer_InDetail {
+    width: 85%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1.5em;
+    border-bottom: 2px solid black;
+    
+  
+  }
+  
+  
+  .webteam_btn{
+      justify-content: center !important;
+      align-items: center;
+      /* margin-bottom: 12px; */
+  }
+
+  .copy-right{
+    margin: 1rem;
+    border-top: 1px solid black;
+    padding-top: 1rem;
+  }
+  .copy-right h6{
+    color: black;
+
+  }
+
+  
+  /* ------------- Bootstrap classes -------------------  */
+  
+  #footer p {
+    margin-top: 0;
+    margin-bottom: 0em;
+  }
+  
+  #footer a {
+    text-decoration: none;
+  }
+  
+  .container-fluid {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .footer_P_hover {
+    color:var(--color-black);
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: large;
+  }
+  
+  .footer_P_hover:hover {
+    color: var(--color-black);
+  }
+  
+  /* change in media */
+  
+  @media screen and (max-width: 425px) {
+    .Parent_Footer_Col3 {
+      padding: 1rem;
+    }
+  }
+  
+  
+  @media screen and (max-width:325px){
+      .Parent_Footer_Col3{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+  
+      .Parent_Footer_Col3 .qr_contact img{
+          width: 150px;
+      }
+  }
+  
+  @media screen and (min-width:325px) and (max-width:1000px) {
+      
+      .Parent_Footer_Col3 .qr_contact img{
+          width: 150px;
+      }
+  }
+  
+  @media screen and (min-width:1000px) and (max-width:1300px) {
+      
+      .Parent_Footer_Col3 .qr_contact img{
+          width: 125px;
+      }
+  }
+  
+  @media screen and (min-width:1300px) {
+      .Parent_Footer_Col3 .qr_contact img{
+          width: 150px;
+      }
+  }
+  
