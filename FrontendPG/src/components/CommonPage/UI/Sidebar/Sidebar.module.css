@@ -1,0 +1,241 @@
+.sidebar {
+  padding-top: 70px !important;
+  height: 100vh;
+  width: 80px;
+  flex-shrink: 0;
+  background-color: var(--primary-color);
+  box-shadow: 1px 1px 10px var(--secondary-color-1);
+  transition: .3s;
+  position: sticky;
+  top: 0;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 2rem);
+  /* overflow-y: scroll; */
+}
+
+.btnDiv {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarNavItem {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  color: rgb(32, 32, 32);
+  text-decoration: none;
+}
+
+.sidebarNavItem:hover {
+  color: rgb(71, 0, 71);
+  font-weight: bold;
+}
+
+.sidebarNavItem:hover .sidebarSvgIcon {
+  background: var(--background-color);
+  transform: scale(1.1);
+}
+
+.sidebarNavItem.active {
+  background: var(--secondary-color-2) !important;
+  box-shadow: 1px 1px 5px var(--secondary-color-1) inset;
+  color: rgb(71, 0, 71) !important;
+  font-weight: bold !important;
+}
+
+.sidebarNavItem.active .sidebarSvgIcon {
+  background: var(--surface-color) !important;
+  box-shadow: 1px 1px 5px var(--secondary-color-1) inset;
+}
+
+.sidebarMenu {
+  transition: 1s;
+  background-color: pink;
+}
+
+
+.sidebar {
+  
+}
+
+.sidebarSvgIcon {
+  font-size: larger;
+  padding: 5%;
+  border-radius: 10px;
+  margin-left: 23px !important;
+}
+
+.sidebarMenuDiv {
+  display: flex;
+  align-items: center;
+}
+
+.sidebarMenuText {
+  margin-left: 10%;
+  opacity: 0;
+  transition: .2s;
+}
+
+
+.close {
+  transition: 1s;
+}
+
+.sidebarParent {
+  position: relative;
+}
+
+
+
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height) * 1.41421356237);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+  position: absolute;
+  top: calc( var(--bar-width));
+  left: calc(var(--bar-width));
+  cursor: pointer;
+  z-index: 2;
+  position: fixed;
+}
+
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--foreground);
+  transform-origin: left center;
+  border-radius: 9999px;
+  transition: opacity var(--animation-timing), width var(--animation-timing), rotate var(--animation-timing), translate var(--animation-timing);
+}
+
+.hamburger-menu input {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  pointer-events: none;
+
+}
+
+.hamburger-menu:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+
+.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+.hamburger-menu:has(input:focus-visible)::before,
+.hamburger-menu:has(input:focus-visible)::after,
+.hamburger-menu input:focus-visible {
+  border: 1px solid var(--background);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+
+.hamburger-menu:has(input:checked)+.sidebar {
+  transition: .3s;
+  width: 200px;
+}
+
+
+.hamburger-menu:has(input:checked)+.sidebar .sidebarMenuText {
+  opacity: 1;
+}
+
+
+
+
+
+.sidebarSubmenu {
+  margin-left: 100%;
+  border-radius: 5px;
+  width: 150px;
+  padding: 1rem;
+  position: absolute;
+  background: var(--primary-color);
+  box-shadow: 1px 1px 5px var(--secondary-color-1);
+  z-index: 1;
+} 
+
+
+.sidebarSubmenuNavItem {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sidebarSubmenuNavItem:hover {
+  color: rgb(71, 0, 71);
+  font-weight: bold;
+}
+
+.sidebarSubmenuNavItem:hover .sidebarSubmenuIcon {
+  background: var(--background-color);
+  transform: scale(1.1);
+}
+
+.sidebarSubmenuIcon {
+  font-size: larger;
+  padding: 5%;
+  border-radius: 10px;
+  margin-left: 3px !important;
+}
+
+.sidebarSubmenuText {
+  margin-left: 10%;
+  transition: .2s;
+}
+
+.sidebarSubmenuNavItem.active {
+  background: var(--secondary-color-2) !important;
+  box-shadow: 1px 1px 5px var(--secondary-color-1) inset !important;
+  color: rgb(71, 0, 71) !important;
+  font-weight: bold !important;
+}
+
+.sidebarSubmenuNavItem.active .sidebarSubmenuIcon {
+  background: var(--surface-color) !important;
+  box-shadow: 1px 1px 5px var(--secondary-color-1) inset;
+}
+
+
+.hamburger-menu:has(input:checked)+.sidebar .sidebarAddWork{
+ border-radius: 25px;
+}
+
+
+.sidebarAddWork{
+  margin: 3rem 0.2rem 1rem 0.2rem;
+  background: var(--secondary-color-3);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  box-shadow: 1px 1px 5px black;
+}
+
+.sidebarAddWork:hover{
+  background: linear-gradient(to right, rgb(255, 187, 0), var(--secondary-color-2));
+  color: var(--text-color-black);
+}

@@ -1,0 +1,240 @@
+.common-pg-progress-section {
+    min-width: 80vw;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+ 
+.common-pg-progress-circles {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 1rem 0;
+    padding: 1rem 5rem 3rem 5rem;
+}
+
+.common-pg-circular-progress-bar {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+ 
+.common-pg-svg-progress {
+    transform: rotate(-90deg);
+}
+
+circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: #ddd;
+}
+
+.common-pg-progress {
+    fill: none;
+    stroke-width: 10;
+    stroke: #3498db;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+.common-pg-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #333;
+}
+
+.common-pg-progress-ring {
+    width: 200px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+    background-color: var(--surface-color);
+    border-radius: 0 6px 6px 6px;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.59);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    border: 1px solid var(--secondary-color-1);
+}
+
+.common-pg-progress-ring:before {
+    content: '';
+    width: 50%;
+    height: 12px;
+    border-radius: 0 20px 0 0;
+    background-color: var(--surface-color);
+    border: 1px solid var(--secondary-color-1);
+    position: absolute;
+    top: -12px; /* Adjusted to align with the top of the progress ring */
+    left: 0;
+}
+
+.common-pg-progress-ring:hover{
+    transform: scale(1.1);
+}
+
+
+progress {
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 7px;
+    top: -5px;
+    position: relative;
+}
+
+progress[value]::-webkit-progress-bar {
+    background: #B092D2;
+}
+
+progress[value]::-moz-progress-bar {
+    background: #B092D2;
+}
+
+progress[value]::-webkit-progress-value {
+    background: #804ba3;
+}
+
+.common-pg-timeline-div{
+    margin: 5px 10px 20px 10px;
+}
+
+.common-pg-time-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1%;
+    padding: 10px 10px 30px;
+}
+
+.common-pg-time-line ul {
+    width: 100%;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 20px repeat(5, 1fr 20px);
+    position: relative;
+    margin: 0;
+    padding: 0 50px 0 10px;
+}
+
+.common-pg-time-line ul li.checkpoint {
+    font-size: 12px;
+    width: 1rem;
+    height: 1rem;
+    background: #B092D2;
+    color: var(--text-color-black);
+    border: solid 2px white;
+    border-radius: 50%;
+    padding: 5%;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.common-pg-time-line ul li.checkpoint:after {
+    content: "Timeline " attr(data-escena);
+    position: absolute;
+    width: 50px;
+    height: 10px;
+    bottom: -20px;
+    text-align: center;
+}
+
+.common-pg-time-line ul li.checkpoint:hover {
+    background: var(--secondary-color-3);
+}
+
+#common-pg-cr-progress {
+    border: 10px solid green;
+}
+
+#common-pg-pending-progress {
+    border: 10px solid rgb(253, 253, 46);
+}
+
+#common-pg-completed-progress {
+    border: 10px solid skyblue;
+}
+
+.common-pg-progress-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.common-pg-progress-label {
+    position: absolute;
+    top: 100%;
+}
+
+
+.common-pg-progress-table-div{
+   max-width: 100%;
+   min-width: 90%;
+}
+
+.common-pg-progress-table {
+    background: var(--surface-color);
+    width: 100%;
+    text-align: center;
+    box-shadow: 1px 1px 10px var(--primary-color);
+}
+
+.common-pg-progress-table th,
+.common-pg-progress-table td {
+    border-bottom: 1px solid rgb(177, 177, 177);
+    padding: 1%;
+    overflow: hidden;
+}
+
+.common-pg-status-dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.common-pg-priority,
+.common-pg-approval {
+    padding: 0.1rem;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.common-pg-download-div{
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+}
+
+#common-pg-download-icon{
+    cursor: pointer;
+    border: 1px solid gray;
+    padding: 10%;
+    font-size: x-large;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px rgb(71, 71, 71);
+}
+
+#common-pg-download-icon:hover{
+    color: var(--text-color-white);
+    background: black;
+}
+
+
