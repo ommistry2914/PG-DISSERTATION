@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useLocation, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css'
 import Home from "./screens/home";
 import StuGuideDashboard from "./components/CommonPage/StuGuideDashboard";
