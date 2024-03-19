@@ -10,6 +10,10 @@ import FaqsMain from "./components/LandingPage/FAQS/FaqsMain";
 import Faqs from "./components/LandingPage/FAQS/Faqs";
 import Guide from "./components/CommonPage/pages/Guide/Guide"
 
+import Login from "./components/Regsiter/LoginPage/Login"
+import Signup from "./components/Regsiter/SignupPage/Signup"
+import GuideSignUp from "./components/Regsiter/SignupPage/GuideSignUp";
+import MainSignUp from "./components/Regsiter/SignupPage/MainSignUp";
 function App() {
 
   return (
@@ -22,9 +26,15 @@ function App() {
           <Route path="/schedule" element={<Schedule />}></Route>
           <Route path="/add-work" element={<ResearchWorkForm />} />
         </Route> */}
+      <Route exact path="/" element={<Home/>}></Route>
+      {/* <Route exact path="/login" element={<Login/>}></Route> */}
+      <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
+      <Route exact path="/login" element={<Login/>}></Route>
+      <Route exact path="/signup/student" element={<Signup/>}></Route>
+      <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
       </Routes>
     </Router>
   )
 }
 
-export default App
+export default App;
