@@ -1,0 +1,36 @@
+:root{
+  --bar-width: 25px;
+  --bar-height: 3px;
+  --hamburger-gap: 5px;
+  --foreground: #333;
+  --background: white;
+  --hamburger-margin: 8px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+}
+
+
+body {
+    background-color: var(--background-color) !important;
+}
+
+p {
+    font-size: 0.9rem;
+}
+
+.common-pg-contents {
+    max-width: 90vw;
+    margin-top: 5rem;
+    margin-left: 2rem;
+}
+
+.navbar {
+    position: fixed;
+    background: var(--primary-color);
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    left: 0;
+    right: 0;
+}
+
