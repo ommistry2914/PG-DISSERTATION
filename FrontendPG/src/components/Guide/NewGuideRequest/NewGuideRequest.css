@@ -1,0 +1,98 @@
+#New_request{
+    position: absolute;
+    left: 16.6%;
+    top: 12em;
+    background: var(--background-color);
+    width:83.5%;
+    padding-bottom: 100px;
+}
+#New_request .guidereq_img{
+    text-align-last: left;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    z-index: 15;
+}
+.guidereq_img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.guidereq_head{
+    text-align-last: left;
+    position: fixed;
+    top: 6.5em;
+    left: 28.2%;
+    width:max-content;
+    display: flex;
+    flex-direction: row;
+    z-index: 15;
+}
+.guidereq_head p{
+    margin: 0;
+    padding: 0;
+}
+#New_request h2{
+    padding-top: 25px;
+}
+.guidereq_head h2{
+    margin: 0;
+    padding: 0;
+}
+.student_img{
+    width: 70px;
+    height: 70px;
+    border-radius: 10%;
+    margin: 5px auto;
+    border: 2px solid var(--primary-color);
+}
+.student_img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10%;
+}
+.new_requests{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 25px;
+}
+.new_request{
+    background: var(--surface-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 2px 2px var(--primary-color);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    width: max-content;
+    margin: 10px;
+}
+.greq_head h3,.greq_head p{
+    margin: 0;
+    padding: 0;
+}
+
+.greq_contact{
+    border-radius: 20px;
+    margin: 5px;
+}
+.greq_contact p{
+    padding: 2px;
+    margin: 0;
+    font-size: 0.9em;
+}
+.greq_button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.greq_button button{
+    margin: 5px;
+    background: var(--secondary-color-1);
+    border-radius: 30px;
+    box-shadow: 1px 1px 1px 1px var(--secondary-color-1) inset;
+}
