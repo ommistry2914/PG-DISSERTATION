@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css'
 import Home from "./screens/home";
-<<<<<<< HEAD
 import StuGuideDashboard from "./components/CommonPage/StuGuideDashboard";
 import Progress from "./components/CommonPage/pages/Progress/Progress";
 import Schedule from "./components/CommonPage/pages/Schedule/Schedule";
@@ -21,7 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<StuGuideDashboard/>}>
+        <Route path="/" element={<StuGuideDashboard/>}></Route>
           <Route path="/mentors" element={<MentorsCard />}></Route>
           <Route path="/guide" element={<Guide />} />
           <Route path="/progress" element={<Progress />}></Route>
