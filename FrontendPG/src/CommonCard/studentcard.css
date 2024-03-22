@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
+
+:root {
+  --soft-blue: hsl(215, 51%, 70%);
+  --cyan: hsl(178, 100%, 50%);
+  --bg-main: hsl(217, 54%, 11%);
+  --bg-card: hsl(216, 50%, 16%);
+  --white: hsl(0, 0%, 100%);
+  --blue-line: hsl(215, 32%, 27%);
+}
+
+html {
+  font-size: 18px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+
+.container_p {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.wrapper_p {
+  margin: 2rem 1rem;
+  padding: 20px;
+  background-color: var(--bg-card);
+  border-radius: 15px;
+  box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-img {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-img img {
+  width: 100%;
+  display: block;
+}
+
+.img-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: hsla(178, 100%, 50%, 0.5);
+  display: none;
+}
+
+.img-view img {
+  position: absolute;
+  width: 50px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card-img:hover .img-view {
+  display: block;
+  cursor: pointer;
+}
+
+
+.text-container h1 a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 20px 0;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.text-container a:hover {
+  color: var(--cyan);
+}
+
+.text-container p {
+  color: var(--soft-blue);
+  font-size: 0.9rem;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0;
+}
+
+.eth,
+.days {
+  display: flex;
+  align-items: center;
+}
+
+.eth p {
+  color: var(--cyan);
+  font-weight: 600;
+  padding-left: 7px;
+}
+
+.days p {
+  padding-left: 7px;
+}
+
+hr {
+  border: 1px solid var(--blue-line);
+}
+
+
+.creator {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.creator img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--white);
+  margin-right: 15px;
+}
+
+.creator p a {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.creator p a:hover {
+  color: var(--cyan);
+}
