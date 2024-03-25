@@ -1,6 +1,6 @@
 import { UserRoundX } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { CgProfile } from "react-icons/cg";
+// import { CgProfile } from "react-icons/cg";
 const UserProfile = () => {
   return (
     <div className="register">
@@ -10,9 +10,10 @@ const UserProfile = () => {
         </button>
       </div>
       <div className="hidden md:block">
-      <Link to={'#'} className='profileicon'>Profile</Link>
-        <Link to={`#`}>Log in</Link>
-        <button className="sign">Sign up</button>
+      {/* <Link to='/studentprofile' className='profileicon'>Profile</Link> */}
+      <Link to='/mentorprofile' className='profileicon'>Profile</Link>
+        <Link to='/login'>Log in</Link>
+       <Link to='/signup'> <button className="sign">Sign up</button></Link>
         
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-// import Navbar from "../components/Layout/Navbar"
+import Navbar from "../components/Navigation"
 
 
 import MSUDescription from '../components/LandingPage/MSUdescription/MSUDescription'
@@ -18,7 +18,7 @@ const Home = () => {
       <br />
 
       <MSUDescription/>
-      {/* <Footer/> */}
+      <Footer/>
       {/* <MSUDescription/> */}
 
 
