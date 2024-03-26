@@ -4,7 +4,7 @@ import im1 from "../assets/f.jpg"
 import { Link } from 'react-router-dom'
 const StudentCard = ({profile, name, desc, link1, link2, img}) => {
   return (
-<div>
+<div className='main_class'>
 <main className="container_p">
     <div className="wrapper_p">
       <div className="card-img">

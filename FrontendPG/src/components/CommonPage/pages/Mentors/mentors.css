@@ -1,0 +1,131 @@
+.common-pg-mentors-cards {
+    min-width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 5rem 1rem 0 2rem;
+}
+
+.common-pg-card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 10%;
+    max-width: 70%;
+    min-height: 20rem;
+    margin: 0 1rem 6rem 1rem;
+    box-shadow: 1px 1px 7px var(--secondary-color-1);
+    border: 1px solid var(--secondary-color-1);
+}
+
+.common-pg-profile-pic-div{
+    position: relative;
+    top: -35%;
+}
+
+.common-pg-profile-photo {
+    max-width: 10rem;
+    max-height: 9rem;
+    border-radius: 5px;
+    box-shadow: 2px 5px 5px black
+}
+
+.common-pg-mentor-detail{
+    position: absolute;
+    margin-top: 1%;
+}
+
+.common-pg-card:hover {
+    transform: scale(1.1);
+}
+
+.common-pg-actions{
+    display: flex;
+    box-shadow: 2px 2px 5px var(--secondary-color-2) inset, -2px -2px 5px var(--secondary-color-2) inset;
+    width: 100%;
+}
+
+.common-pg-action-btn {
+    padding: 2%;
+    width: 100%;
+    height: 70%;
+    border-radius: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 5%;
+    background: var(--secondary-color-2);
+    color: var(--text-color-black);
+    border: none;
+    box-shadow: 1px 1px 3px var(--secondary-color-1) inset;
+}
+
+.common-pg-action-btn:hover {
+    transform: scale(1.1);
+}
+
+
+@keyframes fly {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0);
+    }
+
+    25% {
+        transform: translateX(60%) translateY(-60%) rotate(-10deg);
+    }
+
+    50% {
+        transform: translateX(80%) translateY(-70%) rotate(-20deg);
+        visibility: hidden;
+    }
+
+    75% {
+        transform: translateX(-60%) translateY(60%) rotate(-10deg);
+    }
+
+    100% {
+        transform: translateX(0) translateY(0) rotate(0);
+    }
+}
+
+@keyframes phoneAnimation {
+
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(30deg);
+    }
+}
+
+@keyframes videoAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.common-pg-card:hover .common-pg-mentor-chat {
+    animation: fly 4s linear infinite;
+}
+
+.common-pg-card:hover .common-pg-mentor-call {
+    animation: phoneAnimation 0.5s linear infinite;
+}
+
+.common-pg-card:hover .common-pg-mentor-video-call {
+    animation: videoAnimation 0.5s linear infinite;
+}

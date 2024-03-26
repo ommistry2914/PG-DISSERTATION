@@ -39,7 +39,7 @@ const DummyData = [
 
 const StudentCardList = () => {
   return (
-    <div>
+    <div className='main_class'>
       {DummyData.map((data, index) => (
         <StudentCard
           key={index}

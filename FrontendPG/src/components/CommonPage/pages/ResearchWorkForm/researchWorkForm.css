@@ -1,0 +1,32 @@
+
+form label, input, textarea {
+    margin-bottom: 1rem;
+}
+
+.common-pg-add-work-form {
+    min-width: 60vw;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 3px rgb(107, 107, 107);
+    padding: 1rem;
+    border: 1px solid rgb(172, 172, 172);
+    margin: 0 3rem 0 5rem;
+}
+
+.common-pg-necessary-sup {
+    color: red;
+}
+
+.common-pg-add-work-submit {
+    background: var(--secondary-color-1);
+    margin: 1rem;
+    min-width: 10%;
+    align-self: self-end;
+    box-shadow: 1px 1px 5px black;
+    border: none;
+}
+
+.common-pg-add-wrok-submit:hover {
+    background: radial-gradient(var(--secondary-color-2), var(--secondary-color-1));
+    color: var(--text-color-black);
+}

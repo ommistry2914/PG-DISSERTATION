@@ -1,0 +1,161 @@
+.common-pg-calender-container {
+    overflow: hidden;
+    min-width: 80vw;
+    max-width: 90vw;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0 2rem 3rem;
+}
+ 
+.common-pg-calendar {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background: var(--surface-color);
+    box-shadow: -1px 1px 10px var(--secondary-color-1);
+}
+
+.common-pg-calender-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background: var(--secondary-color-2);
+}
+
+.common-pg-schedule-calender-btns {
+    background-color: var(--secondary-color-2); 
+    border-radius: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: var(--text-color-black);
+    font-weight: 500;
+}
+
+.common-pg-schedule-calender-btns:hover {
+    background: var(--surface-color);
+    color: var(--text-color-black);
+    border: none;
+}
+
+.common-pg-calender-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.common-pg-calender-day {
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid var(--background-color);
+    cursor: pointer;
+}
+
+.prevMonthDay {
+    color: #ccc;
+}
+
+.nextMonthDay {
+    color: #ccc;
+}
+
+.currentDay span {
+    background-color: var(--secondary-color-1);
+    border-radius: 100%;
+    color: var(--text-color-white);
+    padding: 0.3rem;
+}
+
+
+@media (max-width: 480px) {
+    .common-pg-calender-days {
+        grid-template-columns: repeat(7, 1fr);
+        font-size: 12px;
+    }
+
+    .common-pg-calender-day {
+        padding: 3px;
+    }
+
+    .common-pg-calender-header {
+        font-size: 14px;
+    }
+
+    .common-pg-schedule-calender-btns {
+        font-size: 14px;
+    }
+}
+
+
+/* .common-pg-calender-today {
+    background: var(--primary-color);
+    border-radius: 5px;
+    padding: 1rem;
+    width: 100%;
+    margin: 3rem;
+} */
+
+.commmon-pg-schedule-notes-btn {
+    background: var(--surface-color);
+    padding: 0.3rem;
+    color: var(--text-color-black);
+    margin: 0.5rem;
+}
+
+.common-pg-task-cards {
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+
+.common-pg-task-card {
+    border: 1px solid rgb(177, 177, 177);
+    display: flex;
+    padding: 0.5rem;
+}
+
+.common-pg-calender-task {
+    flex: 0 380px;
+}
+
+.common-pg-calender-time {
+    color: gray;
+}
+
+.common-pg-add-note {
+    background: var(--secondary-color-1);
+    border: none;
+    box-shadow: 1px 1px 7px black;
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: var(--text-color-white);
+}
+
+.common-pg-add-note:hover {
+    background: radial-gradient(var(--secondary-color-2), var(--secondary-color-1));
+    color: var(--text-color-black);
+}
+
+
+.common-pg-day-selection{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1%
+}
+
+
+.common-pg-day-selection button{
+    background: var(--surface-color);
+    border: 0.5px solid var(--secondary-color-1);
+    font-size: 12px;
+    color: var(--text-color-black);
+    margin: 1%;
+}
+.common-pg-day-selection button:hover{
+    border: none;
+    background: var(--secondary-color-2);
+}

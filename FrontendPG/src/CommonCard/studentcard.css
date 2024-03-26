@@ -2,10 +2,10 @@
 
 :root {
   --soft-blue: hsl(215, 51%, 70%);
-  --cyan: hsl(178, 100%, 50%);
-  --bg-main: hsl(217, 54%, 11%);
-  --bg-card: hsl(216, 50%, 16%);
-  --white: hsl(0, 0%, 100%);
+  --cyan: hsl(306, 100%, 86%);
+  --bg-main: hsl(0, 0%, 100%);
+  --bg-card: hsl(290, 100%, 86%);
+  --white: hsl(0, 0%, 0%);
   --blue-line: hsl(215, 32%, 27%);
 }
 
@@ -20,22 +20,27 @@ html {
 }
 
 
+.main_class{
+  display: flex;
+}
 
 
 .container_p {
   max-width: 350px;
+  display: flex;
   margin: 0 auto;
 }
 
 .wrapper_p {
   margin: 2rem 1rem;
   padding: 20px;
-  background-color: var(--bg-card);
+  background-color: var( --secondary-color-2);
   border-radius: 15px;
   box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.5);
 }
 
 .card-img {
+  display: flex;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -71,7 +76,7 @@ html {
 
 
 .text-container h1 a {
-  color: var(--white);
+  color: black;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
@@ -80,12 +85,16 @@ html {
   transition: 0.3s ease;
 }
 
+.text-container a{
+  color:black !important;
+}
+
 .text-container a:hover {
-  color: var(--cyan);
+  color:black;
 }
 
 .text-container p {
-  color: var(--soft-blue);
+  color:color(srgb red green blue);
   font-size: 0.9rem;
 }
 
@@ -98,6 +107,7 @@ html {
 
 .eth,
 .days {
+  /* background-color: black; */
   display: flex;
   align-items: center;
 }
@@ -132,7 +142,7 @@ hr {
 }
 
 .creator p a {
-  color: var(--white);
+  color: var(#D1AEF9);
   font-weight: 400;
   font-size: 0.9rem;
   text-decoration: none;
