@@ -76,7 +76,7 @@ const Signup = () => {
               </Upload>
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12} >
+          {/* <Col xs={24} sm={12} >
             <Form.Item
               label="Email"
               name="email"
@@ -87,7 +87,7 @@ const Signup = () => {
             >
               <Input style={inputStyle} />
             </Form.Item>
-          </Col>
+          </Col> */}
           <Col xs={24} sm={12} >
             <Form.Item
               label="PRN"
@@ -102,14 +102,14 @@ const Signup = () => {
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
-              label="Password"
-              name="password"
+              label="Branch"
+              name="Branch"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
-              <Input.Password  style={inputStyle}/>
+              <Input  style={inputStyle}/>
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12}>
+          {/* <Col xs={24} sm={12}>
             <Form.Item
               label="Confirm Password"
               name="confirmPassword"
@@ -128,7 +128,7 @@ const Signup = () => {
             >
               <Input.Password  style={inputStyle}/>
             </Form.Item>
-          </Col>
+          </Col> */}
           <Col xs={24} sm={12}>
             <Form.Item
               label="Gender"

@@ -76,18 +76,7 @@ const GuideSignUp = () => {
               </Upload>
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12} >
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                { required: true, message: 'Please input your email!' },
-                { type: 'email', message: 'Please enter a valid email!' },
-              ]}
-            >
-              <Input style={inputStyle} />
-            </Form.Item>
-          </Col>
+          
           <Col xs={24} sm={12} >
             <Form.Item
               label="Guide Id"
@@ -100,35 +89,8 @@ const GuideSignUp = () => {
               <Input  style={inputStyle}/>
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-              <Input.Password  style={inputStyle}/>
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              label="Confirm Password"
-              name="confirmPassword"
-              dependencies={['password']}
-              rules={[
-                { required: true, message: 'Please confirm your password!' },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue('password') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error('The two passwords do not match!'));
-                  },
-                }),
-              ]}
-            >
-              <Input.Password  style={inputStyle}/>
-            </Form.Item>
-          </Col>
+          
+          
           <Col xs={24} sm={12}>
             <Form.Item
               label="Gender"
@@ -193,18 +155,6 @@ const GuideSignUp = () => {
             </Form.Item>
           </Col>
 
-          <Col xs={24} sm={12}>
-            <Form.Item
-              label="No of Student Mentored"
-              name="no-student"
-              rules={[
-                { required: true, message: 'Please input your phone number!' },
-                { message: 'Please enter a valid phone number!' },
-              ]}
-            >
-              <Input  style={inputStyle}  />
-            </Form.Item>
-          </Col>
           
           <Col xs={24} sm={12}>
             <Form.Item
