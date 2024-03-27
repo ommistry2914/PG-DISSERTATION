@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://bobbyupreti1234:jjQnMSb2XWKZkBDL@cluster0.gpih2nl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: Task
