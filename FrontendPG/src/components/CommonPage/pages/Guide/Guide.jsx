@@ -13,8 +13,20 @@ const Guide = () => {
                     <li className="breadcrumb-item active" aria-current="page">Guide</li>
                 </ol>
             </nav>
-            <div className="common-pg-guide-container">
-                <div className="common-pg-guide-actions">
+            <div className="common-pg-guide-container row">
+            <div className="common-pg-banner col-sm-12 col-md-6">
+                    <h6>"Navigate your uncertainties with expert guidance, come clear your doubts with your guide!</h6>
+                    <div className="common-pg-about-guide">
+                    <div className="common-pg-guide-pic"><img src={Photo1} alt=""/></div>
+                        <div className="common-page-guide-details">
+                            <h4>Name</h4>
+                            <p>Skill</p>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="common-pg-guide-actions col-sm-12 col-md-6">
                     <div className='common-pg-guide-action row' id="common-pg-guide-chat">
                         <button className='common-pg-guide-btns col-sm-12 col-md-6 col-lg-6'><FaTelegramPlane id='common-pg-guide-chat'/></button>
                         <p className='col-sm-12 col-md-6 col-lg-6'>Connect instantly, chat with your guide, and get answers to your questions!</p>
@@ -28,18 +40,7 @@ const Guide = () => {
                         <p className='col-sm-12 col-md-6 col-lg-6'>Gain valuable insights, view feedback from your guide, and elevate your progress!</p>
                     </div>
                 </div>
-                <div className="common-pg-banner">
-                    <h6>"Navigate your uncertainties with expert guidance, come clear your doubts with your guide!</h6>
-                    <div className="common-pg-about-guide">
-                    <div className="common-pg-guide-pic"><img src={Photo1} alt=""/></div>
-                        <div className="common-page-guide-details">
-                            <h4>Name</h4>
-                            <p>Skill</p>
-                            <p>Profession</p>
-                        </div>
-                    </div>
-
-                </div>
+               
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import './progress.css'
 import { FaDownload, FaList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
