@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import './dashboard.css'
 import CircularProgressBar from "../Progress/CircularProgressBar";
 import { FaChevronRight, FaCalendar } from "react-icons/fa";
@@ -78,7 +78,7 @@ const Profile = () => {
             </div>
           </div>
           <div className=" common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
-            <h6>Today's Tasks</h6>
+            <h6>Upcoming Tasks</h6>
             <ul className='common-pg-today-task-ul'>
               <li><span>Lorem ipsum dolor sit amet.</span></li>
               <li><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</span></li>

@@ -1,8 +1,6 @@
 .common-pg-guide-container{
-    min-width: 80vw;
-    max-width: 90vw;
+    min-width: 90vw;
     height: 80vh;
-    display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 5%;

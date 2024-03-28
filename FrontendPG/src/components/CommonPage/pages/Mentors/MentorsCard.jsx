@@ -1,5 +1,5 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './mentors.css'
 import Photo1 from './photo1.png'
 import { FaVideo, FaWhatsapp, FaPhone, FaPlane, FaTelegramPlane } from "react-icons/fa";
