@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,14 @@ public class ProgressController {
       @GetMapping("/userId/{userId}")
    public List<Progress> getProgressByUserId(@PathVariable String userId){
     return progressService.getProgressByUserId(userId);
+   }
+   @GetMapping("/{id}")
+   public Progress getProgress(@PathVariable String id){
+       return progressService.getProgressById(id);
+   }
+     @PutMapping("/update")
+   public Progress modifyTask(@RequestBody Progress progress){
+    return progressService.updateProgress(progress);
    }
    
     

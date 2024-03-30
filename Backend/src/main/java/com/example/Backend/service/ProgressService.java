@@ -25,5 +25,18 @@ public class ProgressService {
     public List<Progress> getProgressByUserId(String userId){
         return repository.getProgressByUserId(userId);
     }
+    public Progress getProgressById(String id){
+        return repository.findById(id).get();
+    }
+    public Progress updateProgress(Progress progressRequest){
+        Progress existingProgress= repository.findById(progressRequest.getId()).get();
+        existingProgress.setUserId(progressRequest.getUserId());
+        existingProgress.setCredentialsProgress(progressRequest.getCredentialsProgress());
+        existingProgress.setCompleted(progressRequest.getCompleted());
+        existingProgress.setPending(progressRequest.getPending());
+        existingProgress.setOverallProgressRate(progressRequest.getOverallProgressRate());
+ 
+        return repository.save(existingProgress);
+     }
 }
 
