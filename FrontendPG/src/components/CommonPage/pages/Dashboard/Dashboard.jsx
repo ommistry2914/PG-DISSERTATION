@@ -6,6 +6,9 @@ import { FaChevronRight, FaCalendar } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
+import Progress from "../Progress/Progress";
+import ProgressService from "../../../../services/ProgressService";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
 
@@ -18,16 +21,31 @@ const Profile = () => {
         preserveAspectRatio: 'xMidYMid slice'
       }
     };
-
     return <Lottie options={defaultOptions} />;
   };
-
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(null);
   const day = 75;
   const totalDays = 300;
-
+  useEffect(()=>{
+    const fetchData=async()=>{
+       setLoading(true);
+       try {
+           const response=await ProgressService.getProgress();
+           setProgress(response.data);
+       } catch (error) {
+           console.log(error);
+       }
+       setLoading(false);
+    };
+    fetchData();
+  },[]);
  
 
+  if (loading) {
+    return <div>Loading...</div>;
 
+}
   return <div className="common-pg-contents">
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
@@ -37,6 +55,7 @@ const Profile = () => {
       </ol>
     </nav>
     <div className=" common-pg-dashboard-content">
+      
       <div className=' common-pg-project-div row'>
         <div className=" common-pg-student-name col-sm-12 col-md-4 col-lg-4">
           <div className="common-pg-profile-img"><img src={Photo1} alt="" className="common-pg-profile-pic" /></div>
@@ -73,8 +92,10 @@ const Profile = () => {
               <div class="common-pg-lid two"></div>
               <div class="common-pg-envelope">Overall Progress</div>
               <div class="common-pg-letter">
-                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={60} /></p>
-              </div>
+              {progress.map(progress=>(
+                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
+              ))}
+                </div>
             </div>
           </div>
           <div className=" common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
