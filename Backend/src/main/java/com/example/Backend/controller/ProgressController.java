@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,10 @@ public class ProgressController {
     public List<Progress> getProgresses(){
         return progressService.findAllProgresses();
     }
+      @GetMapping("/userId/{userId}")
+   public List<Progress> getProgressByUserId(@PathVariable String userId){
+    return progressService.getProgressByUserId(userId);
+   }
    
     
 }

@@ -22,6 +22,8 @@ public class ProgressService {
     public List<Progress> findAllProgresses(){
         return repository.findAll();
     }
-
+    public List<Progress> getProgressByUserId(String userId){
+        return repository.getProgressByUserId(userId);
+    }
 }
 
