@@ -1,38 +1,37 @@
 import React from 'react';
 import StudentCard from '../../CommonCard/StudentCard'; // Assuming StudentCard is in the same directory
-import im1 from "../../assets/f.jpg";
 const DummyData = [
   {
-    profile: im1,
+    profile: "",
     name: 'John Doe',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     link1: '/',
     link2: '/',
-    img: im1,
+    img: "",
   },
   {
-    profile:im1,
+    profile:"",
     name: 'Jane Smith',
     desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     link1: '/',
     link2: '/',
-    img: im1,
+    img: "",
   },
   {
-    profile: im1,
+    profile: "",
     name: 'Jane Smith',
     desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     link1: '/',
     link2: '/',
-    img: im1,
+    img: "",
   },
   {
-    profile:im1,
+    profile:"",
     name: 'Jane Smith',
     desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     link1: '/',
     link2: '/',
-    img: im1,
+    img: "",
   },
   // Add more dummy data as needed
 ];
