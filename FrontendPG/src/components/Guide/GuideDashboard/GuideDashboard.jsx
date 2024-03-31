@@ -55,7 +55,8 @@ const GuideDashboard = () => {
         <>
             <div className='guide_dashboard'>
                 <div className='sidebar_guide'>
-                    <ul className="guide_nav">
+                <a onClick={togglegMenu}>&#9776;</a>
+                    {gMenuVisible && <ul className="guide_nav">
                         <li><a onClick={togglegDashboardVisibility}>  <svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" >
                             <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 14 L 14 14 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z" />
@@ -71,12 +72,8 @@ const GuideDashboard = () => {
                         <li><a onClick={fgEdit}>
                             <img width="20" height="20" src="https://img.icons8.com/sf-black-filled/64/create-new.png" alt="create-new" />
                             Edit profile</a></li>
-                        <li><a href="">
-                            <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/exit.png" alt="exit" /> Logout</a></li>
-                    </ul>
-                    <div className="gnavmenu_icon" onClick={togglegMenu}>
-                        <div className="sidebar_guide">
-                            <ul>
+                            </ul>}
+                    {!gMenuVisible && <ul className='guide_nav'>
                                 <li><a onClick={togglegDashboardVisibility}>  <svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" >
                                     <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 14 L 14 14 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z" />
@@ -92,11 +89,8 @@ const GuideDashboard = () => {
                                 <li><a onClick={fgEdit}>
                                     <img width="20" height="20" src="https://img.icons8.com/sf-black-filled/64/create-new.png" alt="create-new" title='Edit' />
                                 </a></li>
-                                <li><a >
-                                    <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/exit.png" alt="exit" title='Logout' /> </a></li>
-                            </ul>
-                        </div>
-                    </div></div>
+                                </ul>}
+                    </div>
                 <div className='guide_main'>
                     <div className='guide_head'>
                     </div>

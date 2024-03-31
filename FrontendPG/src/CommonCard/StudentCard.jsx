@@ -1,6 +1,5 @@
 import React from 'react'
 import './studentcard.css'
-import im1 from "../assets/f.jpg"
 import { Link } from 'react-router-dom'
 const StudentCard = ({profile, name, desc, link1, link2, img}) => {
   return (

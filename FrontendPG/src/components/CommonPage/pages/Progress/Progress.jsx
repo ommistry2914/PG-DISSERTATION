@@ -4,6 +4,7 @@ import './progress.css'
 import { FaDownload, FaList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import CircularProgressBar from './CircularProgressBar';
+import ProgressService from '../../../../services/ProgressService';
 
 const tasks = [
   { task: 'Task 1', status: 'On Track', progress: '100%', date: '2022-03-10', priority: 'High', approvalStage: 'Approved', mentor: 'John Doe' },
@@ -50,14 +51,29 @@ const getApprovalColor = (approval) => {
 const Progress = () => {
 
   const [percentage, setPercentage] = useState(0);
-
+  const [progress, setProgress] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
   useEffect(() => {
     const interval = setInterval(() => {
       setPercentage(prevPercentage => (prevPercentage + 10) % 100);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, []); 
+  useEffect(()=>{
+    const fetchData=async()=>{
+       setLoading(true);
+       try {
+           const response=await ProgressService.getProgress();
+           setProgress(response.data);
+       } catch (error) {
+           console.log(error);
+       }
+       setLoading(false);
+    };
+    fetchData();
+  },[]);
 
 
   const timelineData = [
@@ -67,7 +83,14 @@ const Progress = () => {
     { title: 'Step 4', progress: 100 }
   ];
 
+  if (loading) {
+    return <div>Loading...</div>;
 
+}
+
+if (error) {
+    return <div>Error: {error}</div>;
+}
   return (
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
@@ -78,7 +101,8 @@ const Progress = () => {
         </ol> 
       </nav>
       <div className="container common-pg-progress-section row">
-
+        {progress.map(progress=>(
+          <div>
         <div className="common-pg-progress-circles row col-sm-12 container">
           <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={60} />CR Progress</div>
           <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={30} />Pending Tasks</div>
@@ -138,8 +162,8 @@ const Progress = () => {
               </tr>
             </thead>
             <tbody>
-              {tasks.map((task, index) => (
-                <tr key={index}>
+            {tasks.map(task=>(
+                <tr>
                   <td><Link><FaList /> </Link>{task.task}</td>
                   <td> <span className="common-pg-status-dot" style={{ backgroundColor: getStatusColor(task.status) }}></span>
                     {task.status}</td>
@@ -150,10 +174,12 @@ const Progress = () => {
                   <td>{task.mentor}</td>
                   <td><div className='common-pg-download-div'>filename12345.txt<span><FaDownload id='common-pg-download-icon'/></span></div></td>
                 </tr>
-              ))}
+            ))}
             </tbody>
           </table>
         </div>
+        </div>
+      ))}
       </div>
     </div>
   );
