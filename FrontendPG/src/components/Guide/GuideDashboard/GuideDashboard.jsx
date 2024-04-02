@@ -4,6 +4,8 @@ import './GuideDashboard.css'
 import NewGuideRequest from '../NewGuideRequest/NewGuideRequest'
 import OngoingGuideDissertation from '../OngoingGuideDissertation/OngoingGuideDissertation'
 import StudentMentored from '../StudentMentored/StudentMentored'
+import Sidebar from '../../CommonPage/UI/Sidebar/Sidebar'
+import SidebarOm from '../../CommonPage/UI/Sidebar/SidebarOm'
 
 const GuideDashboard = () => {
     const [gDashboardVisible, setgDashboardVisible] = useState(true);
@@ -90,10 +92,11 @@ const GuideDashboard = () => {
                                     <img width="20" height="20" src="https://img.icons8.com/sf-black-filled/64/create-new.png" alt="create-new" title='Edit' />
                                 </a></li>
                                 </ul>}
+                        {/* <SidebarOm sidebarData={GuideSidebar}/> */}
                     </div>
                 <div className='guide_main'>
-                    <div className='guide_head'>
-                    </div>
+                    {/* <div className='guide_head'>
+                    </div> */}
                     {gDashboardVisible && (<div className='guide_content'>
                         <div className="guide_profile">
                             <div className="guide_img">

@@ -6,7 +6,7 @@ import Lottie from 'lottie-react';
 import HeadAnim from '../../../assests/HeadAnimation.json';
 
 
-import './Signup.css';
+import './GuideSignUp.css';
 
 const { Option } = Select;
 
@@ -35,7 +35,8 @@ const GuideSignUp = () => {
   };
 
   const inputStyle = {
-    borderColor: '#1890ff',
+    borderColor: '#D1AEF9',
+    color:'#8230C6',
     backgroundColor: '#f0f2f5',
   };
 
@@ -72,7 +73,7 @@ const GuideSignUp = () => {
               rules={[{ required: true, message: 'Please upload your image!' }]}
             >
               <Upload {...uploadProps} accept="image/*" listType="picture">
-                <Button icon={<UploadOutlined />}>Upload</Button>
+                <Button icon={<UploadOutlined />} style={inputStyle}>Upload</Button>
               </Upload>
             </Form.Item>
           </Col>
@@ -164,12 +165,12 @@ const GuideSignUp = () => {
                 { validator: (_, value) => value ? Promise.resolve() : Promise.reject('Please accept the policies') }
               ]}
             >
-              <Checkbox>I agree to the Terms & Condition</Checkbox>
+              <Checkbox style={{color:'#8230C6',fontWeight:'500'}}>I agree to the Terms & Condition</Checkbox>
             </Form.Item>
           </Col>
         </Row>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading} style={{width:'100%'}}>
+          <Button type="primary" htmlType="submit" loading={loading} style={{width:'100%',backgroundColor: '#8230C6'}}>
             Sign Up
           </Button>
         </Form.Item>

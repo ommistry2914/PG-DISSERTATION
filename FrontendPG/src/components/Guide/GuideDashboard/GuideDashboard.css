@@ -3,7 +3,8 @@
     flex-direction: column;
     color: var(--text-color-black);
     background: var(--background-color);
-    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 .sidebar_guide{
     height: 100%;
@@ -79,6 +80,8 @@
     text-align: center;
     flex-direction: column;
     z-index: 15;
+    border: 5px solid var(--borderColor);
+    border-radius: 20px;
 }
 .guide_img{
     width: 120px;
@@ -150,6 +153,8 @@
     text-align: left;
     font-size: 1.1em;
     z-index: 15;
+    border: 5px solid var(--borderColor);
+    border-radius: 20px;
 }
 .guide_details input{
     width: 70%;

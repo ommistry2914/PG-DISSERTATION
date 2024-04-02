@@ -19,17 +19,17 @@ export const faqs = [
 
         ]
     },
-    {
-        option: 'noti',
-        icon: <FaBell />,
-        faqs: [
-            { summary: 'What?', details: 'This is notification detail 1' },
-            { summary: 'What?', details: 'This is notification detail 2' },
-            { summary: 'What?', details: 'This is notification detail 3' },
-            { summary: 'What?', details: 'This is notification detail 4' },
-            { summary: 'What?', details: 'This is notification detail 5' }
-        ]
-    },
+    // {
+    //     option: 'noti',
+    //     icon: <FaBell />,
+    //     faqs: [
+    //         { summary: 'What?', details: 'This is notification detail 1' },
+    //         { summary: 'What?', details: 'This is notification detail 2' },
+    //         { summary: 'What?', details: 'This is notification detail 3' },
+    //         { summary: 'What?', details: 'This is notification detail 4' },
+    //         { summary: 'What?', details: 'This is notification detail 5' }
+    //     ]
+    // },
     {
         option: 'grades',
         icon: <FaBookOpen />,
@@ -52,15 +52,15 @@ export const faqs = [
             { summary: 'What?', details: 'This is certification detail 5' }
         ]
     },
-    {
-        option: 'policies',
-        icon: <FaClipboardCheck />,
-        faqs: [
-            { summary: 'What?', details: 'This is policies detail 1' },
-            { summary: 'What?', details: 'This is policies detail 2' },
-            { summary: 'What?', details: 'This is policies detail 3' },
-            { summary: 'What?', details: 'This is policies detail 4' },
-            { summary: 'What?', details: 'This is policies detail 5' }
-        ]
-    }
+    // {
+    //     option: 'policies',
+    //     icon: <FaClipboardCheck />,
+    //     faqs: [
+    //         { summary: 'What?', details: 'This is policies detail 1' },
+    //         { summary: 'What?', details: 'This is policies detail 2' },
+    //         { summary: 'What?', details: 'This is policies detail 3' },
+    //         { summary: 'What?', details: 'This is policies detail 4' },
+    //         { summary: 'What?', details: 'This is policies detail 5' }
+    //     ]
+    // }
 ];
