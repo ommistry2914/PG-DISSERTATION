@@ -14,6 +14,8 @@ import Signup from "./components/Regsiter/SignupPage/Signup"
 import GuideSignUp from "./components/Regsiter/SignupPage/GuideSignUp";
 import MainSignUp from "./components/Regsiter/SignupPage/MainSignUp";
 import GuideDashboard from "./components/Guide/GuideDashboard/GuideDashboard";
+import Chatbox from "./components/ChatBot/ChatRoom";
+import Navbar from "./components/Layout/Navbar/navbar";
 
 
 
@@ -21,23 +23,24 @@ function App() {
 
   return (
     <Router>
-     
-      <Routes>
-        
-           <Route path="/studentguide/*" element={< StuGuideDashboard/>}></Route>
-           <Route path="/studentguide" element={<StuGuideDashboard />} />
-       <Route exact path="/login" element={<Login/>}></Route> 
-      <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
-      <Route exact path="/signup/student" element={<Signup/>}></Route>
-      <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
-      <Route exact path="/" element={<Home/>}></Route>
-        <Route exact path="/login" element={<Login/>}></Route>
-        <Route exact path="/signup" element={<MainSignUp/>}></Route>
-        <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
-        <Route exact path="/faqs" element={<Faqs/>}></Route>
-    
-      </Routes>
-    </Router>
+     <Navbar/>
+    <Routes>
+      
+         <Route path="/studentguide/*" element={< StuGuideDashboard/>}></Route>
+         <Route path="/studentguide" element={<StuGuideDashboard />} />
+     <Route exact path="/login" element={<Login/>}></Route> 
+    <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
+    <Route exact path="/signup/student" element={<Signup/>}></Route>
+    <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
+    <Route exact path="/" element={<Home/>}></Route>
+      <Route exact path="/login" element={<Login/>}></Route>
+      <Route exact path="/signup" element={<MainSignUp/>}></Route>
+      <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
+      <Route exact path="/faqs" element={<Faqs/>}></Route>
+  
+    </Routes>
+  </Router>
+
   )
 }
 

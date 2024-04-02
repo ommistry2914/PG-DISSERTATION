@@ -17,6 +17,7 @@ public class CorsConfig {
         config.addAllowedOrigin("*"); // Allow requests from any origin
         config.addAllowedMethod("*"); // Allow all HTTP methods
         config.addAllowedHeader("*"); // Allow all headers
+        // Add WebSocket endpoint to CORS configuration
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
