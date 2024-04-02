@@ -21,3 +21,24 @@ export const sidebardata = [
   { path: "/studentguide/schedule", text: "Schedule", icon: <FaIcons.FaCalendar /> }
 ];
 
+export const GuideSidebar = [
+  { path: "/mentorprofile/", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
+  {
+     text: "student list", icon: <FaIcons.FaChalkboardTeacher />, subMenu: [
+      {
+        text: 'student mentored',
+        path: '/mentorprofile/studentmentored',
+        icon: <FaIcons.FaUsers />,
+      },
+      {
+        text: 'new request',
+        path: '/mentorprofile/newrequest',
+        icon: <FaIcons.FaUser />,
+      },
+    ],
+  },
+  { path: "/mentorprofile/ongoingdis", text: "Progress", icon: <FaIcons.FaChartBar /> },
+  { path: "/studentguide/schedule", text: "Schedule", icon: <FaIcons.FaCalendar /> }
+
+];
+

@@ -1,8 +1,9 @@
-.topResearches{
+/* .topResearches{
     background: var(--background-color);
     padding: 10px;
     font-size: 1.2em;
     color: var(--text-color-black);
+    width: 100%;
 }
 .trContents{
     display: flex;
@@ -45,26 +46,9 @@
 	border-right: 8em solid transparent;
 	border-bottom: 20px solid #d9bff7;
     content: "";
-    /*
-    position: relative;
-    top: -49.5px;
-    left: 0;
-    border-left: 120px solid transparent;
-    border-right: 120px solid transparent;
-    border-bottom: 28.8675px solid #B691D2;*/
+    
   }
- /*  .trContent::after {
-	border-left: 25px solid transparent;
-	border-right: 25px solid transparent;
-	border-top: 50px solid #555;
-   content: "";
-    position: absolute;
-    bottom: -28.5px;
-    left: 0;
-    border-left: 120px solid transparent;
-    border-right: 120px solid transparent;
-    border-top: 28.8675px solid #B691D2;
- }*/
+ 
 .trview_more{ 
     position: relative;
     left:  40%;
@@ -106,4 +90,92 @@
     .trContent{
         width: 90%;
     }
-}
+} */
+
+/* .main-reseaches{
+    width: 100%;
+} */
+.topResearches {
+    background: var(--background-color);
+    padding: 2rem;
+    font-size: 1.2em;
+    color: var(--text-color-black);
+    width: 100%;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    margin-bottom: 3rem;
+  }
+  
+  .trContents {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust alignment */
+    margin: 1em auto;
+    padding: 0;
+  }
+  
+  .trContent {
+    width: calc(24% - 1em); /* Adjust width for responsiveness */
+    background: #d9bff7;
+    position: relative;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 10px;
+    margin-bottom: 1em; /* Add margin between items */
+    margin-top: 2rem;
+  }
+  
+  .trContent p {
+    margin: 0.5em 0; /* Adjust paragraph margins */
+  }
+  
+  .trContent button {
+    font-size: 1em;
+    width: 100%;
+    background-color: var(--secondary-color-1);
+    color: var(--text-color-white);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0.5em;
+    border: none; /* Remove border */
+    transition: background-color 0.3s ease; /* Add transition effect */
+
+  }
+  
+  .trContent button:hover {
+    background-color: var(--background-color);
+    color: var(--text-color-black);
+  }
+  
+  .trview_more {
+    background: var(--secondary-color-1);
+    border: none;
+    color: var(--text-color-white);
+    font-size: 1rem;
+    padding: 0.7em 1.5em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 auto; /* Center button */
+    display: block; /* Ensure button takes full width */
+    margin-top: 1em; /* Add margin from top */
+    float: right;
+  }
+  
+  @media screen and (max-width: 1270px) {
+    .trContent {
+      width: calc(30% - 1em); /* Adjust width for responsiveness */
+    }
+  }
+  
+  @media screen and (max-width: 1090px) {
+    .trContent {
+      width: calc(45% - 1em); /* Adjust width for responsiveness */
+    }
+  }
+  
+  @media screen and (max-width: 730px) {
+    .trContent {
+      width: calc(90% - 1em); /* Adjust width for responsiveness */
+    }
+  }
+  

@@ -35,7 +35,8 @@ const Signup = () => {
   };
 
   const inputStyle = {
-    borderColor: '#1890ff',
+    borderColor: '#D1AEF9',
+    color:'#8230C6',
     backgroundColor: '#f0f2f5',
   };
 
@@ -56,7 +57,7 @@ const Signup = () => {
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12}>
             <Form.Item
-              label="Name"
+              label="Name :"
               name="name"
               rules={[{ required: true, message: 'Please input your name!' }]}
             >
@@ -65,14 +66,14 @@ const Signup = () => {
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
-              label="Upload Image"
+              label="Upload Image :"
               name="image"
               valuePropName="fileList"
               getValueFromEvent={(e) => [e.file]}
               rules={[{ required: true, message: 'Please upload your image!' }]}
             >
               <Upload {...uploadProps} accept="image/*" listType="picture">
-                <Button icon={<UploadOutlined />}>Upload</Button>
+                <Button icon={<UploadOutlined />} style={inputStyle} >Upload</Button>
               </Upload>
             </Form.Item>
           </Col>
@@ -90,7 +91,7 @@ const Signup = () => {
           </Col> */}
           <Col xs={24} sm={12} >
             <Form.Item
-              label="PRN"
+              label="PRN :"
               name="PRN"
               rules={[
                 { required: true, message: 'Please input your phone number!' },
@@ -102,7 +103,7 @@ const Signup = () => {
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
-              label="Branch"
+              label="Branch :"
               name="Branch"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
@@ -131,12 +132,13 @@ const Signup = () => {
           </Col> */}
           <Col xs={24} sm={12}>
             <Form.Item
-              label="Gender"
+              label="Gender :"
               name="gender"
               rules={[{ required: true, message: 'Please select your gender!' }]}
+              
             >
-              <Select placeholder="Select gender" >
-                <Option value="male">Male</Option>
+              <Select placeholder="Select gender" style={inputStyle} >
+                <Option value="male" >Male</Option>
                 <Option value="female">Female</Option>
                 <Option value="other">Other</Option>
               </Select>
@@ -144,7 +146,7 @@ const Signup = () => {
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
-              label="Phone Number"
+              label="Phone Number :"
               name="phoneNumber"
               rules={[
                 { required: true, message: 'Please input your phone number!' },
@@ -162,12 +164,12 @@ const Signup = () => {
                 { validator: (_, value) => value ? Promise.resolve() : Promise.reject('Please accept the policies') }
               ]}
             >
-              <Checkbox>I agree to the Terms & Condition</Checkbox>
+              <Checkbox style={{color:'#8230C6',fontWeight:'500'}}>I agree to the Terms & Condition</Checkbox>
             </Form.Item>
           </Col>
         </Row>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading} style={{width:'100%'}}>
+          <Button type="primary" htmlType="submit" loading={loading} style={{width:'100%',backgroundColor: '#8230C6'}}>
             Sign Up
           </Button>
         </Form.Item>

@@ -17,31 +17,30 @@ import GuideDashboard from "./components/Guide/GuideDashboard/GuideDashboard";
 import Chatbox from "./components/ChatBot/ChatRoom";
 import Navbar from "./components/Layout/Navbar/navbar";
 import MainLayout from "./components/TrendingPage/Layout";
-
+import MainGuideDashboard from "./components/Guide/MainGuideDashboard";
 
 
 function App() {
 
   return (
     <Router>
-     {/* <Navbar/> */}
-    <Routes>
-      
-         <Route path="/studentguide/*" element={< StuGuideDashboard/>}></Route>
-         <Route path="/studentguide" element={<StuGuideDashboard />} />
-     <Route exact path="/login" element={<Login/>}></Route> 
-    <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
-    <Route exact path="/signup/student" element={<Signup/>}></Route>
-    <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
-    <Route exact path="/" element={<Home/>}></Route>
-      <Route exact path="/login" element={<Login/>}></Route>
-      <Route exact path="/signup" element={<MainSignUp/>}></Route>
-      <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
-      <Route exact path="/faqs" element={<Faqs/>}></Route>
-      <Route exact path="/trending" element={<MainLayout/>}></Route>
-    </Routes>
-  </Router>
-
+      {/* <Navbar/> */}
+      <Routes>
+        
+           <Route path="/studentguide/*" element={< StuGuideDashboard/>}></Route>
+           <Route path="/studentguide" element={<StuGuideDashboard />} />
+       <Route exact path="/login" element={<Login/>}></Route> 
+      <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
+      <Route exact path="/signup/student" element={<Signup/>}></Route>
+      <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
+      <Route exact path="/" element={<Home/>}></Route>
+        <Route exact path="/login" element={<Login/>}></Route>
+        <Route exact path="/signup" element={<MainSignUp/>}></Route>
+        <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
+        <Route exact path="/faqs" element={<Faqs/>}></Route>
+        <Route exact path="/trending" element={<MainLayout/>}></Route>
+      </Routes>
+    </Router>
   )
 }
 

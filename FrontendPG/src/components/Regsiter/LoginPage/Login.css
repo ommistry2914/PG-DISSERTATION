@@ -1,87 +1,102 @@
-.form-main {
-    max-width: 100%;
-    height: 600px;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    /* padding: 5rem; */
-    border: 1px solid black;
-    border-radius: 50px;
-    overflow: hidden;
-  }
-  
-  .form-left {
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    /* background-color: aqua; */
-    /* background-color: var(--color-lavender); */
-    border-radius: 0px 50px 50px 0px;
 
-  }
-  
-  
-  
-  .form-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 1rem;
-    /* border: 1px solid red; */
-    /* z-index: 2; */
-    padding-right: 3rem;
-  }
-  
-  .form-content {
-    /* padding: 0rem; */
-    padding-top: 3rem;
-    border: 1px solid green;
-    height: 80%;
-  }
-  
-  .form-content h3 {
-    margin-bottom: 2rem;
-    margin-left: 2rem;
-    text-align: start;
-    text-align: justify;
-  }
-  
-  .input-field {
-    margin-bottom: 2rem;
-    margin-left: 2rem;
-    width: 85%;
-  }
 
-  
-  
-  .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .login-form-button {
-    width: 85%;
-  }
-  
-  .register-link {
-    color: blue;
-  }
-  
-  .login-form-forgot {
-    color: blue;
-    margin-left: 7rem;
-  }
-  .ant-input-affix-wrapper-lg{
-    border-color: black;
-    font-size: 15px;
-  }
 
-@media screen and (max-width:786px) {
-  .form-main{
+.form-main-login {
+  max-width: 100%;
+  height: 700px;
+  /* height: auto; */
+
+  display: grid;
+  grid-template-columns: 50% 50%; /* Changed 70% to 50% */
+  /* border: 1px solid black; */
+  border-radius: 10px; /* Added border-radius */
+  padding: 2rem;
+}
+
+.form-lefttt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* border: 1px solid red; */
+  padding: 2rem;
+  padding-top: 4rem;
+}
+
+.form-righttt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  padding: 0 2rem; /* Simplified padding */
+  padding-left: 7rem;
+  /* border: 1px solid blue; */
+}
+
+.form-content {
+  width: 85%;
+  padding: 2rem 0; /* Changed padding-top to 3rem */
+  /* border: 1px solid green; */
+  height: 80%;
+  /* height: auto; */
+  /* box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+}
+
+.form-content h3 {
+  margin-bottom: 3.5rem;
+  /* margin-left: 2rem; */
+  text-align: center;
+  color: var(--secondary-color-1);
+  position: relative;
+}
+
+.form-content h3::after {
+  content: "";
+  position: absolute;
+  left: 3.2rem;
+  bottom: -8px; /* Adjust as needed */
+  width: 75%;
+  height: 3px; /* Thickness of the underline */
+  background-color: var(--secondary-color-1) /* Color of the underline */
+}
+
+.input-field {
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  width: calc(100% - 4rem); /* Adjusted width calculation */
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-form-button {
+  width: calc(100% - 4rem); /* Adjusted width calculation */
+  background-color: var(--secondary-color-1);
+}
+
+.register-link,
+.login-form-forgot {
+  color: var(--secondary-color-1);
+}
+
+.login-form-forgot {
+  margin-left: 9rem; /* Align to the right */
+  
+}
+
+.ant-input-affix-wrapper-lg {
+  border-color: black;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 786px) {
+  .form-main-login {
     grid-template-columns: 100%;
     height: auto;
   }
-  
 }

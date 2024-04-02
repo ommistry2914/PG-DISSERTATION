@@ -13,14 +13,11 @@ const Home = () => {
 
 
       <Head/>
-      <br />
-
       <MSUDescription/>
       <TopResearcher/>
       <StudentCardList/>
       <FaqsMain/>
       <Footer/>
-      {/* <MSUDescription/> */}
 
 
     </div>

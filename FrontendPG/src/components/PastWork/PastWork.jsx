@@ -1,5 +1,6 @@
 import React from 'react';
 import StudentCard from '../../CommonCard/StudentCard'; // Assuming StudentCard is in the same directory
+import './PastWork.css';
 const DummyData = [
   {
     profile: "",
@@ -38,6 +39,8 @@ const DummyData = [
 
 const StudentCardList = () => {
   return (
+    <div className='main-bobwork'>
+    <h2>Top Researches</h2>
     <div className='main_class'>
       {DummyData.map((data, index) => (
         <StudentCard
@@ -51,6 +54,8 @@ const StudentCardList = () => {
         />
       ))}
     </div>
+    </div>
+    
   );
 };
 
