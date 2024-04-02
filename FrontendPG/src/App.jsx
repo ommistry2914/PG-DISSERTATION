@@ -16,6 +16,7 @@ import MainSignUp from "./components/Regsiter/SignupPage/MainSignUp";
 import GuideDashboard from "./components/Guide/GuideDashboard/GuideDashboard";
 import Chatbox from "./components/ChatBot/ChatRoom";
 import Navbar from "./components/Layout/Navbar/navbar";
+import MainLayout from "./components/TrendingPage/Layout";
 
 
 
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <Router>
-     <Navbar/>
+     {/* <Navbar/> */}
     <Routes>
       
          <Route path="/studentguide/*" element={< StuGuideDashboard/>}></Route>
@@ -37,7 +38,7 @@ function App() {
       <Route exact path="/signup" element={<MainSignUp/>}></Route>
       <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
       <Route exact path="/faqs" element={<Faqs/>}></Route>
-  
+      <Route exact path="/trending" element={<MainLayout/>}></Route>
     </Routes>
   </Router>
 
