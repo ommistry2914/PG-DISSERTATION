@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import './App.css'
 import Navbar from './components/Layout/Navbar/navbar';
 import Home from './screens/home';
 import MainSignUp from './components/Regsiter/SignupPage/MainSignUp';
@@ -13,6 +13,12 @@ import MainLayout from './components/TrendingPage/Layout';
 import { useAuth } from './AuthContext';
 import MainGuideDashboard from './components/Guide/MainGuideDashboard';
 import ProtectedRoute from "./ProtectedRoute";
+import RequestForm from "./components/RequestConnection/RequestForm";
+import Statistics from "./components/LandingPage/Statistics/Statistics";
+import GuideCard from "./CommonCard/GuideCard";
+import StudentDashBoard from "./components/Student/StudentDashBoard";
+import WebTeamMain from "./components/WebTeam/WebTeamMain";
+
 
 const App = () => {
   const { authenticated, userRole } = useAuth();
@@ -21,7 +27,8 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        
+      <Route path="/" element={<Home />} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
         {authenticated && userRole === 'guide' ? (
@@ -42,6 +49,14 @@ const App = () => {
         ) : (
           <Route path="/mentorprofile" element={<Navigate to="/" />} />
         )}
+
+
+        <Route exact path="/requestform" element={<RequestForm />}></Route>
+        <Route exact path="/statistics" element={<Statistics />}></Route>
+        <Route exact path="/showguide" element={<GuideCard />}></Route>
+        <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
+        <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
+    
       </Routes>
     </Router>
   );

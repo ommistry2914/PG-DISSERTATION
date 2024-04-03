@@ -7,15 +7,20 @@ import TopResearcher from '../components/LandingPage/TopResearches/TopResearcher
 import StudentCardList from '../components/PastWork/PastWork'
 import FaqsMain from '../components/LandingPage/FAQS/FaqsMain'
 import GuideCard from '../CommonCard/GuideCard'
+import Statistics from '../components/LandingPage/Statistics/Statistics'
+
 const Home = () => {
   return (
     <div>
 
 
       <Head/>
+      <br />
+      <Statistics />
       <MSUDescription/>
       <TopResearcher/>
       <StudentCardList/>
+      <GuideCard />
       <FaqsMain/>
       <Footer/>
 
