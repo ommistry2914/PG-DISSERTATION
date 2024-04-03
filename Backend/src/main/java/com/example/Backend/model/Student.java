@@ -15,7 +15,6 @@ public class Student {
     @Id
     private String id;
     private String email;
-    private String password;
     private String name;
     private String image_url;
     private String prn;

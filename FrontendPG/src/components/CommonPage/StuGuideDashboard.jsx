@@ -9,24 +9,27 @@ import Guide from './pages/Guide/Guide';
 import { Routes, Route } from 'react-router-dom';
 import ResearchWorkForm from './pages/ResearchWorkForm/ResearchWorkForm';
 import Header from './UI/Header/Header'
+import SidebarOm from './UI/Sidebar/SidebarOm';
 
 const StuGuideDashboard = () => {
   return (
-  <div>
-    <Header/>
-   
-    <div className='d-flex'>
-    <Sidebar />
+    <div>
+      <Header />
+
+      <div className='d-flex'>
+        <Sidebar />
         <div>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/mentors" element={<MentorsCard />} />
-          <Route path="/progress" element={<Progress />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/guide" element={<Guide />} /> 
-          <Route path="/add-work" element={<ResearchWorkForm />} />
-        </Routes></div>
-      </div></div>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/mentors" element={<MentorsCard />} />
+            <Route path="/progress" element={<Progress />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/add-work" element={<ResearchWorkForm />} />
+          </Routes>
+        </div>
+      </div>
+    </div>
   );
 };
 

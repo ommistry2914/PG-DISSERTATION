@@ -1,8 +1,4 @@
 import React from 'react'
-
-import Navbar from "../components/Navigation"
-
-
 import MSUDescription from '../components/LandingPage/MSUdescription/MSUDescription'
 import Head from '../components/LandingPage/Head/Head'
 import Footer from '../components/Layout/Footer'
@@ -17,7 +13,6 @@ const Home = () => {
   return (
     <div>
 
-     <Navbar/>
 
       <Head/>
       <br />
@@ -28,7 +23,6 @@ const Home = () => {
       <GuideCard />
       <FaqsMain/>
       <Footer/>
-      {/* <MSUDescription/> */}
 
 
     </div>

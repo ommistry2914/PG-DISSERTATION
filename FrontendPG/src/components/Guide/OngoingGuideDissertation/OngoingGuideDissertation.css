@@ -3,7 +3,7 @@
     left: 16.6%;
     top: 12em;
     background: var(--background-color);
-    width:83.5%;
+    width:83%;
     margin-bottom: 0;
     padding-bottom: 100px;
 }
@@ -22,7 +22,7 @@
 }
 .guidereq_head{
     text-align-last: left;
-    position: fixed;
+    /* position: fixed; */
     top: 6.5em;
     left: 28.2%;
     width:max-content;

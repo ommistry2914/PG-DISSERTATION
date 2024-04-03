@@ -15,7 +15,6 @@ public class Guide {
     @Id
     private String id;
     private String email;
-    private String password;
     private String name;
     private String image;
     private String guideId;
