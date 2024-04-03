@@ -26,13 +26,13 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         
       <Route path="/" element={<Home />} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
-        {authenticated && userRole === 'guide' ? (
+        {/* {authenticated && userRole === 'guide' ? (
           <Route path="/signup/guide" element={<GuideSignUp />} />
         ) : (
           <Route path="/signup/guide" element={<Navigate to="/" />} />
@@ -55,8 +55,15 @@ const App = () => {
         ) : (
           <Route path="/studentdashboard" element={<Navigate to="/" />} />
         )}
-        
+         */}
 
+          <Route path="/signup/guide" element={<GuideSignUp />} />
+          <Route path="/signup/student" element={<Signup />} />
+          <Route path="/studentguide/*" element={<StuGuideDashboard />} />
+          <Route path="/faqs" element={<Faqs />} />
+          <Route path="/trending" element={<MainLayout />} />
+          <Route path="/mentorprofile" element={<GuideDashboard />} />
+          <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
