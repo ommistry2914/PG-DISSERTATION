@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import "./StudentDashboard.css";
-import img1 from "../../assets/home_banner.jpg";
+import img1 from "../../assests/techo-home.png";
 import { FaChalkboardTeacher,FaUserEdit } from "react-icons/fa";
 import { PiStudentFill } from "react-icons/pi";
 import { HiTrendingUp } from "react-icons/hi";

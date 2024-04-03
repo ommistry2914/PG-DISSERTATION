@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes ,Navigate} from "react-router-dom";
 import './App.css'
 import Navbar from './components/Layout/Navbar/navbar';
 import Home from './screens/home';
@@ -21,6 +21,7 @@ import WebTeamMain from "./components/WebTeam/WebTeamMain";
 
 
 const App = () => {
+
   const { authenticated, userRole } = useAuth();
 
   return (

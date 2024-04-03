@@ -1,6 +1,6 @@
 import React from 'react';
 import './Guidecard.css';
-import img1 from '../assets/home_banner.jpg';
+import img1 from '../assests/techo-home.png'
 
 const GuideCard = () => {
  

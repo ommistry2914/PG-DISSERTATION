@@ -1,7 +1,7 @@
 // WebTeamMain.jsx
 import React from 'react';
 import "./Webteam.css";
-import img1 from "../../assets/home_banner.jpg";
+import img1 from "../../assests/techo-home.png";
 import { FaLinkedin } from "react-icons/fa";
 
 const WebTeamMain = () => {
