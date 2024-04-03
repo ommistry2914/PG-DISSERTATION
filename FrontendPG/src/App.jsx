@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes ,Navigate} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import './App.css'
 import Navbar from './components/Layout/Navbar/navbar';
 import Home from './screens/home';
@@ -26,18 +26,18 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
-        
-      <Route path="/" element={<Home />} />
+
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<MainSignUp />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} />
         {authenticated && userRole === 'guide' ? (
           <Route path="/signup/guide" element={<GuideSignUp />} />
         ) : (
           <Route path="/signup/guide" element={<Navigate to="/" />} />
         )}
-         {authenticated && userRole === 'student' ? (
+        {authenticated && userRole === 'student' ? (
           <Route path="/signup/student" element={<Signup />} />
         ) : (
           <Route path="/signup/student" element={<Navigate to="/" />} />
@@ -50,18 +50,26 @@ const App = () => {
         ) : (
           <Route path="/mentorprofile" element={<Navigate to="/" />} />
         )}
-{authenticated && userRole === 'student' ? (
+        {authenticated && userRole === 'student' ? (
           <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
         ) : (
           <Route path="/studentdashboard" element={<Navigate to="/" />} />
-        )}
-        
+        )} */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup/guide" element={<Navigate to="/" />} />
+        <Route path="/signup/student" element={<Signup />} />
+        <Route path="/mentorprofile" element={<GuideDashboard />} />
+        <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
+
+        <Route path="/studentguide/*" element={<StuGuideDashboard />} />
+
+
 
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
-        <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
-    
+        <Route exact path="/webteam" element={<WebTeamMain />} ></Route>
+
       </Routes>
     </Router>
   );
