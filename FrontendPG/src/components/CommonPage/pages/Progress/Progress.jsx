@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import './progress.css'
 import { FaDownload, FaList } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CircularProgressBar from './CircularProgressBar';
 import ProgressService from '../../../../services/ProgressService';
 
@@ -49,31 +49,52 @@ const getApprovalColor = (approval) => {
 
 
 const Progress = () => {
-
+  const [tasks, setTasks] = useState([]);
   const [percentage, setPercentage] = useState(0);
   const [progress, setProgress] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { studentid } = useParams();
   useEffect(() => {
     const interval = setInterval(() => {
       setPercentage(prevPercentage => (prevPercentage + 10) % 100);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []); 
-  useEffect(()=>{
-    const fetchData=async()=>{
-       setLoading(true);
-       try {
-           const response=await ProgressService.getProgress();
-           setProgress(response.data);
-       } catch (error) {
-           console.log(error);
-       }
-       setLoading(false);
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await ProgressService.getProgress();
+        setProgress(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     };
     fetchData();
-  },[]);
+  }, []);
+
+
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/${studentid}/progress`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch tasks');
+        }
+        const data = await response.json();
+        setTasks(data);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
+    };
+
+    fetchTasks();
+  }, [studentid]);
+
 
 
   const timelineData = [
@@ -86,11 +107,11 @@ const Progress = () => {
   if (loading) {
     return <div>Loading...</div>;
 
-}
+  }
 
-if (error) {
+  if (error) {
     return <div>Error: {error}</div>;
-}
+  }
   return (
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
@@ -98,88 +119,98 @@ if (error) {
           <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item active" aria-current="page">Progress</li>
-        </ol> 
+        </ol>
       </nav>
       <div className="container common-pg-progress-section row">
-        {progress.map(progress=>(
+        {progress.map(progress => (
           <div>
-        <div className="common-pg-progress-circles row col-sm-12 container">
-          <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={60} />CR Progress</div>
-          <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={30} />Pending Tasks</div>
-          <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={70} />Completed Tasks</div>
-        </div>
-        <div className="common-pg-timeline-div  col-sm-12 col-md-12 col-lg-12">
-          <div className="common-pg-time-line">
-            <ul>
-              <li data-escena="Intro" class="checkpoint">
-                0
-              </li>
-              <li>
-                <progress value="200" max="200"></progress>
-              </li>
-              <li data-escena="uno" class="checkpoint">
-                1
-              </li>
-              <li>
-                <progress value="100" max="200"></progress>
-              </li>
-              <li data-escena="dos" class="checkpoint">
-                2
-              </li>
-              <li>
-                <progress value="0" max="100"></progress>
-              </li>
-              <li data-escena="tres" class="checkpoint">
-                3
-              </li>
-              <li>
-                <progress value="0" max="100"></progress>
-              </li>
-              <li data-escena="cuatro" class="checkpoint">
-                4
-              </li>
-              <li>
-                <progress value="0" max="100"></progress>
-              </li>
-              <li data-escena="Completed" class="checkpoint">
-                5
-              </li>
-            </ul>
+            <div className="common-pg-progress-circles row col-sm-12 container">
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={60} />CR Progress</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={30} />Pending Tasks</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={70} />Completed Tasks</div>
+            </div>
+            <div className="common-pg-timeline-div  col-sm-12 col-md-12 col-lg-12">
+              <div className="common-pg-time-line">
+                <ul>
+                  <li data-escena="Intro" className="checkpoint">
+                    0
+                  </li>
+                  <li>
+                    <progress value="200" max="200"></progress>
+                  </li>
+                  <li data-escena="uno" className="checkpoint">
+                    1
+                  </li>
+                  <li>
+                    <progress value="100" max="200"></progress>
+                  </li>
+                  <li data-escena="dos" className="checkpoint">
+                    2
+                  </li>
+                  <li>
+                    <progress value="0" max="100"></progress>
+                  </li>
+                  <li data-escena="tres" className="checkpoint">
+                    3
+                  </li>
+                  <li>
+                    <progress value="0" max="100"></progress>
+                  </li>
+                  <li data-escena="cuatro" className="checkpoint">
+                    4
+                  </li>
+                  <li>
+                    <progress value="0" max="100"></progress>
+                  </li>
+                  <li data-escena="Completed" className="checkpoint">
+                    5
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="common-pg-progress-table-div col-sm-12">
+              <table className='common-pg-progress-table'>
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Priority</th>
+                    
+                    <th>Max Credits</th>
+                    <th>Received Credits</th><th>Approval Stage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tasks && tasks.map((task) => (
+                    <tr key={task.id}>
+                      <td>{task.taskName}</td>
+                      <td>{task.status}</td>
+                      <td>{new Date(task.startDate).toLocaleDateString('en-US', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric'
+                      })} <br /> to <br /> {new Date(task.endDate).toLocaleDateString('en-US', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric'
+                      })}</td>
+                      <td><div className='priority' style={{ backgroundColor: getPriorityColor(task.priority) }}>{task.priority}</div></td>
+                      <td>{task.maxCredits}</td>
+                     
+                      <td>{task.revCredits}</td> <td>{task.approvalStage}</td>
+                    </tr>
+                  ))}
+
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div className="common-pg-progress-table-div col-sm-12">
-          <table className='common-pg-progress-table'>
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Status</th>
-                <th>Progress</th>
-                <th>Date</th>
-                <th>Priority</th>
-                <th>Approval Stage</th>
-                <th>Mentor</th>
-                <th>Submissions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {tasks.map(task=>(
-                <tr>
-                  <td><Link><FaList /> </Link>{task.task}</td>
-                  <td> <span className="common-pg-status-dot" style={{ backgroundColor: getStatusColor(task.status) }}></span>
-                    {task.status}</td>
-                  <td><div className="common-pg-progress-bar" style={{ width: `${task.progress}`, height: '15px', backgroundColor: 'skyblue', borderRadius: '10px', fontSize: '12px' }}>{task.progress}</div></td>
-                  <td>{task.date}</td>
-                  <td><div className='common-pg-priority' style={{ backgroundColor: getPriorityColor(task.priority) }}>{task.priority}</div></td>
-                  <td><div className='common-pg-approval' style={{ backgroundColor: getApprovalColor(task.approvalStage) }}>{task.approvalStage}</div></td>
-                  <td>{task.mentor}</td>
-                  <td><div className='common-pg-download-div'>filename12345.txt<span><FaDownload id='common-pg-download-icon'/></span></div></td>
-                </tr>
-            ))}
-            </tbody>
-          </table>
-        </div>
-        </div>
-      ))}
+        ))}
       </div>
     </div>
   );

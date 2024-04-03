@@ -9,23 +9,43 @@ import Guide from './pages/Guide/Guide';
 import { Routes, Route } from 'react-router-dom';
 import ResearchWorkForm from './pages/ResearchWorkForm/ResearchWorkForm';
 import Header from './UI/Header/Header'
+import AllotTask from './pages/AllotTask/AllotTask';
+import AllotedTasks from './pages/AllotTask/AllotedTasks';
+import UpdateAllotedTask from './pages/AllotTask/UpdateAllotedTask';
+import SubmitFor from './pages/ResearchWorkForm/Submitfor';
+import UpdateForm from './pages/ResearchWorkForm/UpdateForm'
+import Submissions from './pages/Submissions/Submissions';
+import LatestDetailedSubmission from './pages/Submissions/LatestDetailedSubmission';
+import PastDetailedSubmission from './pages/Submissions/PastDetailedSubmission';
 
 const StuGuideDashboard = () => {
   return (
-  <div>
-    <Header/>
-   
-    <div className='d-flex'>
-    <Sidebar />
+    <div>
+      <Header />
+
+      <div className='d-flex'>
+        <Sidebar />
         <div>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/mentors" element={<MentorsCard />} />
-          <Route path="/progress" element={<Progress />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/guide" element={<Guide />} /> 
-          <Route path="/add-work" element={<ResearchWorkForm />} />
-        </Routes></div>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/mentors" element={<MentorsCard />} />
+            <Route path="/progress" element={<Progress />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/guide" element={<Guide />} />
+
+            <Route path='/submit-for/:taskid/add-work' element={<ResearchWorkForm />} />
+            
+            <Route path='/submit-for' element={<SubmitFor />} />
+            <Route path='/submissions' element={<Submissions />} />
+            <Route path='/submissions/:taskid/:submissionid/update' element={<UpdateForm />} />
+            <Route path='/submissions/:taskid/:submissionid/latest' element={<LatestDetailedSubmission />} />
+            <Route path='/submissions/:taskid/:submissionid/past' element={<PastDetailedSubmission />} />
+
+            <Route path="allottask/:studentid" element={<AllotTask />}></Route>
+            <Route path="allottask/:studentid/alloted" element={<AllotedTasks />}></Route>
+            <Route path="allottask/:studentid/update/:taskid" element={<UpdateAllotedTask />}></Route>
+
+          </Routes></div>
       </div></div>
   );
 };

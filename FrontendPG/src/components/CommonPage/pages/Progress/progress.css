@@ -6,7 +6,7 @@
     justify-content: center;
     align-content: center;
 }
-  
+
 .common-pg-progress-circles {
     display: flex;
     justify-content: space-between;
@@ -19,7 +19,7 @@
     width: 50%;
     height: 100%;
 }
- 
+
 .common-pg-svg-progress {
     transform: rotate(-90deg);
 }
@@ -72,11 +72,12 @@ circle {
     background-color: var(--surface-color);
     border: 1px solid var(--secondary-color-1);
     position: absolute;
-    top: -12px; /* Adjusted to align with the top of the progress ring */
+    top: -12px;
+    /* Adjusted to align with the top of the progress ring */
     left: 0;
 }
 
-.common-pg-progress-ring:hover{
+.common-pg-progress-ring:hover {
     transform: scale(1.1);
 }
 
@@ -103,7 +104,7 @@ progress[value]::-webkit-progress-value {
     background: #804ba3;
 }
 
-.common-pg-timeline-div{
+.common-pg-timeline-div {
     margin: 5px 10px 20px 10px;
 }
 
@@ -181,9 +182,9 @@ progress[value]::-webkit-progress-value {
 }
 
 
-.common-pg-progress-table-div{
-   max-width: 100%;
-   min-width: 90%;
+.common-pg-progress-table-div {
+    max-width: 100%;
+    min-width: 90%;
 }
 
 .common-pg-progress-table {
@@ -197,7 +198,6 @@ progress[value]::-webkit-progress-value {
 .common-pg-progress-table td {
     border-bottom: 1px solid rgb(177, 177, 177);
     padding: 1%;
-    overflow: hidden;
 }
 
 .common-pg-status-dot {
@@ -215,7 +215,7 @@ progress[value]::-webkit-progress-value {
     justify-content: center;
 }
 
-.common-pg-download-div{
+.common-pg-download-div {
     display: flex;
     column-gap: 20px;
     justify-content: center;
@@ -224,7 +224,7 @@ progress[value]::-webkit-progress-value {
     overflow: hidden;
 }
 
-#common-pg-download-icon{
+#common-pg-download-icon {
     cursor: pointer;
     border: 1px solid gray;
     padding: 10%;
@@ -233,9 +233,21 @@ progress[value]::-webkit-progress-value {
     box-shadow: 1px 1px 10px rgb(71, 71, 71);
 }
 
-#common-pg-download-icon:hover{
+#common-pg-download-icon:hover {
     color: var(--text-color-white);
     background: black;
 }
 
 
+
+.common-pg-progress-table thead th{
+    background: var(--text-color-black);
+    color: var(--text-color-white);
+    font-size: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.common-pg-details-link{
+    color: blue;
+}

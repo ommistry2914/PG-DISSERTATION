@@ -1,16 +1,32 @@
-
-form label, input, textarea {
+.common-pg-add-work-form label,
+input,
+textarea {
     margin-bottom: 1rem;
 }
 
+
+.common-pg-add-work-form label textarea{
+    min-height: 150px;
+    max-height: 350px;
+
+}
+
+.common-pg-forms{
+    min-width: 85vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .common-pg-add-work-form {
-    min-width: 60vw;
+    width: 70%;
     display: flex;
     flex-direction: column;
     box-shadow: 1px 1px 3px rgb(107, 107, 107);
     padding: 1rem;
     border: 1px solid rgb(172, 172, 172);
-    margin: 0 3rem 0 5rem;
+    margin: 0 3rem 1rem 5rem;
+    align-items: center;
 }
 
 .common-pg-necessary-sup {
@@ -26,7 +42,28 @@ form label, input, textarea {
     border: none;
 }
 
-.common-pg-add-wrok-submit:hover {
+.common-pg-add-work-submit:hover {
     background: radial-gradient(var(--secondary-color-2), var(--secondary-color-1));
     color: var(--text-color-black);
+}
+
+.common-pg-add-work-form .row {
+    width: 90%;
+    text-align: center;
+}
+
+#common-pg-allot-task-btn {
+    width: 10%;
+    font-size: 15px;
+    margin-left: 90%;
+    margin-bottom: 3%;
+}
+
+#common-pg-allot-task-btn:hover{
+    color: var(--text-color-black);
+    background: var(--primary-color);
+}
+
+.common-pg-del-task-btn {
+    cursor: pointer;
 }

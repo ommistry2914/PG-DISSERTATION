@@ -14,8 +14,9 @@ import Signup from "./components/Regsiter/SignupPage/Signup"
 import GuideSignUp from "./components/Regsiter/SignupPage/GuideSignUp";
 import MainSignUp from "./components/Regsiter/SignupPage/MainSignUp";
 import GuideDashboard from "./components/Guide/GuideDashboard/GuideDashboard";
-
-
+import AllotTask from "./components/CommonPage/pages/AllotTask/AllotTask";
+import UpdateAllotedTask from "./components/CommonPage/pages/AllotTask/UpdateAllotedTask";
+import AllotedTask from './components/CommonPage/pages/AllotTask/AllotedTasks'
 
 function App() {
 
@@ -24,8 +25,8 @@ function App() {
      
       <Routes>
         
-           <Route path="/studentguide/*" element={< StuGuideDashboard/>}></Route>
-           <Route path="/studentguide" element={<StuGuideDashboard />} />
+           <Route path=":studentid/studentguide/*" element={< StuGuideDashboard/>}></Route>
+           <Route path=":studentid/studentguide" element={<StuGuideDashboard />} />
        <Route exact path="/login" element={<Login/>}></Route> 
       <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
       <Route exact path="/signup/student" element={<Signup/>}></Route>
@@ -35,6 +36,8 @@ function App() {
         <Route exact path="/signup" element={<MainSignUp/>}></Route>
         <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
         <Route exact path="/faqs" element={<Faqs/>}></Route>
+
+       
     
       </Routes>
     </Router>
