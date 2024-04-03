@@ -50,12 +50,16 @@ const App = () => {
         ) : (
           <Route path="/mentorprofile" element={<Navigate to="/" />} />
         )}
-
+{authenticated && userRole === 'student' ? (
+          <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
+        ) : (
+          <Route path="/studentdashboard" element={<Navigate to="/" />} />
+        )}
+        
 
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
-        <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
         <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
     
       </Routes>
