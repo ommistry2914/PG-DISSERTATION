@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './navbar.css'; 
-
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../../AuthContext';
 const Navbar = () => {
+    const { authenticated, userRole, login, logout } = useAuth();
+
     const [menuVisible, setMenuVisible] = useState(false);
     const [searchDropdownVisible, setSearchDropdownVisible] = useState(false);
     const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
@@ -17,6 +21,28 @@ const Navbar = () => {
         setSearchDropdownVisible(false);
         setAccountDropdownVisible(false);
         setDropdown(!dropdown);
+    };
+
+    const handleLogout = async () => {
+        try {
+            // Call logout API here using Axios
+            const response = await axios.post(
+                'http://localhost:8080/api/auth/logout',
+                
+                );
+
+            if (response.status === 200) {
+                // Log()out successful
+                logout();
+            } else {
+                // Handle logout error
+                console.error('Logout failed:', response.statusText);
+                // Optionally, you can display an error message to the user
+            }
+        } catch (error) {
+            console.error('Logout failed:', error.message);
+            // Optionally, you can display an error message to the user
+        }
     };
 
     return (
@@ -101,11 +127,10 @@ const Navbar = () => {
                             <span className="navbar_profile_name">Profile</span>
                         </div>
                         <div id="navbar_account_dropdown" className={`${accountDropdownVisible ? 'visible_dropdown' : 'hide_dropdown'}`}>
-                        <a href="/Profile/profile.html" id="navbar_account_dropdown_login" class="dropList">LOGIN-</a>
-                        <a href="/Profile/profile.html" id="navbar_account_dropdown_login" class="dropList">SIGNUP</a>
-                            <a href="/Profile/signup.html" class="dropList">Dashboard</a>
-                            {/* <a href="#" class="dropList">Coupons</a> */}
-                           
+                        <Link to="/login" id="navbar_account_dropdown_login" class="dropList">LOGIN-</Link>
+                        <Link to="/signup" id="navbar_account_dropdown_login" class="dropList">SIGNUP</Link>
+                            <Link to="/mentorprofile" id="navbar_account_dropdown_login"  class="dropList">Dashboard</Link>
+                            <span onClick={handleLogout} id="navbar_account_dropdown_login" class="dropList">Logout</span>
                         </div>
                     </div>
                 </section>

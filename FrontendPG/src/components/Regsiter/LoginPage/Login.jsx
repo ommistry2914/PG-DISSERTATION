@@ -1,60 +1,127 @@
-import React from 'react'
-import clg from '../../../assests/techo-home.png';
+import React from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import axios from 'axios';
 import Lottie from 'lottie-react';
 import HeadAnim from '../../../assests/HeadAnimation.json';
+import './Login.css';
+import { useAuth } from '../../../AuthContext';
 
-
-import './Login.css'
 
 const Login = () => {
-  const [form] = Form.useForm();
+  const { authenticated, userRole, login, logout } = useAuth();
+  const navigate = useNavigate(); 
+
+  const handlesignupnavigation=()=>{
+    navigate('/signup');
+  }
+  const handleSubmit = async (values) => {
+    try {
+      
+      const response = await axios.post('http://localhost:8080/api/auth/signin', {
+        username: values.username,
+        password: values.password,
+      });
+  
+     
+      if (response.status === 200) {
+        
+        const { username, roles, email } = response.data;
+  
+      
+        const role = roles.includes('ROLE_GUIDE') ? 'guide' : 'student';
+  
+       
+        login({ username, role, email });
+  
+       
+        if (role === "guide") {
+          try {
+            
+            const checkResponse = await axios.get(`http://localhost:8080/api/auth/guide/email/${email}`);
+  
+            if (checkResponse.status === 200 && checkResponse.data.exists) {
+          
+              navigate('/mentorprofile');
+            } else {
+           
+              navigate('/signup/guide');
+            }
+          } catch (error) {
+            console.error('Error checking email:', error);
+          }
+        } else if (role === "student") {
+          try {
+           
+            const checkResponse = await axios.get(`http://localhost:8080/api/auth/student/email/${email}`);
+  
+            if (checkResponse.status === 200 && checkResponse.data.exists) {
+             
+              navigate('/mentorprofile');
+            } else {
+              
+              navigate('/signup/student');
+            }
+          } catch (error) {
+            console.error('Error checking email:', error);
+          }
+        }
+      }
+    } catch (error) {
+      
+      console.error('Authentication error:', error);
+    }
+  };
+  
+  
   const inputStyle = {
     borderColor: '#D1AEF9',
-    color:'#8230C6',
+    color: '#8230C6',
     backgroundColor: '#f0f2f5',
   };
+
   return (
     <>
       <div className="form-main-login">
 
         <div className="form-lefttt">
           <div className="anim-div">
-          <Lottie animationData={HeadAnim}/>
+            <Lottie animationData={HeadAnim}/>
           </div>
         </div>
 
         <div className="form-righttt">
           <div className="form-content">
-          <h3>Login to your account</h3>
-          <Form form={form}>
+            <h3>Login to your account</h3>
+            <Form onFinish={handleSubmit}>
 
-              <Form.Item className='input-field'
-                    hasFeedback
+              <Form.Item
+                className='input-field'
+                hasFeedback
                 name="username"
                 validateTrigger="onBlur"
                 rules={[
                   {
                     required: true,
-                    type: 'email',
-                    message: 'Please input your Email!',
+                    type: 'username',
+                    message: 'Please input your Username!',
                   },
                 ]}
               >
                 <Input
-                
-                 size='large' prefix={<UserOutlined className="site-form-item-icon" />} 
-                 placeholder="Email"
-                 style={inputStyle} />
+                  size='large'
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Username"
+                  style={inputStyle}
+                />
               </Form.Item>
 
-              <Form.Item className='input-field'
-                    hasFeedback
+              <Form.Item
+                className='input-field'
+                hasFeedback
                 name="password"
                 validateTrigger="onBlur"
-
                 rules={[
                   {
                     required: true,
@@ -62,7 +129,8 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input size='large'
+                <Input
+                  size='large'
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
@@ -71,9 +139,8 @@ const Login = () => {
               </Form.Item>
 
               <Form.Item>
-                <Form.Item name="remember"  valuePropName="checked" noStyle>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
                   <Checkbox className='remember' style={{color:'#8230C6',fontWeight:'500'}}>Remember me</Checkbox>
-                  
                 </Form.Item>
                 <a className="login-form-forgot" href="">
                   Forgot password ?
@@ -85,17 +152,16 @@ const Login = () => {
                   Log in
                 </Button>
               </Form.Item>
-              <span >
+              <span onClick={handlesignupnavigation}>
                 or <a href="" className='register-link'> Sign up</a>
               </span>
 
             </Form>
           </div>
-          
         </div>
       </div>
     </>
   )
 }
 
-export default Login
+export default Login;

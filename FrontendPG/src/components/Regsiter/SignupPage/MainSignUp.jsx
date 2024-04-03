@@ -1,78 +1,4 @@
 
-// import React, { useState } from 'react';
-// import { Typography, Input, Button, Radio } from 'antd';
-// import { Link } from 'react-router-dom';
-// import Lottie from 'lottie-react';
-// import HeadAnim from '../../../assests/HeadAnimation.json';
-
-// import './MainSignUp.css';
-
-// const { Title } = Typography;
-
-// const MainSignUp = () => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
-//   const [role, setRole] = useState('student'); // Default role is student
-
-//   const handleSignUp = () => {
-//     // Add your sign up logic here
-//     console.log('Email:', email);
-//     console.log('Password:', password);
-//     console.log('Confirm Password:', confirmPassword);
-//     console.log('Role:', role);
-//     // You can add your sign up API call or any other logic here
-//   };
-
-//   return (
-//     <>
-//       <div className="form-main">
-//         <div className="form-left">
-//           <div className="anim-div">
-//             <Lottie animationData={HeadAnim} />
-//           </div>
-//         </div>
-
-//         <div className="form-right">
-//           <Title level={2}>Welcome to [Website Name]</Title>
-//           <Input
-//             placeholder="Email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             className="signup-input"
-//           />
-//           <Input.Password
-//             placeholder="Password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             className="signup-input"
-//           />
-//           <Input.Password
-//             placeholder="Confirm Password"
-//             value={confirmPassword}
-//             onChange={(e) => setConfirmPassword(e.target.value)}
-//             className="signup-input"
-//           />
-//           <div className="role-label">Role:</div>
-//           <div className="role-radio-group">
-//             <Radio.Group onChange={(e) => setRole(e.target.value)} value={role}>
-//               <Radio className="radio-item" value="student">Student</Radio>
-//               <Radio className="radio-item" value="guide">Guide</Radio>
-//             </Radio.Group>
-//           </div>
-//           <Button className="signup-button" onClick={handleSignUp}>
-//             Sign Up
-//           </Button>
-//           <div>
-//             Already have an account? <Link to="/login">Login</Link>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default MainSignUp;
 // MainSignUp.js
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Radio } from 'antd';
@@ -80,8 +6,10 @@ import Lottie from 'lottie-react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import HeadAnim from '../../../assests/HeadAnimation.json';
 import './MainSignUp.css';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const MainSignUp = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [role, setRole] = useState('student'); // Default role is student
 
@@ -91,9 +19,33 @@ const MainSignUp = () => {
     backgroundColor: '#f0f2f5',
   };
 
-  const handleSignUp = (values) => {
+  const handleSignUp = async (values) => {
     console.log('Received values:', values);
-    // You can add your sign-up logic here
+     console.log(role);
+    
+
+    try {
+      // Make a POST request to your backend API to save user data
+      const response = await axios.post('http://localhost:8080/api/auth/signup', {
+        username: values.username,
+        email:values.email,
+        password: values.password,
+        roles: [role], // Roles passed as array
+      });
+
+      // Check if the signup was successful
+      if (response.status === 200) {
+        console.log('User signed up successfully');
+        navigate('/login');
+        // You can add additional logic here, such as redirecting to another page
+      } else {
+        console.error('Error signing up user');
+        // Handle error scenario
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error scenario
+    }
   };
 
   return (
@@ -108,6 +60,27 @@ const MainSignUp = () => {
         <div className="form-content">
           <h3>Welcome...</h3>
           <Form form={form} onFinish={handleSignUp}>
+
+          <Form.Item
+              className='input-field'
+              hasFeedback
+              name="username"
+              validateTrigger="onBlur"
+              rules={[
+                {
+                  required: true,
+                  type: 'username',
+                  message: 'Please input your username!',
+                },
+              ]}
+            >
+              <Input
+                size='large'
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Username"
+                style={inputStyle}
+              />
+            </Form.Item>
 
             <Form.Item
               className='input-field'
