@@ -14,33 +14,36 @@ import Signup from "./components/Regsiter/SignupPage/Signup"
 import GuideSignUp from "./components/Regsiter/SignupPage/GuideSignUp";
 import MainSignUp from "./components/Regsiter/SignupPage/MainSignUp";
 import GuideDashboard from "./components/Guide/GuideDashboard/GuideDashboard";
-import AllotTask from "./components/CommonPage/pages/AllotTask/AllotTask";
-import UpdateAllotedTask from "./components/CommonPage/pages/AllotTask/UpdateAllotedTask";
-import AllotedTask from './components/CommonPage/pages/AllotTask/AllotedTasks'
+import Chatbox from "./components/ChatBot/ChatRoom";
+import Navbar from "./components/Layout/Navbar/navbar";
+import MainLayout from "./components/TrendingPage/Layout";
+
+
 
 function App() {
 
   return (
     <Router>
-     
-      <Routes>
-        
-           <Route path=":studentid/studentguide/*" element={< StuGuideDashboard/>}></Route>
-           <Route path=":studentid/studentguide" element={<StuGuideDashboard />} />
-       <Route exact path="/login" element={<Login/>}></Route> 
-      <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
-      <Route exact path="/signup/student" element={<Signup/>}></Route>
-      <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
-      <Route exact path="/" element={<Home/>}></Route>
-        <Route exact path="/login" element={<Login/>}></Route>
-        <Route exact path="/signup" element={<MainSignUp/>}></Route>
-        <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
-        <Route exact path="/faqs" element={<Faqs/>}></Route>
+     {/* <Navbar/> */}
+    <Routes>
+      
+         <Route path=":studentid/studentguide/*" element={< StuGuideDashboard/>}></Route>
+         <Route path=":studentid/studentguide" element={<StuGuideDashboard />} />
+     <Route exact path="/login" element={<Login/>}></Route> 
+    <Route exact path="/mainsign" element={<MainSignUp/>}></Route>
+    <Route exact path="/signup/student" element={<Signup/>}></Route>
+    <Route exact path="/signup/guide" element={<GuideSignUp/>}></Route>
+    <Route exact path="/" element={<Home/>}></Route>
+      <Route exact path="/login" element={<Login/>}></Route>
+      <Route exact path="/signup" element={<MainSignUp/>}></Route>
+      <Route exact path="/mentorprofile" element={<GuideDashboard/>}></Route>
+      <Route exact path="/faqs" element={<Faqs/>}></Route>
 
        
-    
-      </Routes>
-    </Router>
+      <Route exact path="/trending" element={<MainLayout/>}></Route>
+    </Routes>
+  </Router>
+
   )
 }
 
