@@ -15,9 +15,14 @@
   --secondary-color-3: #EBFF00;
   --text-color-black: black;
   --text-color-white:white;
-  --background-color:#E2E2E2;
+  --background-color:white;
   --surface-color: white;
   --borderColor: #D1AEF9;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 

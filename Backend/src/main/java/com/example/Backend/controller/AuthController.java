@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,6 +34,9 @@ import com.example.Backend.repository.UserRepository;
 import com.example.Backend.security.jwt.JwtUtils;
 import com.example.Backend.service.UserDetailsImp;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -54,7 +58,7 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -66,6 +70,13 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
+
+				   // Set JWT token as an HttpOnly cookie
+				   Cookie cookie = new Cookie("jwtToken", jwt);
+				   cookie.setMaxAge(3600); // Set the expiry time of the cookie (in seconds)
+				   cookie.setHttpOnly(true); // Make the cookie HttpOnly
+				   cookie.setPath("/"); // Set the cookie path
+				   response.addCookie(cookie); // Add the cookie to the response
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
@@ -101,13 +112,15 @@ public class AuthController {
 			roles.add(userRole);
 		} else {
 			strRoles.forEach(role -> {
+				logger.info(role);
 				switch (role) {
-					case "admin":
-						Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+					
+					case "student":
+						Role adminRole = roleRepository.findByName(ERole.ROLE_STUDENT)
 								.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 						roles.add(adminRole);
 						break;
-					case "mod":
+					case "guide":
 					try {
 						// Attempt to find the role
 						Role modRole = roleRepository.findByName(ERole.ROLE_GUIDE)
@@ -119,12 +132,7 @@ public class AuthController {
 						// Handle the error or rethrow it
 						throw e;
 					}
-					
 						break;
-					default:
-						Role userRole = roleRepository.findByName(ERole.ROLE_STUDENT)
-								.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-						roles.add(userRole);
 				}
 			});
 		}
@@ -135,4 +143,18 @@ public class AuthController {
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 	
+	@PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        // Clear the JWT token cookie
+        Cookie cookie = new Cookie("jwtToken", null);
+        cookie.setMaxAge(0); // Set the expiry time to zero to delete the cookie
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        // You may also want to clear any authentication-related information from the SecurityContextHolder
+        SecurityContextHolder.clearContext();
+
+        return ResponseEntity.ok("Logged out successfully");
+    }
 }

@@ -1,28 +1,64 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Upload, message, Row, Col, Select, Checkbox } from 'antd';
 import { UserOutlined, UploadOutlined } from '@ant-design/icons';
-
+import { useAuth } from '../../../AuthContext';
 import Lottie from 'lottie-react';
 import HeadAnim from '../../../assests/HeadAnimation.json';
-
-
-import './Signup.css';
+import axios from 'axios';
+import {useNavigate} from "react-router-dom";
+import './GuideSignUp.css';
 
 const { Option } = Select;
 
 const GuideSignUp = () => {
+  const navigate= useNavigate();
+  const {useremail}=useAuth();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
 
-  const onFinish = (values) => {
-    setLoading(true);
-    // You can handle form submission here, e.g., send data to server
-    console.log('Received values:', values);
-    setTimeout(() => {
-      setLoading(false);
-      message.success('Registration successful!');
-      form.resetFields();
-    }, 1000);
+  const onFinish =async  (values) => {
+    console.log(values);
+     setLoading(true); 
+
+    try {
+    
+      const formData = new FormData();
+      formData.append('file', imageFile);
+
+     
+      const fileResponse = await axios.post('http://localhost:8080/api/auth/files/upload', formData);
+      const imageUrl = fileResponse.data; 
+
+
+      const payload = {
+        email:useremail,
+        name: values.name,
+        guideId: values.guide_id,
+        gender: values.gender,
+        phoneNumber: values.phoneNumber,
+        academicQualification: values.Academic,
+        yearOfExperience:values.year,
+        areaOfSpecialization:values.area,
+        image_url: imageUrl 
+      };
+
+      const response = await axios.post('http://localhost:8080/api/auth/guide', payload);
+
+      console.log('Student saved:', response.data);
+      navigate('/mentorprofile');
+      setLoading(false); 
+    } catch (error) {
+
+      console.error('Error saving student:', error);
+      setLoading(false); 
+      message.error('Failed to save student. Please try again later.');
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -35,7 +71,8 @@ const GuideSignUp = () => {
   };
 
   const inputStyle = {
-    borderColor: '#1890ff',
+    borderColor: '#D1AEF9',
+    color:'#8230C6',
     backgroundColor: '#f0f2f5',
   };
 
@@ -64,26 +101,22 @@ const GuideSignUp = () => {
             </Form.Item>
           </Col>
           <Col xs={24} sm={12}>
-            <Form.Item
-              label="Upload Image"
-              name="image"
-              valuePropName="fileList"
-              getValueFromEvent={(e) => [e.file]}
-              rules={[{ required: true, message: 'Please upload your image!' }]}
-            >
-              <Upload {...uploadProps} accept="image/*" listType="picture">
-                <Button icon={<UploadOutlined />}>Upload</Button>
-              </Upload>
-            </Form.Item>
+          <Form.Item
+                    label="Upload Image :"
+                    name="image"
+                    rules={[{ required: true, message: 'Please upload your image!' }]}
+                  >
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                  </Form.Item>
           </Col>
           
           <Col xs={24} sm={12} >
             <Form.Item
               label="Guide Id"
-              name="guide-id"
+              name="guide_id"
               rules={[
-                { required: true, message: 'Please input your phone number!' },
-                { pattern: /^[0-9]+$/, message: 'Please enter a valid phone number!' },
+                { required: true, message: 'Please input your id!' },
+                // { pattern: /^[0-9]+$/, message: 'Please enter a valid phone number!' },
               ]}
             >
               <Input  style={inputStyle}/>
@@ -164,12 +197,12 @@ const GuideSignUp = () => {
                 { validator: (_, value) => value ? Promise.resolve() : Promise.reject('Please accept the policies') }
               ]}
             >
-              <Checkbox>I agree to the Terms & Condition</Checkbox>
+              <Checkbox style={{color:'#8230C6',fontWeight:'500'}}>I agree to the Terms & Condition</Checkbox>
             </Form.Item>
           </Col>
         </Row>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading} style={{width:'100%'}}>
+          <Button type="primary" htmlType="submit" loading={loading} style={{width:'100%',backgroundColor: '#8230C6'}}>
             Sign Up
           </Button>
         </Form.Item>

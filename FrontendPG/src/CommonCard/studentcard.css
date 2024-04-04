@@ -152,3 +152,48 @@ hr {
 .creator p a:hover {
   color: var(--cyan);
 }
+
+/* Existing CSS */
+
+/* Add media query for mobile devices */
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .container_p {
+    max-width: 100%; /* Adjust max-width for smaller screens */
+  }
+
+  .wrapper_p {
+    margin: 1rem 0.5rem; /* Adjust margin for smaller screens */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .text-container h1 a {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .text-container p {
+    font-size: 0.8rem; /* Adjust font size for smaller screens */
+  }
+
+  .flex {
+    flex-direction: column; /* Adjust flex direction for smaller screens */
+    align-items: flex-start; /* Align items to start for smaller screens */
+  }
+
+  .eth,
+  .days {
+    margin-top: 0.5rem; /* Adjust margin for smaller screens */
+  }
+
+  .creator {
+    flex-direction: column; /* Adjust flex direction for smaller screens */
+    align-items: flex-start; /* Align items to start for smaller screens */
+  }
+
+  .creator img {
+    margin-bottom: 0.5rem; /* Adjust margin for smaller screens */
+  }
+}

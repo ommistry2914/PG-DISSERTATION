@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Nunito&display=swap');
+
+.heading-expert{
+    margin-top: 5%;
+color: black;
+font-size: 50px;
+font-family: Nunito;
+}
+
+.stat-bg
+{
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: start;
+    padding: 3%;
+}
+
+.stat-card
+{
+    background-color: white;
+    padding: 5%;
+    font-family: Nunito;
+    border-radius: 10px;
+    width:30%;
+
+}
+
+.statfont{
+    font-size: 40px;
+}
