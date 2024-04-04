@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <Router>
-      {/* <Navbar /> */}
+      { <Navbar /> }
       <Routes>
         
       <Route path="/" element={<Home />} />
@@ -62,7 +62,8 @@ const App = () => {
           <Route path="/studentguide/*" element={<StuGuideDashboard />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/trending" element={<MainLayout />} />
-          <Route path="/mentorprofile" element={<GuideDashboard />} />
+          <Route path="/mentorprofile" element={<MainGuideDashboard />} />
+          <Route path="/mentorprofile/*" element={<MainGuideDashboard />} />
           <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
