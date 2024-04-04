@@ -46,6 +46,11 @@ public class NotesController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{studentid}/studentguide/schedule/notes/{noteid}")
+    public Notes getNotesById(@PathVariable("noteid") String noteid) {
+        return notesRepo.getNotesById(noteid);
+    }
+
     @GetMapping("/{studentid}/studentguide/schedule/notes")
     public List<Notes> getNotesByStudentId(@PathVariable("studentid") String studentid) {
         return notesService.getNotesByStudentId(studentid);

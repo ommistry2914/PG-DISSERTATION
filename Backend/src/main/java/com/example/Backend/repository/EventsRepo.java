@@ -11,8 +11,7 @@ public interface EventsRepo extends MongoRepository<Events, String>{
 
     List<Events> getEventsByStudentId(String studentid);
 
-    List<Events> findByStudentIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(String studentId, Date date,
-            Date date2);
+    Events getEventsById(String eventid);
 
     // // List<Schedule> findByNotes(String notes);
     // List<Schedule> findByDateAndUserid(String date, String userid);

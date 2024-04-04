@@ -58,6 +58,13 @@ export default function Submissions() {
 
   return (
     <div className='common-pg-contents'>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item"><a href="#">Student</a></li>
+          <li className="breadcrumb-item"><a href="#">Working</a></li>
+          <li className="breadcrumb-item active" aria-current="page"><a href="#">Submissions</a></li>
+        </ol>
+      </nav>
       <div className='common-pg-submissions-content'>
         <div className="common-pg-horizontal-tabs">
           {tasks.map((task) => (
