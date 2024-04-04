@@ -2,18 +2,18 @@
 import * as FaIcons from 'react-icons/fa'
 
 export const sidebardata = [
-  { path: "/studentguide/", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
+  { path: "", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
   { path: "submissions", text: "Submissions", icon: <FaIcons.FaBook /> },
   {
      text: "Advisors", icon: <FaIcons.FaChalkboardTeacher />, subMenu: [
       {
         text: 'mentors',
-        path: '/studentguide/mentors',
+        path: 'mentors',
         icon: <FaIcons.FaUsers />,
       },
       {
         text: 'guide',
-        path: '/studentguide/guide',
+        path: 'guide',
         icon: <FaIcons.FaUser />,
       },
     ],
