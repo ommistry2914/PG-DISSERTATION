@@ -1,0 +1,25 @@
+
+.guide_edit{
+    text-align-last: left;
+    width: 70%;
+    padding: 15px;
+    margin: 5px auto;
+}
+.guide_edit input{
+    margin: 5px;
+    padding: 5px;
+    width: 60%;
+    font-size: 0.9em;
+    background: rgba(240, 240, 240, 0.638);
+    color: var(--text-color-black);
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgb(209, 209, 209)  inset;
+}
+.guide_editButton button{
+    background: var(--secondary-color-1);
+    margin: 10px auto;
+    width: 20%;
+    color: var(--text-color-white);
+    box-shadow: 1px 1px 5px var(--secondary-color-1);
+}

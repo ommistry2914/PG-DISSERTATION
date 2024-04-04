@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Nunito&display=swap');
+.req-main-bg
+{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: var(--primary-color);
+    padding: 5% 15%;
+}
+.req-card
+{
+    padding: 8%;
+    background-color: white;
+    border-radius: 5%;
+    text-align: left;
+}
+
+.req-card h1{
+    text-align: center;
+    font-family: Nunito;
+    font-size: 30px;
+    margin-bottom: 2%;
+}
+
+.req-card label{
+    margin-top: 3%;
+    font-size: 20px;
+    font-family: Nunito;
+}
+
+.req-btnlocal {
+    background-color: var(--secondary-color-1);
+    color: white;
+    display: block;
+    width: 100%;
+    margin-top: 8%;
+}
+
+.req-btnlocal:hover {
+    background-color: var(--secondary-color-1);
+    color: white;
+    transform: scale(1.1);
+    transition: all .5s ease;
+}
+
+.req-btn-cont{
+    display: flex;
+    justify-content: right;
+}
+.req-edit-btn{
+    background-color: var(--secondary-color-1);
+    color: white;
+    margin-right: 5%;
+}
+
+.req-edit-btn:hover {
+    background-color: var(--secondary-color-1);
+    color: white;
+    transform: scale(1.1);
+    transition: all .5s ease;
+}

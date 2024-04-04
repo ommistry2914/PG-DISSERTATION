@@ -9,6 +9,7 @@ import Guide from './pages/Guide/Guide';
 import { Routes, Route } from 'react-router-dom';
 import ResearchWorkForm from './pages/ResearchWorkForm/ResearchWorkForm';
 import Header from './UI/Header/Header'
+
 import AllotTask from './pages/AllotTask/AllotTask';
 import AllotedTasks from './pages/AllotTask/AllotedTasks';
 import UpdateAllotedTask from './pages/AllotTask/UpdateAllotedTask';
@@ -17,6 +18,8 @@ import UpdateForm from './pages/ResearchWorkForm/UpdateForm'
 import Submissions from './pages/Submissions/Submissions';
 import LatestDetailedSubmission from './pages/Submissions/LatestDetailedSubmission';
 import PastDetailedSubmission from './pages/Submissions/PastDetailedSubmission';
+
+// import SidebarOm from './UI/Sidebar/SidebarOm';
 
 const StuGuideDashboard = () => {
   return (
@@ -45,8 +48,10 @@ const StuGuideDashboard = () => {
             <Route path="allottask/:studentid/alloted" element={<AllotedTasks />}></Route>
             <Route path="allottask/:studentid/update/:taskid" element={<UpdateAllotedTask />}></Route>
 
-          </Routes></div>
-      </div></div>
+          </Routes>
+        </div>
+      </div>
+    </div>
   );
 };
 

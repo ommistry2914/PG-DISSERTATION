@@ -21,7 +21,7 @@
 }
 .guidereq_head{
     text-align-last: left;
-    position: fixed;
+    /* position: fixed; */
     top: 6.5em;
     left: 28.2%;
     width:max-content;

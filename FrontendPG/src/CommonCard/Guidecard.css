@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.heading-expert{
+    margin-top: 5%;
+color: black;
+font-size: 50px;
+font-family: Nunito;
+}
+
+.guide-main {
+    background-color: var(--background-color);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+.guide-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.5);
+    width: 30%; 
+    margin: 20px;
+}
+
+.guide-card-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.guide-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.content {
+    margin-top: 10%;
+}
+
+.spancss {
+    background-color: var(--secondary-color-2);
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    margin: 2%;
+    border-radius: 5px;
+}
+
+.pcss {
+    height: 20%;
+}
+
+.pcss p {
+    font-size: 15px;
+}
+
+.button-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    padding: 10px 20px;
+    margin-top: 5px;
+    background-color: var(--secondary-color-1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 90px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: var(--borderColor);
+    color: black;
+    transform: scale(1.05);
+}
+
+.viewmore{
+    margin-bottom: 20px;
+}
+
+.button-view{
+    padding: 10px 20px;
+    margin-top: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 10%;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.button-view:hover{
+    background-color: var(--borderColor);
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .guide-card {
+        width: 90%; 
+    }
+
+    .button-view{
+        width: 20%;
+    }
+}
+

@@ -21,21 +21,22 @@
     padding: 2px;
 }
 .desc-head{
-    font-size: 20px;
-
+    font-size: 26px;
+    margin-bottom: 2rem;
+    margin-left: 4rem;
 }
 .desc-para{
     max-width: 500px;
     margin-top: 0rem;
     margin-bottom: 2rem;
-    margin-left: 1.3rem;
+    margin-left: 4.5rem;
     text-align: justify;
     font-size: 1rem;
     font-weight: 500;
 }
 .read-link{
     text-align: left;
-    margin-left: 1.3rem;
+    margin-left: 4.5rem;
     font-size: 1rem;
     font-weight: 500;
 
@@ -47,8 +48,8 @@
     /* border: 1px solid black; */
 }
 .desc-image .techo-img{
-    /* object-fit: contain; */
-    width: 90%;
+    object-fit: contain;
+    width: 75%;
     max-width: 100%;
 }
 
