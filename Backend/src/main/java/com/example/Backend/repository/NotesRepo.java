@@ -12,6 +12,8 @@ public interface NotesRepo extends MongoRepository<Notes, String>{
 
     List<Notes> getNotesByStudentId(String studentid);
 
+    Notes getNotesById(String noteid);
+
     // // List<Schedule> findByNotes(String notes);
     // List<Schedule> findByDateAndUserid(String date, String userid);
     // List<Schedule> findByUserid(String userid);

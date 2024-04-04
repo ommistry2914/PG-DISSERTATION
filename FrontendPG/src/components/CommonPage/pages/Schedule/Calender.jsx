@@ -39,7 +39,7 @@ export default function Calender({ selectedDay, onDayClick, events }) {
       return allDays.map((day) => (
           <div
               key={day.toDateString()}
-              className={`common-pg-calender-day ${selectedDay && selectedDay.toDateString() === day.toDateString() ? 'common-pg-selectedDay' : ''}`}
+              className={`common-pg-calender-day ${selectedDay && selectedDay.toDateString() === day.toDateString() ? 'common-pg-calender-selectedDay' : ''}`}
               onClick={() => onDayClick(day)}
           >
               {events.includes(day.toDateString()) && <div className="common-pg-calender-dot"></div>}

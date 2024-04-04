@@ -67,12 +67,14 @@ public class EventsController {
             @RequestParam("date") String date) {
         return eventsService.getEventsByStudentIdAndDate(studentid, date);
     }
-    @GetMapping("/by-date")
-    public List<Events> getEventsByDate(@RequestParam String studentId, @RequestParam String dateStr) throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-        return eventsRepo.findByStudentIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(studentId, date, date);
+
+    
+    @GetMapping("/{studentid}/studentguide/schedule/events/{eventid}")
+    public Events getEventsById( @PathVariable("eventid") String eventid) {
+        return eventsRepo.getEventsById(eventid);
     }
 
+   
     @GetMapping("/{studentid}/studentguide/schedule/events")
     public List<Events> getEventsByStudentId(@PathVariable("studentid") String studentid) {
         return eventsService.getEventsByStudentId(studentid);

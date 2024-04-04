@@ -3,7 +3,7 @@ import './calender.css';
 
 function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [eventDetails, setEventDetails] = useState({ title: '', date: '', time: '', guests: '', location: '', description: '' });
+  const [eventDetails, setEventDetails] = useState({ title: '', date: '', from: '',to: '',   description: '' });
   const [notify, setNotify] = useState('');
 
   const handleFlip = () => {
@@ -59,15 +59,15 @@ function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent })
                   <input type="text" name="description" placeholder="Description" value={eventDetails.description} onChange={handleInputChange} />
                 </div>
               </div>
-              {/* <div className="row"><input
-                    type="radio"
-                    name="notify"
-                    value="True"
-                    checked={notify === "True"}
-                    onChange={() => setNotify("notify")}
-                    required
-                  />
-                  True</div> */}
+              <div className="row">
+               
+                  <label>Notify:</label>
+                   <div className="col-sm-6"><input type="radio" name="notify" value="true" />
+                  <label>Yes</label></div>
+                  <div className="col-sm-6"><input type="radio" name="notify" value="false" defaultChecked />
+                  <label>No</label></div> 
+                
+              </div>
               <div className="row">
                 <div className="col-sm-6">
                   <button type="submit" className='common-pg-note-event-submit-btn'>Add Event</button>
