@@ -3,6 +3,7 @@ import * as FaIcons from 'react-icons/fa'
 
 export const sidebardata = [
   { path: "/studentguide/", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
+  { path: "submissions", text: "Submissions", icon: <FaIcons.FaBook /> },
   {
      text: "Advisors", icon: <FaIcons.FaChalkboardTeacher />, subMenu: [
       {
@@ -17,8 +18,8 @@ export const sidebardata = [
       },
     ],
   },
-  { path: "/studentguide/progress", text: "Progress", icon: <FaIcons.FaChartBar /> },
-  { path: "/studentguide/schedule", text: "Schedule", icon: <FaIcons.FaCalendar /> }
+  { path: "progress", text: "Progress", icon: <FaIcons.FaChartBar /> },
+  { path: "schedule", text: "Schedule", icon: <FaIcons.FaCalendar /> }
 ];
 
 export const GuideSidebar = [

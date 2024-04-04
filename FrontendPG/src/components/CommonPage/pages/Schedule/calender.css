@@ -1,21 +1,23 @@
 .common-pg-calender-container {
     overflow: hidden;
-    min-width: 80vw;
+    min-width: 90vw;
     max-width: 90vw;
     justify-content: center;
     align-content: center;
+    padding: 1rem 0 1rem 3rem;
     display: flex;
-    align-items: center;
-    padding: 2rem 0 2rem 3rem;
 }
- 
+
 .common-pg-calendar {
+    width: 50%;
+    height: 100%;
     overflow: hidden;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     background: var(--surface-color);
     box-shadow: -1px 1px 10px var(--secondary-color-1);
+    margin-bottom: 1%;
 }
 
 .common-pg-calender-header {
@@ -27,7 +29,7 @@
 }
 
 .common-pg-schedule-calender-btns {
-    background-color: var(--secondary-color-2); 
+    background-color: var(--secondary-color-2);
     border-radius: 0;
     padding: 5px 10px;
     cursor: pointer;
@@ -44,12 +46,12 @@
 .common-pg-calender-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 15px;
 }
 
 .common-pg-calender-day {
     text-align: center;
-    padding: 5px;
+    padding: 21%;
     border-radius: 5px;
     width: 100%;
     border: 1px solid var(--background-color);
@@ -108,8 +110,9 @@
 }
 
 .common-pg-task-cards {
-    overflow-y: scroll;
+    min-width:70%;
     border-radius: 5px;
+    margin-bottom: 3%;
 }
 
 .common-pg-task-card {
@@ -119,7 +122,7 @@
 }
 
 .common-pg-calender-task {
-    flex: 0 380px;
+    flex: 0 90%;
 }
 
 .common-pg-calender-time {
@@ -141,21 +144,218 @@
 }
 
 
-.common-pg-day-selection{
+.common-pg-day-selection {
     display: flex;
     justify-content: center;
     margin-bottom: 1%
 }
 
 
-.common-pg-day-selection button{
+.common-pg-day-selection button {
     background: var(--surface-color);
     border: 0.5px solid var(--secondary-color-1);
     font-size: 12px;
     color: var(--text-color-black);
     margin: 1%;
 }
-.common-pg-day-selection button:hover{
+
+.common-pg-day-selection button:hover {
     border: none;
     background: var(--secondary-color-2);
 }
+
+
+
+.common-pg-task-container {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.common-pg-event-notes {
+    position: relative;
+    min-height: 100%;
+    width: 50%;
+}
+
+.common-pg-note-event-heading {
+    position: absolute;
+    top: 1.5%;
+    width: 100%;
+    background: var(--secondary-color-1);
+    margin-bottom: 1%;
+    color: var(--text-color-white);
+}
+
+.common-pg-flip-card {
+    position: relative;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    margin: auto;
+}
+
+.common-pg-flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.common-pg-flip-card.common-pg-event-card-flipped .common-pg-flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.common-pg-flip-card form {
+    min-width: 100%;
+    position: relative;
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.common-pg-flip-card form .row {
+    min-width: 80%;
+}
+
+
+.common-pg-flip-card-front,
+.common-pg-flip-card-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.common-pg-flip-card-front {
+    background-color: var(--secondary-color-2);
+    color: black;
+    box-shadow: 1px 1px 5px var(--secondary-color-2);
+}
+
+.common-pg-flip-card-back {
+    background-color: var(--secondary-color-2);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Additional styling for button and form */
+.common-pg-notes-events-form button {
+    margin: 2% 1% 3% 1%;
+    padding: 4%;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--surface-color);
+    color: var(--text-color-black);
+    cursor: pointer;
+    box-shadow: 0 0 5px black inset;
+}
+
+.common-pg-notes-events-form input {
+    width: 100%;
+    margin-bottom: 3%;
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 80%;
+}
+
+.common-pg-notes-events-form textarea {
+    width: 90%;
+    min-height: 150px;
+    max-height: 200px;
+    resize: vertical;
+    overflow-y: auto;
+    margin-bottom: 5%;
+    padding: 2%;
+}
+
+.common-pg-notes-events-form label,
+.common-pg-notes-events-form button {
+    font-size: 80%;
+}
+
+.common-pg-notes-events-form button:hover {
+    box-shadow: 0 0 5px black;
+}
+
+.common-pg-notes-events-form button[type="submit"] {
+    color: var(--text-color-black);
+    background-color: var(--secondary-color-3);
+}
+
+@media (max-width: 768px) {
+    .common-pg-calender-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .common-pg-flip-card-front {
+        position: relative;
+    }
+
+}
+
+.common-pg-calender-selectedDay {
+    border: solid var(--secondary-color-1);
+}
+
+.common-pg-calender-dot {
+    background: var(--secondary-color-1);
+    width: 5px;
+    height: 5px;
+    border-radius: 50px;
+}
+
+
+.common-pg-note.row,
+.common-pg-event.row {
+    width: 100%;
+    text-align: justify;
+    padding: 1%;
+}
+
+
+.common-pg-note button,
+.common-pg-event button {
+    width: 5%;
+    background: var(--background-color);
+    color: var(--text-color-black);
+    box-shadow: 0 0 5px var(--secondary-color-1);
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    margin-left: 6%;
+}
+
+
+.common-pg-calender-dot-purple {
+    background-color: purple;
+  }
+  
+  .common-pg-calender-dot-green {
+    background-color: green;
+  }
+  
+  .common-pg-calender-dot-red {
+    background-color: red;
+  }
+
+  .common-pg-update-evt-form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    align-items: center;
+  }
