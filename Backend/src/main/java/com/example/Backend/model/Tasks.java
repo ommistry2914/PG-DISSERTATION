@@ -16,14 +16,16 @@ public class Tasks {
     private String id;
     private String userId;
     private String taskName;
+    private String taskDescription;
     private Date startDate;
     private Date endDate;
-    private boolean submission;
     private String priority;
     private String status;
-    private String mentorId;
-    private Mentor[] mentorFeedback;
-    private String guideFeedback;
-    private String submittedFileUrl;
-  
+    private String submissionId;
+    private Date submissionDate;
+    private String approvalStage;
+    private Date approvalDate;
+    private int maxCredits;
+    private int revCredits;
+
 }

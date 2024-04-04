@@ -9,18 +9,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "schedule")
+@Document(collection = "events")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Schedule {
+@AllArgsConstructor
+public class Events {
     @Id
     private String id;
-    private String userId;
-    private Date date;
-    private Date startTime;
-    private Date endTime;
+    private String studentId;
     private String event;
-    private String notes;
-    // Getters and setters
+    private Date from;
+    private Date to;
+    private String description;
+    private Boolean completionStatus;
+    private Boolean notify;
 }

@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import './researchWorkForm.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 
-
-function ResearchWorkForm() {
-  const { studentid, taskid } = useParams();
+function UpdateForm() {
+  const { studentid, taskid, submissionid } = useParams();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [formData, setFormData] = useState({
@@ -46,8 +43,8 @@ function ResearchWorkForm() {
 
     console.log('Form Data:', formData);
 
-    fetch(`http://localhost:8080/${studentid}/submit-for/${taskid}/add-work`, {
-      method: 'POST',
+    fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/update`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -61,11 +58,11 @@ function ResearchWorkForm() {
             references: '',
             file: null
           });
-          console.log('Work added successfully!');
+          console.log('Updated successfully!');
           setShowSuccessAlert(true);
           setShowErrorAlert(false);
         } else {
-          console.error('Failed to add work');
+          console.error('Failed to update work');
           setShowSuccessAlert(false);
           setShowErrorAlert(true);
         }
@@ -77,6 +74,30 @@ function ResearchWorkForm() {
       });
 
   };
+
+
+  const fetchSubmission = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch submission');
+      }
+      const submission = await response.json();
+      setFormData({
+        taskName: submission.taskName,
+        abstract: submission.summary,
+        references: submission.references,
+        file: submission.fileSubmitted
+      });
+    } catch (error) {
+      console.error('Error fetching submission:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubmission();
+  }, [studentid, taskid, submissionid]);
+
 
   return (
     <div className="common-pg-contents">
@@ -112,29 +133,28 @@ function ResearchWorkForm() {
                 required
               />
             </label></div>
-          <div className="row">
-            <label>
-              Abstract<sup className='common-pg-necessary-sup'>*</sup>
-              <textarea
-                name="abstract"
-                className='form-control'
-                value={formData.abstract}
-                onChange={handleChange}
-                required
-              />
-            </label></div>
-          <div className="row">
-            <label>
-              References<sup className='common-pg-necessary-sup'>*</sup>
-              <textarea
-                name="references"
-                value={formData.references}
-                className='form-control'
-                onChange={handleChange}
-                required
-              />
-            </label></div>
+          <div className="row"><label>
+            Abstract<sup className='common-pg-necessary-sup'>*</sup>
+            <textarea
+              name="abstract"
+              className='form-control'
+              value={formData.abstract}
+              onChange={handleChange}
+              required
+            />
+          </label></div>
+
           <div className="row"> <label>
+            References<sup className='common-pg-necessary-sup'>*</sup>
+            <textarea
+              name="references"
+              value={formData.references}
+              className='form-control'
+              onChange={handleChange}
+              required
+            />
+          </label></div>
+          <div className="row">   <label>
             Attach Research Paper<sup className='common-pg-necessary-sup'>*</sup>
             <input
               type="file"
@@ -144,11 +164,17 @@ function ResearchWorkForm() {
               required
             />
           </label></div>
+          {/* {formData.file && (
+            <div className="row">
+              <label>
+                Current File:
+                <a href={formData.file} target="_blank" rel="noreferrer">{formData.file}</a>
+              </label>
+            </div>
+          )} */}
           <button type="submit" className='submit'>Submit</button>
-        </form>
-      </div>
-    </div>
+        </form></div></div>
   );
 }
 
-export default ResearchWorkForm;
+export default UpdateForm;

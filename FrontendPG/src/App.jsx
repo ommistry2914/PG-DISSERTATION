@@ -26,8 +26,11 @@ const App = () => {
 
   return (
     <Router>
-      { <Navbar /> }
-      <Routes>
+
+     {/* <Navbar/> */}
+    <Routes>
+      
+         
         
       <Route path="/" element={<Home />} />
         <Route path="/signup" element={<MainSignUp />} />
@@ -56,7 +59,9 @@ const App = () => {
           <Route path="/studentdashboard" element={<Navigate to="/" />} />
         )}
          */}
-
+          <Route path=":studentid/studentguide/*" element={< StuGuideDashboard/>}></Route>
+          <Route path=":studentid/studentguide" element={<StuGuideDashboard />} />
+            
           <Route path="/signup/guide" element={<GuideSignUp />} />
           <Route path="/signup/student" element={<Signup />} />
           <Route path="/studentguide/*" element={<StuGuideDashboard />} />

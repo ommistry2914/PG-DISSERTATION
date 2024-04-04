@@ -35,7 +35,7 @@ const Sidebar = () => {
       <div className={styles.sidebar} onMouseLeave={() => handleSubMenuClose()}>
         <nav className={styles.sidebarNav}>
 
-          <Link to='add-work' className={styles.sidebarAddWorkLink}>
+          <Link to='submit-for' className={styles.sidebarAddWorkLink}>
             <div className={styles.sidebarAddWork}>
               <div className={styles.sidebarSvgIcon}><FaPlus /></div>
               <div className={styles.sidebarMenuText}>Add Work</div>
