@@ -12,6 +12,7 @@ const tasks = [
   // Add more tasks as needed
 ];
 
+
 const getStatusColor = (status) => {
   switch (status) {
     case 'Pending':
@@ -20,18 +21,20 @@ const getStatusColor = (status) => {
       return 'red';
     case 'On Track':
       return 'green';
+    case 'Approved':
+      return 'green';
     default:
       return 'black';
   }
 };
 
 const getPriorityColor = (priority) => {
-  switch (priority) {
-    case 'High':
+  switch (priority.toLowerCase()) {
+    case 'high':
       return 'red';
-    case 'Medium':
+    case 'medium':
       return 'orange';
-    case 'Low':
+    case 'low':
       return 'yellow';
   }
 }
@@ -40,13 +43,12 @@ const getApprovalColor = (approval) => {
   switch (approval) {
     case 'Approved':
       return 'lightgreen';
-    case 'Expecting Changes':
-      return 'skyblue';
-    case 'Pending Approval':
+    case 'Rejected':
+      return 'red';
+    case 'Pending':
       return 'yellow';
   }
 }
-
 
 const Progress = () => {
   const [tasks, setTasks] = useState([]);
@@ -116,8 +118,8 @@ const Progress = () => {
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">Student</a></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Progress</li>
         </ol>
       </nav>
@@ -176,16 +178,16 @@ const Progress = () => {
                     <th>Status</th>
                     <th>Date</th>
                     <th>Priority</th>
-                    
                     <th>Max Credits</th>
-                    <th>Received Credits</th><th>Approval Stage</th>
+                    <th>Received Credits</th>
+                    <th>Approval Stage</th>
                   </tr>
                 </thead>
                 <tbody>
                   {tasks && tasks.map((task) => (
                     <tr key={task.id}>
                       <td>{task.taskName}</td>
-                      <td>{task.status}</td>
+                      <td><span className="status-dot" style={{ backgroundColor: getStatusColor(task.status) }}></span>{task.status}</td>
                       <td>{new Date(task.startDate).toLocaleDateString('en-US', {
                         day: 'numeric',
                         month: 'long',
@@ -201,8 +203,8 @@ const Progress = () => {
                       })}</td>
                       <td><div className='priority' style={{ backgroundColor: getPriorityColor(task.priority) }}>{task.priority}</div></td>
                       <td>{task.maxCredits}</td>
-                     
-                      <td>{task.revCredits}</td> <td>{task.approvalStage}</td>
+                      <td>{task.revCredits}</td> 
+                      <td><div className='approval' style={{ backgroundColor: getApprovalColor(task.approvalStage) }}>{task.approvalStage}</div></td>
                     </tr>
                   ))}
 

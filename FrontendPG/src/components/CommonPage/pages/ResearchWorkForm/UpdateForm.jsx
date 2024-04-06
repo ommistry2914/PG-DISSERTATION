@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './researchWorkForm.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function UpdateForm() {
   const { studentid, taskid, submissionid } = useParams();
@@ -29,51 +29,47 @@ function UpdateForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const currentDate = new Date();
-    const currentDateTimeString = currentDate.toISOString();
     const formData = {
-      taskName: e.target.taskName.value,
-      summary: e.target.abstract.value,
-      references: e.target.references.value,
-      dateofsubmission: currentDateTimeString
+        taskName: e.target.taskName.value,
+        summary: e.target.abstract.value,
+        references: e.target.references.value
     };
 
     console.log('Form Data:', formData);
 
-    fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/update`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(response => {
+    try {
+        const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
         if (response.ok) {
-          setFormData({
-            taskName: '',
-            abstract: '',
-            references: '',
-            file: null
-          });
-          console.log('Updated successfully!');
-          setShowSuccessAlert(true);
-          setShowErrorAlert(false);
+            setFormData({
+                taskName: '',
+                abstract: '',
+                references: '',
+                file: null
+            });
+            console.log('Updated successfully!');
+            setShowSuccessAlert(true);
+            setShowErrorAlert(false);
         } else {
-          console.error('Failed to update work');
-          setShowSuccessAlert(false);
-          setShowErrorAlert(true);
+            console.error('Failed to update work');
+            setShowSuccessAlert(false);
+            setShowErrorAlert(true);
         }
-      })
-      .catch(error => {
-        console.error('Error adding work:', error);
+    } catch (error) {
+        console.error('Error updating work:', error);
         setShowSuccessAlert(false);
         setShowErrorAlert(true);
-      });
-
-  };
+    }
+};
 
 
   const fetchSubmission = async () => {
@@ -103,9 +99,10 @@ function UpdateForm() {
     <div className="common-pg-contents">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">Student</a></li>
-          <li className="breadcrumb-item active" aria-current="page">ResearchWorkSubmission</li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide/submissions`}>Submissions</Link></li>
+          <li className="breadcrumb-item active" aria-current="page">Update Submission</li>
         </ol>
       </nav>
       <div className="common-pg-forms">

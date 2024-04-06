@@ -1,5 +1,6 @@
 package com.example.Backend.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class SubmissionService {
         if (newSubmission.getFileSubmitted() != null) {
             update.set("fileSubmitted", newSubmission.getFileSubmitted());
         }
+           
+        update.set("dateOfSubmission", new Date());
 
         mongoTemplate.updateFirst(query, update, Submission.class);
     }

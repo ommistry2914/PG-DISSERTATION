@@ -7,6 +7,7 @@ import com.example.Backend.repository.TasksRepository;
 import com.example.Backend.service.TasksService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -52,19 +55,19 @@ public class TasksController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{userid}/progress")
-    public List<Tasks> getTaskByUserId(@PathVariable("userid") String userid) {
-        return taskRepo.findByUserId(userid);
+    @GetMapping("{studentid}/progress")
+    public List<Tasks> getTaskByUserId(@PathVariable("studentid") String studentid) {
+        return taskRepo.findByUserId(studentid);
     }
 
-    @GetMapping("{userid}/submit-for")
-    public List<Tasks> getTaskNameByUserId(@PathVariable("userid") String userid) {
-        return taskRepo.findByUserId(userid);
+    @GetMapping("{studentid}/submit-for")
+    public List<Tasks> getTaskNameByUserId(@PathVariable("studentid") String studentid) {
+        return taskRepo.findByUserId(studentid);
     }
 
-    @GetMapping("{userid}/submissions")
-    public List<Tasks> getAllTaskNameByUserId(@PathVariable("userid") String userid) {
-        return taskRepo.findByUserId(userid);
+    @GetMapping("{studentid}/submissions")
+    public List<Tasks> getAllTaskNameByUserId(@PathVariable("studentid") String studentid) {
+        return taskRepo.findByUserId(studentid);
     }
 
     // Update task on approval
@@ -74,6 +77,17 @@ public class TasksController {
         submissionService.updateEvent(taskId, submissionId, newEvent);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("{studentid}/submissions/{taskid}/mcred")
+    public ResponseEntity<Tasks> getMaxCreditsById(@PathVariable("taskid") String taskid) {
+        Optional<Tasks> optionalTask = taskRepo.findById(taskid);
+        if (optionalTask.isPresent()) {
+            return ResponseEntity.ok(optionalTask.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
 
 }
 

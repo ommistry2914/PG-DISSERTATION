@@ -2,14 +2,15 @@ import React from 'react'
 import './guide.css'
 import { FaPhone, FaClipboardCheck, FaTelegramPlane } from 'react-icons/fa'
 import Photo1 from '../../images/photo1.png'
+import { Link } from 'react-router-dom';
 
 const Guide = () => {
     return (
         <div className="common-pg-contents">
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item"><a href="#">Student</a></li>
+                    <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
                     <li className="breadcrumb-item active" aria-current="page">Guide</li>
                 </ol>
             </nav>

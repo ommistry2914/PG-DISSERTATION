@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import './dashboard.css'
 import CircularProgressBar from "../Progress/CircularProgressBar";
-import { FaChevronRight, FaCalendar } from "react-icons/fa";
+import { FaChevronRight, FaCaretRight } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
@@ -23,39 +23,100 @@ const Profile = () => {
     };
     return <Lottie options={defaultOptions} />;
   };
+
+  const { studentid } = useParams();
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(null);
+  const [task, setTasks] = useState([]);
+
   const day = 75;
   const totalDays = 300;
-  useEffect(()=>{
-    const fetchData=async()=>{
-       setLoading(true);
-       try {
-           const response=await ProgressService.getProgress();
-           setProgress(response.data);
-       } catch (error) {
-           console.log(error);
-       }
-       setLoading(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await ProgressService.getProgress();
+        setProgress(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     };
     fetchData();
-  },[]);
- 
+  }, []);
+
+
+  const fetchEvents = async () => {
+    try {
+      const currentDate = new Date("2024-04-05"); // Get the current date
+      const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule`);
+      const data = await response.json();
+
+      const formattedDate = currentDate.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).replace(/\//g, '-');
+      console.log(formattedDate)
+
+      const formattedDateForComparison = formattedDate.split('-').reverse().join('-');
+
+      if (data) {
+        const filteredEvents = data.filter(item => {
+          if (item.event && item.from && item.to) {
+            const eventFromDate = new Date(item.from);
+            const eventToDate = new Date(item.to);
+            return formattedDateForComparison >= eventFromDate.toISOString().slice(0, 10) &&
+              formattedDateForComparison <= eventToDate.toISOString().slice(0, 10);
+          }
+          return false;
+        }).slice(0, 3); // Limit the number of events to 3
+
+        const filteredNotes = data.filter(item => {
+          if (item.notes) {
+            const noteDate = new Date(item.date);
+            return formattedDateForComparison === noteDate.toISOString().slice(0, 10);
+          }
+          return false;
+        }).slice(0, 3);
+
+        const filteredTasks = [...filteredEvents, ...filteredNotes];
+
+        if (filteredTasks.length > 0) {
+          console.log('Tasks from API:', filteredTasks); // Log the tasks if they exist
+          setTasks(filteredTasks);
+        } else {
+          console.log('No tasks found for the selected day');
+          setTasks([]);
+        }
+      } else {
+        console.log('No events or notes found in the response');
+        setTasks([]);
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+
 
   if (loading) {
     return <div>Loading...</div>;
 
-}
+  }
   return <div className="common-pg-contents">
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
-        <li className="breadcrumb-item"><a href="#">Home</a></li>
         <li className="breadcrumb-item"><a href="#">Student</a></li>
-        <li className="breadcrumb-item active" aria-current="page">Dashboard</li>
+        <li className="breadcrumb-item active" aria-current="page">Dissertation</li>
       </ol>
     </nav>
     <div className=" common-pg-dashboard-content">
-      
+
       <div className=' common-pg-project-div row'>
         <div className=" common-pg-student-name col-sm-12 col-md-4 col-lg-4">
           <div className="common-pg-profile-img"><img src={Photo1} alt="" className="common-pg-profile-pic" /></div>
@@ -66,7 +127,7 @@ const Profile = () => {
           </div>
 
         </div>
-        <div className="common-pg-project-overviews col-sm-12 col-md-2 col-lg-2">Project: <p  id="common-pg-project-name">Lorem ipsum dolor sit amet consectetur adipisicing.</p></div>
+        <div className="common-pg-project-overviews col-sm-12 col-md-2 col-lg-2">Project: <p id="common-pg-project-name">Lorem ipsum dolor sit amet consectetur adipisicing.</p></div>
         <div className="common-pg-project-overviews col-sm-12 col-md-2 col-lg-2">
           <div className="common-pg-calender-icon">
             <span className="common-pg-handle-one"></span>
@@ -92,20 +153,26 @@ const Profile = () => {
               <div class="common-pg-lid two"></div>
               <div class="common-pg-envelope">Overall Progress</div>
               <div class="common-pg-letter">
-              {progress.map(progress=>(
-                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
-              ))}
-                </div>
+                {progress.map(progress => (
+                  <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
+                ))}
+              </div>
             </div>
           </div>
           <div className=" common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
-            <h6>Upcoming Tasks</h6>
+            <h6>Todays Schedule</h6>
             <ul className='common-pg-today-task-ul'>
-              <li><span>Lorem ipsum dolor sit amet.</span></li>
-              <li><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</span></li>
-              <li><span>Lorem, ipsum dolor.</span></li>
+              {task.map((task) => (
+                task.event ? (
+                  <li key={task.id}><FaCaretRight/><span>{task.event}, {task.description} &nbsp; &nbsp; {new Date(task.from).toISOString().slice(11, 16)} to {new Date(task.to).toISOString().slice(11, 16)}</span></li>
+                ) : (
+                  <li key={task.id}><FaCaretRight/><span>{task.notes}</span></li>
+                )
+
+              ))}
+
             </ul>
-            <Link to={'/schedule'}><button className="common-pg-view-all">View all <FaChevronRight /></button></Link>
+            <Link to={`schedule`}><button className="common-pg-view-all">View all <FaChevronRight /></button></Link>
           </div>
         </div>
       </div>
