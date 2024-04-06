@@ -185,6 +185,7 @@ progress[value]::-webkit-progress-value {
 .common-pg-progress-table-div {
     max-width: 100%;
     min-width: 90%;
+    margin-bottom: 1%;
 }
 
 .common-pg-progress-table {

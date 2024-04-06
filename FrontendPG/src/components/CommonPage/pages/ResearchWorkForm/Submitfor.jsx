@@ -59,6 +59,7 @@ const SubmitFor = () => {
                         <thead>
                             <tr>
                                 <th>Task</th>
+                                <th>Description</th>
                                 <th>Due Date</th>
                                 <th>Add</th>
                                 <th>Status</th>
@@ -68,6 +69,7 @@ const SubmitFor = () => {
                             {tasks && tasks.map((task) => (
                                 <tr key={task.id}>
                                     <td>{task.taskName}</td>
+                                    <td>{task.taskDescription}</td>
                                     <td>{new Date(task.endDate).toLocaleDateString('en-US', {
                                         day: 'numeric',
                                         month: 'long',
