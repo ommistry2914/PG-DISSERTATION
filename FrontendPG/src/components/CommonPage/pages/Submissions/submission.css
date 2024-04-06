@@ -56,6 +56,14 @@
  margin-bottom: 1rem;
 }
 
+.form-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: justify;
+  justify-content: center;
+}
+
 
 .common-pg-detailed-submission-content {
   min-width: 85vw;
@@ -100,6 +108,7 @@
   width: 100%;
   min-height: 100px;
   max-height: 200px;
+  padding: 2%;
 }
 .common-pg-approval-submit{
   background: var(--primary-color);
@@ -112,7 +121,6 @@
 .form-group .row{
   width: 100%;
   margin: 1%;
-  justify-content: center;
-  align-content: center;
-  text-align: justify;
+  display: flex;
+  flex-direction: column;
 }
