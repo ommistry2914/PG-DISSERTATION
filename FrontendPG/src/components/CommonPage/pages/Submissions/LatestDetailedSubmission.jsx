@@ -210,8 +210,8 @@ const DetailedSubmission = () => {
                     checked={approvalStatus === "Approved"}
                     onChange={() => setApprovalStatus("Approved")}
                     required
-                  />
-                    Approved</div>
+                  /> 
+                  &nbsp; Approved</div>
                   <div className="col-12"> <input
                     type="radio"
                     name="approvalStage"
@@ -220,7 +220,7 @@ const DetailedSubmission = () => {
                     onChange={() => setApprovalStatus("Rejected")}
                     required
                   />
-                    Rejected</div>
+                    &nbsp;  Rejected</div>
                   <div className="col-12"><input
                     type="radio"
                     name="approvalStage"
@@ -229,7 +229,7 @@ const DetailedSubmission = () => {
                     onChange={() => setApprovalStatus("Pending")}
                     required
                   />
-                    Request Revisions
+                     &nbsp; Request Revisions
                   </div>
 
 
