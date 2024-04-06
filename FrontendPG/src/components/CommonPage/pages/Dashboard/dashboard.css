@@ -304,15 +304,21 @@
     background: rgb(231, 231, 231);
     border-top: 7px solid var(--secondary-color-1);
     box-shadow: 0px 4px 17px #623a9060;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .common-pg-today-task-ul {
     font-size: 13px;
     line-height: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .common-pg-today-task-ul li {
-    list-style: disc;
+    list-style: none;
     color: var(--secondary-color-1);
 }
 
@@ -335,14 +341,12 @@
 }
 
 .common-pg-view-all {
-    background: var(--surface-color);
-    border: 1px solid var(--secondary-color-1);
+    background: none;
     color: var(--text-color-black);
     font-size: 11px;
+    width: 100%;
 }
 
 .common-pg-view-all:hover {
-    border: 1px solid var(--secondary-color-1);
-    background: var(--background-color);
-    transform: scale(1.05);
+    color: var(--secondary-color-1);
 }

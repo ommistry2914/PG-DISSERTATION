@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 
 import './researchWorkForm.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 function ResearchWorkForm() {
   const { studentid, taskid } = useParams();
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [formData, setFormData] = useState({
     taskName: '',
@@ -32,69 +31,60 @@ function ResearchWorkForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const currentDate = new Date();
-    const currentDateTimeString = currentDate.toISOString();
     const formData = {
-      taskName: e.target.taskName.value,
-      summary: e.target.abstract.value,
-      references: e.target.references.value,
-      dateofsubmission: currentDateTimeString
+        taskName: e.target.taskName.value,
+        summary: e.target.abstract.value,
+        references: e.target.references.value
     };
 
     console.log('Form Data:', formData);
 
-    fetch(`http://localhost:8080/${studentid}/submit-for/${taskid}/add-work`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(response => {
-        if (response.ok) {
-          setFormData({
-            taskName: '',
-            abstract: '',
-            references: '',
-            file: null
-          });
-          console.log('Work added successfully!');
-          setShowSuccessAlert(true);
-          setShowErrorAlert(false);
-        } else {
-          console.error('Failed to add work');
-          setShowSuccessAlert(false);
-          setShowErrorAlert(true);
-        }
-      })
-      .catch(error => {
-        console.error('Error adding work:', error);
-        setShowSuccessAlert(false);
-        setShowErrorAlert(true);
-      });
+    try {
+        const response = await fetch(`http://localhost:8080/${studentid}/submit-for/${taskid}/add-work`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
 
-  };
+        if (response.ok) {
+            setFormData({
+                taskName: '',
+                abstract: '',
+                references: '',
+                file: null
+            });
+            console.log('Work added successfully!');
+            window.location.href = `/${studentid}/submit-for`;
+        } else {
+            console.error('Failed to add work');
+            setShowErrorAlert(true);
+        }
+    } catch (error) {
+        console.error('Error adding work:', error);
+        setShowErrorAlert(true);
+    }
+};
+
 
   return (
     <div className="common-pg-contents">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="#">Student</a></li>
-          <li className="breadcrumb-item"><a href="#">Dissertation</a></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide/submit-for`}>Task Submission</Link></li>
           <li className="breadcrumb-item active" aria-current="page">ResearchWorkSubmission</li>
         </ol>
       </nav>
       <div className="common-pg-forms">
         <form onSubmit={handleSubmit} className='common-pg-add-work-form'>
           <h4 style={{ alignSelf: 'center', color: 'purple' }}>Research Work Submission</h4>
-          {showSuccessAlert && (
-            <div className="alert alert-success" role="alert">
-              Added successfully!
-            </div>
-          )}
+        
           {showErrorAlert && (
             <div className="alert alert-danger" role="alert">
               Add Unsuccessful!
