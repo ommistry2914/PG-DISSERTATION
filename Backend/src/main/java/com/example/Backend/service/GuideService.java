@@ -1,11 +1,11 @@
 package com.example.Backend.service;
-import com.example.Backend.repository.GuideRepository;
-
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.Backend.model.Guide;
+import com.example.Backend.repository.GuideRepository;
 @Service
 public class GuideService {
      @Autowired
@@ -29,5 +29,8 @@ public class GuideService {
 
     public boolean existsByEmail(String email) {
         return guideRepository.existsByEmail(email);
+    }
+    public List<Guide> getGuidesByEmail(String email){
+        return guideRepository.getGuidesByEmail(email);
     }
 }
