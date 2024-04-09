@@ -78,5 +78,6 @@
 }
 .ongoing_content button{
     background: var(--secondary-color-1);
+    margin: 10px;
 }
 

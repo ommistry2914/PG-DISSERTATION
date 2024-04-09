@@ -6,12 +6,17 @@ import { FaChevronRight, FaCalendar } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
-import Progress from "../Progress/Progress";
-import ProgressService from "../../../../services/ProgressService";
+import Progress from "../Progress/Progress"
 import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-
+  const [tasks,setTasks]=useState([]);
+  const [completeTasks, setCompleteTasks] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
+  const [credits,setCredits]=useState(0);
+  const [totalCredits,setTotalCredits]=useState(0);
+  const { studentid } = useParams();
   const MyLottieAnimation = () => {
     const defaultOptions = {
       loop: true,
@@ -27,25 +32,50 @@ const Profile = () => {
   const [progress, setProgress] = useState(null);
   const day = 75;
   const totalDays = 300;
-  useEffect(()=>{
-    const fetchData=async()=>{
-       setLoading(true);
-       try {
-           const response=await ProgressService.getProgress();
-           setProgress(response.data);
-       } catch (error) {
-           console.log(error);
-       }
-       setLoading(false);
+  
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/${studentid}/progress`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch tasks');
+        }
+        const data = await response.json();
+        setTasks(data);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
     };
-    fetchData();
-  },[]);
+
+    fetchTasks();
+  }, [studentid]);
+  useEffect(()=>{
+    let total=tasks.length;
+    let complete=0;
+    let credit=0;
+    let totalCredit=0
+    tasks.forEach(task => {
+      if (task.approvalStage === 'Approved') {
+        complete++;
+      }
+      credit+=task.revCredits;
+      totalCredit+=task.maxCredits;
+      setTotalCredits(totalCredit);
+      setCredits(credit);
+      setCompleteTasks(complete);
+      setTotalTasks(total);
+    });
+   })
+  
+
+ const pendingTasks = totalTasks - completeTasks;
+ const completeProgress = (completeTasks / totalTasks) * 100 || 0;
+ const pendingProgress = (pendingTasks / totalTasks) * 100 || 0;
+ const creditProgress=(credits/totalCredits)*100 || 0;
+ const overallProgress= (((completeProgress)+(pendingProgress*0.5)+(creditProgress*2))/3).toFixed(2);
+
+
  
-
-  if (loading) {
-    return <div>Loading...</div>;
-
-}
   return <div className="common-pg-contents">
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
@@ -92,9 +122,9 @@ const Profile = () => {
               <div class="common-pg-lid two"></div>
               <div class="common-pg-envelope">Overall Progress</div>
               <div class="common-pg-letter">
-              {progress.map(progress=>(
-                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
-              ))}
+              
+                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={overallProgress} /></p>
+             
                 </div>
             </div>
           </div>

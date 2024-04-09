@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './researchWorkForm.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
-
+import axios from 'axios';
 
 function ResearchWorkForm() {
   const { studentid, taskid } = useParams();
@@ -15,7 +15,7 @@ function ResearchWorkForm() {
     references: '',
     file: null
   });
-
+  const [notification,setNotification]=useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +55,21 @@ function ResearchWorkForm() {
     })
       .then(response => {
         if (response.ok) {
+          const today=new Date();
+          try {
+            const notification={
+              senderId:studentid,
+              receiverId:'guideId',
+              createdAt:today,
+              type:'Task Submitted',
+              link:`http://localhost:5173/guideId/studentguide/submissions`
+          }
+          const res=axios.post('http://localhost:8080/api/auth/notification',notification);
+        }
+        catch(e){
+          console.log(e);
+        }
+        console.log(notification);
           setFormData({
             taskName: '',
             abstract: '',
@@ -92,7 +107,7 @@ function ResearchWorkForm() {
           <h4 style={{ alignSelf: 'center', color: 'purple' }}>Research Work Submission</h4>
           {showSuccessAlert && (
             <div className="alert alert-success" role="alert">
-              Added successfully!
+              Submission Added and notification sent successfully!
             </div>
           )}
           {showErrorAlert && (

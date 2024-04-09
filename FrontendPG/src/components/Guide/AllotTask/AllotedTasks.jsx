@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../Progress/progress.css';
 import { FaEdit, FaMinusCircle } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ const getPriorityColor = (priority) => {
 
 const AllotedTasks = () => {
     const [tasks, setTasks] = useState([]);
-    const { studentid } = useParams();
+    const { email } = useParams();
     const [showDeleteSuccessAlert, setShowDeleteSuccessAlert] = useState(false);
     const [showDeleteErrorAlert, setShowDeleteErrorAlert] = useState(false);
 
@@ -25,7 +24,7 @@ const AllotedTasks = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/${studentid}/progress`);
+                const response = await fetch(`http://localhost:8080/${email}/progress`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch tasks');
                 }
@@ -37,12 +36,12 @@ const AllotedTasks = () => {
         };
 
         fetchTasks();
-    }, [studentid]);
+    }, [email]);
 
     //Delete a Task
     const onDelete = async (taskid) => {
         try {
-            const response = await fetch(`http://localhost:8080/allottask/${studentid}/delete/${taskid}`, {
+            const response = await fetch(`http://localhost:8080/allottask/${email}/delete/${taskid}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
@@ -76,7 +75,7 @@ const AllotedTasks = () => {
             )}
 
             <div className="common-pg-progress-section row container-fluid">
-                <Link to={`/${studentid}/studentguide/allottask/${studentid}`}><button id='common-pg-allot-task-btn'>Add Task</button></Link>
+                <Link to={`/mentorprofile/ongoing/allottask/${email}`}><button id='common-pg-allot-task-btn'>Add Task</button></Link>
                 <div className="common-pg-progress-table-div col-sm-12">
                     <table className='common-pg-progress-table'>
                         <thead>
@@ -102,6 +101,7 @@ const AllotedTasks = () => {
                                         hour: 'numeric',
                                         minute: 'numeric'
                                     })} <br /> to <br /> {new Date(task.endDate).toLocaleDateString('en-US', {
+    
                                         day: 'numeric',
                                         month: 'long',
                                         year: 'numeric',
@@ -110,7 +110,7 @@ const AllotedTasks = () => {
                                     })}</td>
                                     <td><div className='priority' style={{ backgroundColor: getPriorityColor(task.priority) }}>{task.priority}</div></td>
                                     <td>{task.maxCredits}</td>
-                                    <td><Link to={`/${studentid}/studentguide/allottask/${studentid}/update/${task.id}`}><FaEdit /></Link></td>
+                                    <td><Link to={`/mentorprofile/ongoing/allottask/${email}/update/${task.id}`}><FaEdit /></Link></td>
                                     <td><FaMinusCircle onClick={() => onDelete(task.id)} className='common-pg-del-task-btn'/></td>
                                 </tr>
                             ))}

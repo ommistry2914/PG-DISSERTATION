@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaDownload } from 'react-icons/fa';
+import axios from "axios";
+import { useAuth } from "../../../../AuthContext";
 
 const DetailedSubmission = () => {
+  const {useremail}=useAuth();
   const [submission, setSubmission] = useState(null);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
@@ -15,7 +18,8 @@ const DetailedSubmission = () => {
   const [approvalStatus, setApprovalStatus] = useState('');
   const [credits, setCredits] = useState('');
 
-
+  const [notification,setNotification]=useState(null);
+  
   useEffect(() => {
     // Fetch submission data based on submissionId
     fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`)
@@ -38,27 +42,47 @@ const DetailedSubmission = () => {
     });
   };
 
-
+  
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
 
+    const today=new Date();
     try {
+      const notification={
+        senderId:useremail,
+        receiverId:studentid,
+        createdAt:today,
+        type:'Task Feedback',
+        link:`http://localhost:5173/${studentid}/studentguide/submissions`
+    }
+     
       const formData = new FormData();
       formData.append('guideFeedback', feedback);
-
       await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/feedback`, {
         method: 'PUT',
         body: formData
       });
       console.log('Feedback submitted successfully');
+      const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+      console.log((await response).data);
+      if(response.OK){
+        console.log("Notification added!")
+      }
     } catch (error) {
       console.error('Error submitting feedback:', error);
     }
   };
-
-  const handleApprovalSubmit = (e) => {
+  const today = new Date();
+  const handleApprovalSubmit =async (e) => {
     e.preventDefault();
+    const notification={
+      senderId:useremail,
+      receiverId:studentid,
+      createdAt:today,
+      type:'Approval status',
+      link:`http://localhost:5173/${studentid}/studentguide/submissions`
+  }       
     const formData = new FormData(e.target);
     const credits = formData.get('credits');
     const creditsValue = approvalStatus === 'Approved' ? credits : 0;
@@ -77,13 +101,20 @@ const DetailedSubmission = () => {
             revCredits: creditsValue
           })
         })
-          .then(response => {
+          .then(async response => {
             if (response.ok) {
               setFormData({
                 approvalStatus: '',
               });
-              console.log('Work added successfully!');
-              setShowSuccessAlert(true);
+              console.log('Guide updated status!');
+              
+              try{const sendNotification=axios.post('http://localhost:8080/api/auth/notification',notification);
+              console.log('Notification send');
+            }
+            catch(e){
+              console.log(e);
+            }
+            setShowSuccessAlert(true);
               setShowErrorAlert(false);
             } else {
               console.error('Failed to add work');

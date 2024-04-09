@@ -4,7 +4,6 @@ import './progress.css'
 import { FaDownload, FaList } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import CircularProgressBar from './CircularProgressBar';
-import ProgressService from '../../../../services/ProgressService';
 
 const tasks = [
   { task: 'Task 1', status: 'On Track', progress: '100%', date: '2022-03-10', priority: 'High', approvalStage: 'Approved', mentor: 'John Doe' },
@@ -55,6 +54,10 @@ const Progress = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { studentid } = useParams();
+  const [completeTasks, setCompleteTasks] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
+  const [credits,setCredits]=useState(0);
+  const [totalCredits,setTotalCredits]=useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
       setPercentage(prevPercentage => (prevPercentage + 10) % 100);
@@ -62,19 +65,7 @@ const Progress = () => {
 
     return () => clearInterval(interval);
   }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await ProgressService.getProgress();
-        setProgress(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+ 
 
 
 
@@ -94,8 +85,28 @@ const Progress = () => {
 
     fetchTasks();
   }, [studentid]);
+ useEffect(()=>{
+  let total=tasks.length;
+  let complete=0;
+  let credit=0;
+  let totalCredit=0
+  tasks.forEach(task => {
+    if (task.approvalStage === 'Approved') {
+      complete++;
+    }
+    credit+=task.revCredits;
+    totalCredit+=task.maxCredits;
+    setTotalCredits(totalCredit);
+    setCredits(credit);
+    setCompleteTasks(complete);
+    setTotalTasks(total);
+  });
+ })
 
-
+ const pendingTasks = totalTasks - completeTasks;
+ const completeProgress = (completeTasks / totalTasks) * 100 || 0;
+ const pendingProgress = (pendingTasks / totalTasks) * 100 || 0;
+ const creditProgress=(credits/totalCredits)*100 || 0;
 
   const timelineData = [
     { title: 'Step 1', progress: 20 },
@@ -104,14 +115,7 @@ const Progress = () => {
     { title: 'Step 4', progress: 100 }
   ];
 
-  if (loading) {
-    return <div>Loading...</div>;
-
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  
   return (
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
@@ -122,12 +126,12 @@ const Progress = () => {
         </ol>
       </nav>
       <div className="container common-pg-progress-section row">
-        {progress.map(progress => (
+       
           <div>
             <div className="common-pg-progress-circles row col-sm-12 container">
-              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={60} />CR Progress</div>
-              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={30} />Pending Tasks</div>
-              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={70} />Completed Tasks</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={creditProgress} />CR Progress</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={pendingProgress} />Pending Tasks</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={completeProgress} />Completed Tasks</div>
             </div>
             <div className="common-pg-timeline-div  col-sm-12 col-md-12 col-lg-12">
               <div className="common-pg-time-line">
@@ -210,7 +214,7 @@ const Progress = () => {
               </table>
             </div>
           </div>
-        ))}
+     
       </div>
     </div>
   );
