@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaDownload } from 'react-icons/fa';
+import axios from "axios";
+import { useAuth } from "../../../../AuthContext";
 
 const DetailedSubmission = () => {
+  const {useremail}=useAuth();
   const [submission, setSubmission] = useState(null);
   const [task, setTask] = useState(null);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -16,7 +19,8 @@ const DetailedSubmission = () => {
   const [approvalStatus, setApprovalStatus] = useState('');
   const [credits, setCredits] = useState('');
 
-
+  const [notification,setNotification]=useState(null);
+  
   useEffect(() => {
     const fetchSubmission = async () => {
       try {
@@ -64,68 +68,100 @@ const DetailedSubmission = () => {
     });
   };
 
-
+  
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
 
+    const today=new Date();
     try {
+      const notification={
+        senderId:useremail,
+        receiverId:studentid,
+        createdAt:today,
+        type:'Task Feedback',
+        link:`http://localhost:5173/${studentid}/studentguide/submissions`
+    }
+      const formData = new FormData();
+      formData.append('guideFeedback', feedback);
 
       await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/feedback`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: feedback
+        body: formData
       });
       setFeedback('');
       setShowSuccessAlert(true);
       setShowErrorAlert(false);
       console.log('Feedback submitted successfully');
+      const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+      console.log((await response).data);
+      if(response.OK){
+        console.log("Notification added!")
+      }
     } catch (error) {
       setShowSuccessAlert(false);
       setShowErrorAlert(true);
       console.error('Error submitting feedback:', error);
     }
   };
-
-  const handleApprovalSubmit = async (e) => {
+  const today = new Date();
+  const handleApprovalSubmit =async (e) => {
     e.preventDefault();
+    
     const formData = new FormData(e.target);
     const credits = formData.get('credits');
     const creditsValue = approvalStatus === 'Approved' ? credits : 0;
     console.log(`${approvalStatus} ${credits}`);
-    
-    try {
+    const notification={
+      senderId:useremail,
+      receiverId:studentid,
+      createdAt:today,
+      type:'Approval status',
+      link:`http://localhost:5173/${studentid}/studentguide/submissions`
+  }    
+   try{
+        // Use submissionDate in the fetch request
         const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                approvalStage: approvalStatus,
-                revCredits: creditsValue
-            })
-        });
-        
-        if (response.ok) {
-            setApprovalStatus('');
-            setCredits('');
-            console.log('Work added successfully!');
-            setShowSuccessAlert(true);
-            setShowErrorAlert(false);
-        } else {
-            console.error('Failed to add work');
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              approvalStage: approvalStatus,
+              revCredits: creditsValue
+          })
+      });
+         
+            if (response.ok) {
+            
+              setCredits('');
+              setApprovalStatus('');
+              console.log('Guide updated status!');
+              console.log('Work added successfully!');
+              try{const sendNotification=axios.post('http://localhost:8080/api/auth/notification',notification);
+              console.log('Notification send');
+            }
+            catch(e){
+              console.log(e);
+            }
+              setShowSuccessAlert(true);
+              setShowErrorAlert(false);
+            } else {
+              console.error('Failed to add work');
+              setShowSuccessAlert(false);
+              setShowErrorAlert(true);
+            }
+          }
+          catch(error){
+            console.error('Error adding work:', error);
             setShowSuccessAlert(false);
             setShowErrorAlert(true);
-        }
-    } catch (error) {
-        console.error('Error adding work:', error);
-        setShowSuccessAlert(false);
-        setShowErrorAlert(true);
-    }
-};
+          }
 
+        };
 
 
   const handleDownload = () => {

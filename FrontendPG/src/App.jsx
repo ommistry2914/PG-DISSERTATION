@@ -18,24 +18,22 @@ import Statistics from "./components/LandingPage/Statistics/Statistics";
 import GuideCard from "./CommonCard/GuideCard";
 import StudentDashBoard from "./components/Student/StudentDashBoard";
 import WebTeamMain from "./components/WebTeam/WebTeamMain";
+import Form from "./components/CommonPage/pages/ResearchWorkForm/Form";
 
 
 const App = () => {
 
-  const { authenticated, userRole } = useAuth();
-
+  const { authenticated, userRole, useremail } = useAuth();
   return (
     <Router>
 
-     {/* <Navbar/> */}
+     { <Navbar/> }
     <Routes>
       
-         
-        
       <Route path="/" element={<Home />} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
-        {/* {authenticated && userRole === 'guide' ? (
+        {authenticated && userRole === 'guide' ? (
           <Route path="/signup/guide" element={<GuideSignUp />} />
         ) : (
           <Route path="/signup/guide" element={<Navigate to="/" />} />
@@ -48,27 +46,24 @@ const App = () => {
         <Route path="/studentguide/*" element={<StuGuideDashboard />} />
         <Route path="/faqs" element={<Faqs />} />
         <Route path="/trending" element={<MainLayout />} />
-        {authenticated && userRole === 'guide' ? (
-          <Route path="/mentorprofile" element={<GuideDashboard />} />
+        {authenticated && userRole === 'guide' && useremail? (
+          <Route path={`/mentorprofile/*`} element={<MainGuideDashboard />} />
         ) : (
           <Route path="/mentorprofile" element={<Navigate to="/" />} />
         )}
-{authenticated && userRole === 'student' ? (
+        {authenticated && userRole === 'student' ? (
           <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
         ) : (
           <Route path="/studentdashboard" element={<Navigate to="/" />} />
-        )}
-         */}
-          <Route path=":studentid/studentguide/*" element={< StuGuideDashboard/>}></Route>
+        )} 
+        
+         <Route path=":studentid/studentguide/*" element={< StuGuideDashboard/>}></Route>
           <Route path=":studentid/studentguide" element={<StuGuideDashboard />} />
-            
           <Route path="/signup/guide" element={<GuideSignUp />} />
           <Route path="/signup/student" element={<Signup />} />
           <Route path="/studentguide/*" element={<StuGuideDashboard />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/trending" element={<MainLayout />} />
-          <Route path="/mentorprofile" element={<MainGuideDashboard />} />
-          <Route path="/mentorprofile/*" element={<MainGuideDashboard />} />
           <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>

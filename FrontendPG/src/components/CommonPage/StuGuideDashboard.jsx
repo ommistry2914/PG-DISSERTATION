@@ -10,9 +10,6 @@ import { Routes, Route } from 'react-router-dom';
 import ResearchWorkForm from './pages/ResearchWorkForm/ResearchWorkForm';
 import Header from './UI/Header/Header'
 
-import AllotTask from './pages/AllotTask/AllotTask';
-import AllotedTasks from './pages/AllotTask/AllotedTasks';
-import UpdateAllotedTask from './pages/AllotTask/UpdateAllotedTask';
 import SubmitFor from './pages/ResearchWorkForm/Submitfor';
 import UpdateForm from './pages/ResearchWorkForm/UpdateForm'
 import Submissions from './pages/Submissions/Submissions';
@@ -44,9 +41,7 @@ const StuGuideDashboard = () => {
             <Route path='/submissions/:taskid/:submissionid/latest' element={<LatestDetailedSubmission />} />
             <Route path='/submissions/:taskid/:submissionid/past' element={<PastDetailedSubmission />} />
 
-            <Route path="allottask/:studentid" element={<AllotTask />}></Route>
-            <Route path="allottask/:studentid/alloted" element={<AllotedTasks />}></Route>
-            <Route path="allottask/:studentid/update/:taskid" element={<UpdateAllotedTask />}></Route>
+            
 
           </Routes>
         </div>
