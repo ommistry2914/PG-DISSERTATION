@@ -201,10 +201,10 @@ const Profile = () => {
               <div class="common-pg-lid two"></div>
               <div class="common-pg-envelope">Overall Progress</div>
               <div class="common-pg-letter">
-              
-                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={overallProgress} /></p>
-             
-                </div>
+                {progress.map(progress => (
+                  <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
+                ))}
+              </div>
             </div>
           </div>
           <div className=" common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
