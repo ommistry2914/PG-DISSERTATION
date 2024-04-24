@@ -9,6 +9,10 @@ import { GrTemplate } from "react-icons/gr";
 import { SiGoogleforms } from "react-icons/si";
 import {Link} from 'react-router-dom';
 
+
+import Sidebar from '../CommonPage/UI/Sidebar/Sidebar';
+import {  studentbardata } from '../CommonPage/UI/Sidebar/sidebardata';
+
 const StudentDashboard = () => {
   const [showCalendar, setShowCalendar] = useState(true);
 
@@ -23,6 +27,8 @@ const StudentDashboard = () => {
 
   return (
     <div className="sd-main-bg">
+        <Sidebar sidebarData={studentbardata}/>
+
 
       <div className="sd-sidebar" style={{ width: showCalendar ? '20%' : '25%' }}>
         <h6 className="sd-heading">

@@ -44,3 +44,25 @@ export const guidebardata = [
 
 ];
 
+export const studentbardata = [
+  { path: "/mentorprofile/", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
+  {
+     text: "student list", icon: <FaIcons.FaChalkboardTeacher />, subMenu: [
+      {
+        text: 'student mentored',
+        path: '/mentorprofile/pastStudents',
+        icon: <FaIcons.FaUsers />,
+      },
+      {
+        text: 'new request',
+        path: '/mentorprofile/request',
+        icon: <FaIcons.FaUser />,
+      },
+    ],
+  },
+  { path: "/mentorprofile/ongoing", text: "Ongoing ", icon: <FaIcons.FaChartBar /> },
+  { path: "/studentguide/edit", text: "edit", icon: <FaIcons.FaCalendar /> }
+
+];
+
+
