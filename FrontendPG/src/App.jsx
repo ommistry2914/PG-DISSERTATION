@@ -37,20 +37,16 @@ const App = () => {
     <Router>
 
 
-//      <Navbar/>
 
     <Navbar/> 
 
     <Routes>
       
       <Route path="/" element={<Home />} />
-      {/* <Route path="/chatlogin" element={<AuthPage onAuth={(user) => setUser(user)} />} /> */}
       <Route path="/chatroom" element={<ChatsPage/>} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
 
-//         {/* {authenticated && userRole === 'guide' ? (
-//         {/* <Route path="/login" element={<Login />} />
 
 
         {authenticated && userRole === 'guide' ? (
