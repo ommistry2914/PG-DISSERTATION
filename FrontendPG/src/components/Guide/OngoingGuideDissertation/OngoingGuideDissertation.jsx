@@ -80,7 +80,6 @@ import React, { useEffect, useState } from 'react';
 import './OngoingGuideDissertation.css';
 
 
-// const   OngoingGuideDissertation = () => {
 
 import axios from 'axios'; 
 import { Link } from 'react-router-dom';
@@ -173,7 +172,6 @@ const OngoingGuideDissertation = () => {
 
                         </div>
                         <div className="greq_button">
-//                             <button>view more</button>
 
                             <Link to={`allottask/${dissertation.email}`}><button>Allot Task</button></Link>
                             <Link to={`/${useremail}/studentguide/`}><button>View More</button></Link>
