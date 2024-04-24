@@ -1,7 +1,7 @@
 #New_request{
     position: absolute;
     left: 16.6%;
-    top: 12em;
+    top: 4em;
     background: var(--background-color);
     width:83.5%;
     padding-bottom: 100px;
@@ -41,8 +41,8 @@
     padding: 0;
 }
 .student_img{
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-radius: 10%;
     margin: 5px auto;
     border: 2px solid var(--primary-color);
@@ -69,7 +69,10 @@
     text-align: center;
     padding: 10px;
     width: max-content;
-    margin: 10px;
+    margin: 20px;
+}
+.greq_head{
+    margin-top: 30px;
 }
 .greq_head h3,.greq_head p{
     margin: 0;
@@ -85,14 +88,35 @@
     margin: 0;
     font-size: 0.9em;
 }
+
+.greq_link a{
+font-size: 15px;
+}
+
+.greq_link:hover{
+    color: black;
+}
+
 .greq_button{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 .greq_button button{
-    margin: 5px;
+    margin: 10px;
     background: var(--secondary-color-1);
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 1px 1px 1px 1px var(--secondary-color-1) inset;
+}
+
+.greq_btn{
+    font-size: 17px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+.greq_btn:hover{
+    color: white;
+    transform: scale(1.05);
 }

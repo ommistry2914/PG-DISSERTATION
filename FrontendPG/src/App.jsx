@@ -20,6 +20,9 @@ import Statistics from "./components/LandingPage/Statistics/Statistics";
 import GuideCard from "./CommonCard/GuideCard";
 import StudentDashBoard from "./components/Student/StudentDashBoard";
 import WebTeamMain from "./components/WebTeam/WebTeamMain";
+import RequestGuide from "./components/RequestConnection/RequestGuide";
+import ViewRDF from "./components/RequestConnection/ViewRDF";
+import ProfilePage from "./components/Student/ProfilePage";
 // import Form from "./components/CommonPage/pages/ResearchWorkForm/Form";
 import AuthPage from "./components/ChatBot/Chatlogin";
 import ChatsPage from "./components/ChatBot/Chat";
@@ -73,6 +76,9 @@ const App = () => {
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
         <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
+        <Route exact path="/requestguidepage"  element={<RequestGuide />} ></Route>
+        <Route exact path="/rdfActions/viewrdf/:stdid"  element={<ViewRDF />} ></Route>
+        <Route exact path="/editprofilepage"  element={<ProfilePage />} ></Route>
     
       </Routes>
     </Router>
