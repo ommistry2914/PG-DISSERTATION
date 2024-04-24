@@ -10,7 +10,7 @@ const GuideDashboard = () => {
         const fetchData=async()=>{
             setLoading(true)
             try {
-                const response=await axios.get("http://localhost:8080/guides/guideId/wdhcdh")
+                const response=await axios.get("http://localhost:8080/api/auth/guide")
                 setGuides(response.data);
             } catch (error) {
                 console.log(error)

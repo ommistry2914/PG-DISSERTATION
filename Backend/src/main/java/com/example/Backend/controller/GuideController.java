@@ -27,7 +27,7 @@ public class GuideController {
         return guideService.getGuideById(id);
     }
 
-    @PostMapping
+    @PostMapping("/addGuide")
     public Guide saveGuide(@RequestBody Guide guide) {
         return guideService.saveGuide(guide);
     }
