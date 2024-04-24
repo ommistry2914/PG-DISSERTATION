@@ -6,13 +6,12 @@ import { FaChevronRight, FaCaretRight } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
-// import ProgressService from "../../../../service/ProgressService";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
   const [tasks,setTasks]=useState([]);
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(null);
+  const [progress, setProgress] = useState([]);
   const [completeTasks, setCompleteTasks] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
   const [credits,setCredits]=useState(0);
@@ -34,21 +33,6 @@ const Profile = () => {
 
   const day = 75;
   const totalDays = 300;
-  
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await ProgressService.getProgress();
-  //       setProgress(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, []);
-
 
   const fetchEvents = async () => {
     try {
@@ -115,8 +99,8 @@ const Profile = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch tasks');
         }
-        const data = await response.json();
-        setTasks(data);
+        const progresses = await response.json();
+        setProgress(progresses);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
@@ -125,7 +109,8 @@ const Profile = () => {
     fetchTasks();
   }, [studentid]);
   useEffect(()=>{
-    let total=tasks.length;
+    let total=progress.length;
+   
     let complete=0;
     let credit=0;
     let totalCredit=0
@@ -142,18 +127,12 @@ const Profile = () => {
     });
    })
   
-
  const pendingTasks = totalTasks - completeTasks;
  const completeProgress = (completeTasks / totalTasks) * 100 || 0;
  const pendingProgress = (pendingTasks / totalTasks) * 100 || 0;
  const creditProgress=(credits/totalCredits)*100 || 0;
  const overallProgress= (((completeProgress)+(pendingProgress*0.5)+(creditProgress*2))/3).toFixed(2);
-
-
- if (loading) {
-  return <div>Loading...</div>;
-
-}
+ 
   return <div className="common-pg-contents">
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
@@ -199,16 +178,16 @@ const Profile = () => {
               <div class="common-pg-lid two"></div>
               <div class="common-pg-envelope">Overall Progress</div>
               <div class="common-pg-letter">
-                {progress.map(progress => (
-                  <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
-                ))}
+                
+                  <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={overallProgress} /></p>
+                
               </div>
             </div>
           </div>
           <div className=" common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
             <h6>Todays Schedule</h6>
             <ul className='common-pg-today-task-ul'>
-              {task.map((task) => (
+              {tasks.map((task) => (
                 task.event ? (
                   <li key={task.id}><FaCaretRight/><span>{task.event}, {task.description} &nbsp; &nbsp; {new Date(task.from).toISOString().slice(11, 16)} to {new Date(task.to).toISOString().slice(11, 16)}</span></li>
                 ) : (
