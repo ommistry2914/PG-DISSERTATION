@@ -6,10 +6,7 @@ import { FaChevronRight, FaCaretRight } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
-import Progress from "../Progress/Progress";
-import ProgressService from "../../../../services/ProgressService";
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const [tasks,setTasks]=useState([]);
