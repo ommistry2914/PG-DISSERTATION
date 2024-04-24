@@ -1,32 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Nunito&display=swap');
 
 .heading-expert{
-    margin-top: 5%;
-color: black;
-font-size: 50px;
+/* margin-top: 5%; */
+color: var(--secondary-color-1);
+font-size: 40px;
 font-family: Nunito;
+margin-bottom: 2rem;
+text-align: center;
+}
+.stat-main{
+    max-width: 100% !important;
+    /* background-color: var(--secondary-color-1); */
+    margin-bottom: 2rem;
+
+
+
 }
 
 .stat-bg
 {
-    background-color: var(--background-color);
+    max-width: 100%;
+    /* background-color: var(--secondary-color-1); */
+    background-color: var(--borderColor);
+
     display: flex;
     flex-direction: row;
     justify-content:space-around;
-    align-items: start;
-    padding: 3%;
+    align-items: center;
+    padding: 2%;
 }
 
 .stat-card
 {
-    background-color: white;
+    /* background-color: white; */
+    /* background-color: var(--secondary-color-1); */
+
     padding: 5%;
     font-family: Nunito;
-    border-radius: 10px;
-    width:30%;
-
+    /* border-radius: 10px; */
+    /* width:30%; */
+    /* width: calc(30% - 20px); */
 }
 
 .statfont{
     font-size: 40px;
+    /* color: white; */
+    color: black;
+
+}
+.statfont1{
+    /* color: white; */
+    color: black;
+
 }

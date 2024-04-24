@@ -53,8 +53,8 @@ const Navbar = () => {
                         <span className="material-symbols-rounded navbar_toggle_menu"> menu </span>
                         <i className="material-symbols-rounded navbar_toggle_close"> close </i>
                     </div>
-                    <a href="#" className="navbar_logo">
-                        <span className="material-symbols-rounded"> eco </span> Earz
+                    <a href="/" className="navbar_logo">
+                        <span className="material-symbols-rounded"> eco </span> PGWORLD
                     </a>
                 </div>
 
@@ -62,26 +62,26 @@ const Navbar = () => {
                     <ul className="navbar_list">
                     <li class="dropdown__item">                      
                             <div class="nav__link dropdown__button">
-                                Discover 
+                                Trending Topic 
                             </div>
 
                        
                         </li>
                         <li class="dropdown__item">
                             <div class="nav__link dropdown__button">
-                                Gaming 
+                                Pastwork
                             </div>
 
                         </li>
                         <li class="dropdown__item">
                             <div class="nav__link dropdown__button">
-                                Accessories 
+                                View Expert 
                             </div>
 
                         </li>
                         <li class="dropdown__item">                        
                             <div class="nav__link dropdown__button">
-                                Company <span class="material-symbols-rounded dropdown__arrow"> expand_more </span>
+                                Templates <span class="material-symbols-rounded dropdown__arrow"> expand_more </span>
                             </div>
 
                             <div class="dropdown__container">

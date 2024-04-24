@@ -15,7 +15,6 @@ const Home = () => {
 
 
       <Head/>
-      <br />
       <Statistics />
       <MSUDescription/>
       <TopResearcher/>

@@ -6,9 +6,12 @@ import OngoingGuideDissertation from './OngoingGuideDissertation/OngoingGuideDis
 import StudentMentored from './StudentMentored/StudentMentored';
 import EditGuide from './EditGuide';
 // import Sidebar from '../CommonPage/UI/Sidebar/Sidebar';
-import SidebarOm from '../CommonPage/UI/Sidebar/SidebarOm';
-import { GuideSidebar } from "../CommonPage/UI/Sidebar/sidebardata";
+
+
 import SidebarG from './SidebarG';
+import Sidebar from '../CommonPage/UI/Sidebar/Sidebar';
+import { guidebardata } from '../CommonPage/UI/Sidebar/sidebardata';
+
 
 
 const MainGuideDashboard = () => {
@@ -16,7 +19,8 @@ const MainGuideDashboard = () => {
     <div>
         <div className='d-flex'>
         {/* <SidebarOm sidebarData={GuideSidebar} /> */}
-        <SidebarG/>
+        {/* <SidebarG/> */}
+        <Sidebar sidebarData={guidebardata}/>
         <div>
         <Routes>
           <Route path="/" element={<GuideDashboard />} />

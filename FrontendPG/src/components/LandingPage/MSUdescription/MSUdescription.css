@@ -8,7 +8,9 @@
     grid-template-columns: 50% 50%;
     gap: 1rem;
     padding: 2rem;
-    background-color: var(--color-lavender);
+    /* background-color: var(--secondary-color-2); */
+    /* background-color: var(--borderColor); */
+
 
 }
 
@@ -18,21 +20,24 @@
     flex-direction: column;
     justify-content: center;
     /* border: 2px solid green; */
-    padding: 2px;
+    /* padding: 2px; */
 }
 .desc-head{
     font-size: 26px;
     margin-bottom: 2rem;
-    margin-left: 4rem;
+    margin-left: -5rem;
+    float: left;
+    /* color: var(--text-color-white); */
 }
 .desc-para{
     max-width: 500px;
     margin-top: 0rem;
     margin-bottom: 2rem;
-    margin-left: 4.5rem;
-    text-align: justify;
+    /* margin-left: 4.5rem; */
+    text-align:start;
     font-size: 1rem;
     font-weight: 500;
+    /* color: var(--text-color-white); */
 }
 .read-link{
     text-align: left;
@@ -41,6 +46,20 @@
     font-weight: 500;
 
 }
+.trview_moreee {
+    background: var(--secondary-color-1);
+    border: none;
+    color: var(--text-color-white);
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 auto; /* Center button */
+    display: block; /* Ensure button takes full width */
+    /* margin-top: 1em;  */
+    /* float: left; */
+    margin-left: 0rem;
+  }
 .desc-image{
     display: flex;
     justify-content: center;
