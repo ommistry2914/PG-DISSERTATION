@@ -35,10 +35,6 @@ const App = () => {
   const { authenticated, userRole, useremail } = useAuth();
   return (
     <Router>
-
-
-//      <Navbar/>
-
     <Navbar/> 
 
     <Routes>
@@ -48,9 +44,6 @@ const App = () => {
       <Route path="/chatroom" element={<ChatsPage/>} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
-
-//         {/* {authenticated && userRole === 'guide' ? (
-//         {/* <Route path="/login" element={<Login />} />
 
 
         {authenticated && userRole === 'guide' ? (
@@ -88,8 +81,6 @@ const App = () => {
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
-
-//         <Route exact path="/webteam" element={<WebTeamMain />} ></Route>
 
 
         <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
