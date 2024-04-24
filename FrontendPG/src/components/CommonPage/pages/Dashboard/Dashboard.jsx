@@ -6,10 +6,8 @@ import { FaChevronRight, FaCaretRight } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
-import Progress from "../Progress/Progress";
-import ProgressService from "../../../../services/ProgressService";
+// import ProgressService from "../../../../service/ProgressService";
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const [tasks,setTasks]=useState([]);
@@ -37,19 +35,19 @@ const Profile = () => {
   const day = 75;
   const totalDays = 300;
   
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await ProgressService.getProgress();
-        setProgress(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await ProgressService.getProgress();
+  //       setProgress(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchData();
+  // }, []);
 
 
   const fetchEvents = async () => {
