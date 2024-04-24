@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaDownload } from 'react-icons/fa';
+import axios from "axios";
+import { useAuth } from "../../../../AuthContext";
 
 const DetailedSubmission = () => {
+  const {useremail}=useAuth();
   const [submission, setSubmission] = useState(null);
+  const [task, setTask] = useState(null);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const { studentid, submissionid, taskid } = useParams();
@@ -15,19 +19,45 @@ const DetailedSubmission = () => {
   const [approvalStatus, setApprovalStatus] = useState('');
   const [credits, setCredits] = useState('');
 
-
+  const [notification,setNotification]=useState(null);
+  
   useEffect(() => {
-    // Fetch submission data based on submissionId
-    fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchSubmission = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch submission');
+        }
+        const data = await response.json();
         console.log(data);
         setSubmission(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching submission:', error);
-      });
+      }
+    };
+
+    fetchSubmission();
   }, [studentid, submissionid, taskid]);
+
+
+  useEffect(() => {
+    const fetchTask = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/mcred`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch task');
+        }
+        const data = await response.json();
+        console.log(data);
+        setTask(data);
+      } catch (error) {
+        console.error('Error fetching task:', error);
+      }
+    };
+
+    fetchTask();
+  }, [studentid, taskid]);
+
 
 
   const handleChange = (e) => {
@@ -38,51 +68,85 @@ const DetailedSubmission = () => {
     });
   };
 
-
+  
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
 
+    const today=new Date();
     try {
+      const notification={
+        senderId:useremail,
+        receiverId:studentid,
+        createdAt:today,
+        type:'Task Feedback',
+        link:`http://localhost:5173/${studentid}/studentguide/submissions`
+    }
       const formData = new FormData();
       formData.append('guideFeedback', feedback);
 
       await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/feedback`, {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: formData
       });
+      setFeedback('');
+      setShowSuccessAlert(true);
+      setShowErrorAlert(false);
       console.log('Feedback submitted successfully');
+      const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+      console.log((await response).data);
+      if(response.OK){
+        console.log("Notification added!")
+      }
     } catch (error) {
+      setShowSuccessAlert(false);
+      setShowErrorAlert(true);
       console.error('Error submitting feedback:', error);
     }
   };
-
-  const handleApprovalSubmit = (e) => {
+  const today = new Date();
+  const handleApprovalSubmit =async (e) => {
     e.preventDefault();
+    
     const formData = new FormData(e.target);
     const credits = formData.get('credits');
     const creditsValue = approvalStatus === 'Approved' ? credits : 0;
     console.log(`${approvalStatus} ${credits}`);
-    fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`)
-      .then(response => response.json())
-      .then(data => {
+    const notification={
+      senderId:useremail,
+      receiverId:studentid,
+      createdAt:today,
+      type:'Approval status',
+      link:`http://localhost:5173/${studentid}/studentguide/submissions`
+  }    
+   try{
         // Use submissionDate in the fetch request
-        fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`, {
+        const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            approvalStage: approvalStatus,
-            revCredits: creditsValue
+              approvalStage: approvalStatus,
+              revCredits: creditsValue
           })
-        })
-          .then(response => {
+      });
+         
             if (response.ok) {
-              setFormData({
-                approvalStatus: '',
-              });
+            
+              setCredits('');
+              setApprovalStatus('');
+              console.log('Guide updated status!');
               console.log('Work added successfully!');
+              try{const sendNotification=axios.post('http://localhost:8080/api/auth/notification',notification);
+              console.log('Notification send');
+            }
+            catch(e){
+              console.log(e);
+            }
               setShowSuccessAlert(true);
               setShowErrorAlert(false);
             } else {
@@ -90,31 +154,23 @@ const DetailedSubmission = () => {
               setShowSuccessAlert(false);
               setShowErrorAlert(true);
             }
-          })
-          .catch(error => {
+          }
+          catch(error){
             console.error('Error adding work:', error);
             setShowSuccessAlert(false);
             setShowErrorAlert(true);
-          });
-      })
-      .catch(error => {
-        console.error('Error fetching submission data:', error);
-        setShowSuccessAlert(false);
-        setShowErrorAlert(true);
-      });
-  }
+          }
 
-
-
+        };
 
 
   const handleDownload = () => {
-    // Implement download logic
     alert('Downloading file...');
   };
 
+
   if (!submission) {
-    return <p>Loading...</p>;
+    return <div className="common-pg-contents"><p>Loading...</p></div>;
   }
 
   return (
@@ -122,8 +178,8 @@ const DetailedSubmission = () => {
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="#">Student</a></li>
-          <li className="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li className="breadcrumb-item"><a href="#">Submissions</a></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide/submissions`}>Submissions</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Detailed Submission</li>
         </ol>
       </nav>
@@ -141,37 +197,32 @@ const DetailedSubmission = () => {
               minute: 'numeric'
             })}</p>
             <p><strong>Abstract:</strong></p>
-            <div className="common-pg-sub-details"> Definition:
-              Ring topology is a type of network configuration where devices are connected in a circular
-              manner, forming a closed loop. In this setup, each device is connected to exactly two other
-              devices, creating a continuous pathway for data transmission. This means that data travels in
-              only one direction around the ring, passing through each device until it reaches its destination.
-              ❖ Characteristics:
-              1. Circular Structure: In a ring topology, the network devices are arranged in a closed
-              loop or circle.
-              2. Unidirectional Data Flow: Data travels in only one direction around the ring, passing
-              through each device until it reaches its destination.
-              3. Token Passing: To avoid collisions, some ring networks use a method called token
-              passing, where a special packet (token) is passed from one device to the next,
-              granting the right to send data.
-              4. Reliability: Ring topology can be relatively reliable because if one device or
-              connection fails, it doesn't necessarily disrupt the entire network.
-              5. Performance: In terms of performance, ring networks can be efficient for
-              transmitting data, especially if token passing is used to manage access to the
-              network{submission.summary}</div>
+            <div className="common-pg-sub-details">{submission.summary}</div>
             <p><strong>References:</strong></p>
-            <div className="common-pg-sub-details">     manner, forming a closed loop. In this setup, each device is connected to exactly two other
-              devices, creating a continuous pathway for data transmission. This means that data travels in
-              only one direction around the ring, passing through each device until it reaches its destinatio manner, forming a closed loop. In this setup, each device is connected to exactly two other
-              devices, creating a continuous pathway for data transmission. This means that data travels in
-              only one direction around the ring, passing through each device until it reaches its destinatiomanner, forming a closed loop. In this setup, each device is connected to exactly two other
-              devices, creating a continuous pathway for data transmission. This means that data travels in
-              only one direction around the ring, passing through each device until it reaches its destination.{submission.references}</div>
+            <div className="common-pg-sub-details">{submission.references}</div>
             <p><strong>File:</strong></p>
-            <div className="common-pg-sub-details"><p>{submission.fileSubmitted} <button onClick={handleDownload} className="common-pg-add-work-submit"><FaDownload /></button></p>
-            </div>  </div>
+            <div className="common-pg-sub-details">
+              <p>{submission.fileSubmitted}
+                <button onClick={handleDownload} className="common-pg-add-work-submit"><FaDownload /> </button>
+              </p>
+            </div>
+          </div>
+
           <div className="common-pg-latest-sub-form">
             <h6>Feedback and Approval Forms</h6>
+
+            {showSuccessAlert && (
+              <div className="alert alert-success" role="alert">
+                Added successfully!
+              </div>
+            )}
+            {showErrorAlert && (
+              <div className="alert alert-danger" role="alert">
+                Add Unsuccessful!
+              </div>
+            )}
+
+
             <form onSubmit={handleFeedbackSubmit} className='common-pg-guide-approval-form'>
               <h5>Feedback</h5>
               <div className="form-group">
@@ -195,8 +246,8 @@ const DetailedSubmission = () => {
                     checked={approvalStatus === "Approved"}
                     onChange={() => setApprovalStatus("Approved")}
                     required
-                  />
-                   Approved</div>
+                  /> 
+                  &nbsp; Approved</div>
                   <div className="col-12"> <input
                     type="radio"
                     name="approvalStage"
@@ -205,7 +256,7 @@ const DetailedSubmission = () => {
                     onChange={() => setApprovalStatus("Rejected")}
                     required
                   />
-                    Rejected</div>
+                    &nbsp;  Rejected</div>
                   <div className="col-12"><input
                     type="radio"
                     name="approvalStage"
@@ -214,7 +265,7 @@ const DetailedSubmission = () => {
                     onChange={() => setApprovalStatus("Pending")}
                     required
                   />
-                    Request Revisions
+                     &nbsp; Request Revisions
                   </div>
 
 
@@ -225,7 +276,7 @@ const DetailedSubmission = () => {
               {approvalStatus === 'Approved' && (
                 <div>
 
-                  <label htmlFor="credits">Credits (Out of )</label>
+                  <label htmlFor="credits">Credits (Out of {task.maxCredits})</label>
                   <input type='number' id='credits' name='credits'
                     value={credits}
                     onChange={(e) => setCredits(e.target.value)} step="0.1"></input>

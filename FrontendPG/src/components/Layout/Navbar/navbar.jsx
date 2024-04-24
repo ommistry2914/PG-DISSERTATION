@@ -1,15 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './navbar.css'; 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../AuthContext';
+
 const Navbar = () => {
-    const { authenticated, userRole, login, logout } = useAuth();
+    const { authenticated, userRole, login, logout,useremail } = useAuth();
 
     const [menuVisible, setMenuVisible] = useState(false);
     const [searchDropdownVisible, setSearchDropdownVisible] = useState(false);
     const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
+    const [notificationDropdown, setNotificationDropdown] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [notification,setNotification]=useState(null);
+    const [read,setRead]=useState();
 
+  
+    const fetchNotifications = async () => {
+         try {
+        const response = await axios.get(`http://localhost:8080/api/auth/notification/receiverId/${useremail}`);
+        console.log(response)
+        setNotification(response.data);
+        console.log(useremail+notification);
+        const unreadNotifications = response.data.filter(notification => !notification.read);
+        setUnreadCount(unreadNotifications.length);
+        
+    }
+       catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
+    };
+    if(useremail && !notification){
+        fetchNotifications();
+    }; 
+    const markAsRead =async (id,notification) => {
+        // Update the notifications array to mark the notification as read
+        await axios.put(`http://localhost:8080/api/auth/notification/${id}`,notification)
+
+        .then(response => {
+            // Handle successful update
+            console.log('Notification marked as read:', response.data);
+            // You may update the UI or perform other actions as needed
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error marking notification as read:', error);
+        });
+
+      };
     const toggleMenu = () => {
         setSearchDropdownVisible(false);
         setAccountDropdownVisible(false);
@@ -22,6 +60,7 @@ const Navbar = () => {
         setAccountDropdownVisible(false);
         setDropdown(!dropdown);
     };
+   
 
     const handleLogout = async () => {
         try {
@@ -119,8 +158,26 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-
+                
                 <section id="navbar_profile">
+                {useremail && notification && <div id='navbar_notification' >
+        <div id='navbar_notification_icon' className='navbar_profile_child_title' onClick={()=>toggleDropdown(notificationDropdown,setNotificationDropdown)}>
+            <span className='fas fa-bell fa-xl'></span>
+            <span class="badge rounded-pill badge-notification bg-danger">{unreadCount}</span>
+        </div>
+         <div id='navbar_notification_dropdown' className={`${notificationDropdown?'visible_dropdown':'hide_dropdown'}`}>
+        {notification.map(notification=>(
+           <> {!(notification.read)&& <Link to={`${notification.link}`}  id="navbar_account_dropdown_login" class="dropList"><div>
+           <p>From: {notification.senderId}</p>
+           <p>Type: {notification.type}</p>
+           <button onClick={()=>markAsRead(notification.id,notification)}>Mark Read</button>
+         </div></Link> }</>
+            
+        ))}
+                
+                            
+        </div>
+      </div>}
                     <div id="navbar_profile_account" className="navbar_profile_child">
                         <div id="navbar_account_icon" className="navbar_profile_child_title" onClick={() => toggleDropdown(accountDropdownVisible, setAccountDropdownVisible)}>
                             <span className="material-symbols-rounded navbar_profile_icons"> person </span>

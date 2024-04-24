@@ -4,13 +4,13 @@ import './progress.css'
 import { FaDownload, FaList } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import CircularProgressBar from './CircularProgressBar';
-import ProgressService from '../../../../services/ProgressService';
 
 const tasks = [
   { task: 'Task 1', status: 'On Track', progress: '100%', date: '2022-03-10', priority: 'High', approvalStage: 'Approved', mentor: 'John Doe' },
   { task: 'Task 2', status: 'Delayed', progress: '50%', date: '2022-03-15', priority: 'Medium', approvalStage: 'Pending Approval', mentor: 'Jane Smith' },
   // Add more tasks as needed
 ];
+
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -20,18 +20,20 @@ const getStatusColor = (status) => {
       return 'red';
     case 'On Track':
       return 'green';
+    case 'Approved':
+      return 'green';
     default:
       return 'black';
   }
 };
 
 const getPriorityColor = (priority) => {
-  switch (priority) {
-    case 'High':
+  switch (priority.toLowerCase()) {
+    case 'high':
       return 'red';
-    case 'Medium':
+    case 'medium':
       return 'orange';
-    case 'Low':
+    case 'low':
       return 'yellow';
   }
 }
@@ -40,13 +42,12 @@ const getApprovalColor = (approval) => {
   switch (approval) {
     case 'Approved':
       return 'lightgreen';
-    case 'Expecting Changes':
-      return 'skyblue';
-    case 'Pending Approval':
+    case 'Rejected':
+      return 'red';
+    case 'Pending':
       return 'yellow';
   }
 }
-
 
 const Progress = () => {
   const [tasks, setTasks] = useState([]);
@@ -55,6 +56,10 @@ const Progress = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { studentid } = useParams();
+  const [completeTasks, setCompleteTasks] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
+  const [credits,setCredits]=useState(0);
+  const [totalCredits,setTotalCredits]=useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
       setPercentage(prevPercentage => (prevPercentage + 10) % 100);
@@ -62,19 +67,7 @@ const Progress = () => {
 
     return () => clearInterval(interval);
   }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await ProgressService.getProgress();
-        setProgress(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+ 
 
 
 
@@ -94,8 +87,28 @@ const Progress = () => {
 
     fetchTasks();
   }, [studentid]);
+ useEffect(()=>{
+  let total=tasks.length;
+  let complete=0;
+  let credit=0;
+  let totalCredit=0
+  tasks.forEach(task => {
+    if (task.approvalStage === 'Approved') {
+      complete++;
+    }
+    credit+=task.revCredits;
+    totalCredit+=task.maxCredits;
+    setTotalCredits(totalCredit);
+    setCredits(credit);
+    setCompleteTasks(complete);
+    setTotalTasks(total);
+  });
+ })
 
-
+ const pendingTasks = totalTasks - completeTasks;
+ const completeProgress = (completeTasks / totalTasks) * 100 || 0;
+ const pendingProgress = (pendingTasks / totalTasks) * 100 || 0;
+ const creditProgress=(credits/totalCredits)*100 || 0;
 
   const timelineData = [
     { title: 'Step 1', progress: 20 },
@@ -104,30 +117,23 @@ const Progress = () => {
     { title: 'Step 4', progress: 100 }
   ];
 
-  if (loading) {
-    return <div>Loading...</div>;
-
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  
   return (
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">Student</a></li>
+          <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Progress</li>
         </ol>
       </nav>
       <div className="container common-pg-progress-section row">
-        {progress.map(progress => (
+       
           <div>
             <div className="common-pg-progress-circles row col-sm-12 container">
-              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={60} />CR Progress</div>
-              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={30} />Pending Tasks</div>
-              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={70} />Completed Tasks</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={creditProgress} />CR Progress</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={pendingProgress} />Pending Tasks</div>
+              <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={completeProgress} />Completed Tasks</div>
             </div>
             <div className="common-pg-timeline-div  col-sm-12 col-md-12 col-lg-12">
               <div className="common-pg-time-line">
@@ -176,16 +182,16 @@ const Progress = () => {
                     <th>Status</th>
                     <th>Date</th>
                     <th>Priority</th>
-                    
                     <th>Max Credits</th>
-                    <th>Received Credits</th><th>Approval Stage</th>
+                    <th>Received Credits</th>
+                    <th>Approval Stage</th>
                   </tr>
                 </thead>
                 <tbody>
                   {tasks && tasks.map((task) => (
                     <tr key={task.id}>
                       <td>{task.taskName}</td>
-                      <td>{task.status}</td>
+                      <td><span className="status-dot" style={{ backgroundColor: getStatusColor(task.status) }}></span>{task.status}</td>
                       <td>{new Date(task.startDate).toLocaleDateString('en-US', {
                         day: 'numeric',
                         month: 'long',
@@ -201,8 +207,8 @@ const Progress = () => {
                       })}</td>
                       <td><div className='priority' style={{ backgroundColor: getPriorityColor(task.priority) }}>{task.priority}</div></td>
                       <td>{task.maxCredits}</td>
-                     
-                      <td>{task.revCredits}</td> <td>{task.approvalStage}</td>
+                      <td>{task.revCredits}</td> 
+                      <td><div className='approval' style={{ backgroundColor: getApprovalColor(task.approvalStage) }}>{task.approvalStage}</div></td>
                     </tr>
                   ))}
 
@@ -210,7 +216,7 @@ const Progress = () => {
               </table>
             </div>
           </div>
-        ))}
+     
       </div>
     </div>
   );

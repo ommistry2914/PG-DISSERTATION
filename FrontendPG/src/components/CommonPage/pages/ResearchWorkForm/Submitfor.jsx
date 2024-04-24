@@ -36,14 +36,19 @@ const SubmitFor = () => {
         fetchTasks();
     }, [studentid]);
 
+    
+  if (!tasks) {
+    return  <div className="common-pg-contents"><p>Loading...</p></div>;
+  }
+
 
 
     return (
         <div className='common-pg-contents'>
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Student</a></li>
-                    <li className="breadcrumb-item"><a href="#">Dissertation</a></li>
+                    <li className="breadcrumb-item"><Link to="#">Student</Link></li>
+                    <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
                     <li className="breadcrumb-item active" aria-current="page">Add Submission</li>
                 </ol>
             </nav>
@@ -54,6 +59,7 @@ const SubmitFor = () => {
                         <thead>
                             <tr>
                                 <th>Task</th>
+                                <th>Description</th>
                                 <th>Due Date</th>
                                 <th>Add</th>
                                 <th>Status</th>
@@ -63,6 +69,7 @@ const SubmitFor = () => {
                             {tasks && tasks.map((task) => (
                                 <tr key={task.id}>
                                     <td>{task.taskName}</td>
+                                    <td>{task.taskDescription}</td>
                                     <td>{new Date(task.endDate).toLocaleDateString('en-US', {
                                         day: 'numeric',
                                         month: 'long',

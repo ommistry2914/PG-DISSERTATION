@@ -76,10 +76,33 @@
 // }
 // export default OngoingGuideDissertation;
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './OngoingGuideDissertation.css';
 
-const   OngoingGuideDissertation = () => {
+
+// const   OngoingGuideDissertation = () => {
+
+import axios from 'axios'; 
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../../AuthContext';
+const OngoingGuideDissertation = () => {
+    const {authenticated, useremail}=useAuth();
+    const [guides,setGuides]=useState(null);
+    const [loading, setLoading] = useState(true);
+    useEffect(()=>{
+        const fetchData=async()=>{
+            setLoading(true)
+            try {
+                const response=await axios.get(`http://localhost:8080/api/auth/guide/guideEmail/${useremail}`)
+                setGuides(response.data);
+            } catch (error) {
+                console.log(error)
+            }
+            setLoading(false);
+        };
+        fetchData();
+    },[]);
+
     // Dummy data representing ongoing dissertations
     const ongoingDissertationsData = [
         {
@@ -119,7 +142,12 @@ const   OngoingGuideDissertation = () => {
         },
         // Add more ongoing dissertation objects as needed
     ];
-
+    const dataToSend = { receiver: 'xyz' };
+   
+    if (loading) {
+        return <div>Loading...</div>;
+    
+    }
     return (
         <div id="New_request">
             {/* <div className="guidereq_head">
@@ -142,9 +170,14 @@ const   OngoingGuideDissertation = () => {
                             <p>Topic: {dissertation.topic}</p>
                             <p>Name: {dissertation.name}</p>
                             <p>Email: {dissertation.email}</p>
+
                         </div>
                         <div className="greq_button">
-                            <button>view more</button>
+//                             <button>view more</button>
+
+                            <Link to={`allottask/${dissertation.email}`}><button>Allot Task</button></Link>
+                            <Link to={`/${useremail}/studentguide/`}><button>View More</button></Link>
+
                         </div>
                     </div>
                 ))}

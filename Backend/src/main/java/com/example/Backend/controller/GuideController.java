@@ -1,14 +1,21 @@
 package com.example.Backend.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.Backend.model.Guide;
 import com.example.Backend.service.GuideService;
-import java.util.Optional;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth/guide")
@@ -27,7 +34,7 @@ public class GuideController {
         return guideService.getGuideById(id);
     }
 
-    @PostMapping
+    @PostMapping("/addGuide")
     public Guide saveGuide(@RequestBody Guide guide) {
         return guideService.saveGuide(guide);
     }
@@ -42,6 +49,10 @@ public ResponseEntity<Map<String, Boolean>> checkGuideEmail(@PathVariable String
     Map<String, Boolean> response = new HashMap<>();
     response.put("exists", exists);
     return ResponseEntity.ok(response);
+}
+@GetMapping("/guideEmail/{email}")
+public List<Guide> getGuideByEmail(@PathVariable String email){
+ return guideService.getGuidesByEmail(email);
 }
 
 }

@@ -7,4 +7,6 @@ public interface StudentRepository extends MongoRepository<Student, String> {
     // Define custom queries if needed
 
     boolean existsByEmail(String email);
+
+    Student findByEmail(String id);
 }

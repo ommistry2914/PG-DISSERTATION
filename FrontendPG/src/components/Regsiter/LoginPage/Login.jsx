@@ -43,7 +43,7 @@ const Login = () => {
   
             if (checkResponse.status === 200 && checkResponse.data.exists) {
           
-              navigate('/mentorprofile');
+              navigate(`/mentorprofile`);
             } else {
            
               navigate('/signup/guide');

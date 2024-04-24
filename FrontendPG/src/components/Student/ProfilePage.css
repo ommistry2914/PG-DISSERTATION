@@ -1,0 +1,27 @@
+.vdf-main-bg{
+    background-color: var(--borderColor);
+    padding: 30px;
+}
+
+.vdf-card{
+background-color: white;
+border-radius: 10px;
+padding: 10px;
+font-family: Nunito;
+}
+
+.vdf-content{
+    display: flex;
+    margin: 5px;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: space-evenly;
+}
+
+.vdf-label{
+    margin-bottom: 8px;
+}
+
+.vdf-input{
+    margin-bottom: 30px;
+}

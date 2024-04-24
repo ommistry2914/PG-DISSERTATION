@@ -7,6 +7,7 @@ import { PiStudentFill } from "react-icons/pi";
 import { HiTrendingUp } from "react-icons/hi";
 import { GrTemplate } from "react-icons/gr";
 import { SiGoogleforms } from "react-icons/si";
+import {Link} from 'react-router-dom';
 
 const StudentDashboard = () => {
   const [showCalendar, setShowCalendar] = useState(true);
@@ -30,10 +31,13 @@ const StudentDashboard = () => {
         <ul className="sd-navlist">
         <li><GrTemplate />&nbsp;&nbsp;&nbsp;Templates</li>
         <li><PiStudentFill />&nbsp;&nbsp;&nbsp;Past Work</li>
-        <li><FaChalkboardTeacher />&nbsp;&nbsp;&nbsp;Request Guide</li>
+        <li><FaChalkboardTeacher />&nbsp;&nbsp;&nbsp;Request Guide
+        </li>
         <li><HiTrendingUp />&nbsp;&nbsp;&nbsp;Trending Topics</li>
         <li><FaUserEdit />&nbsp;&nbsp;&nbsp;Edit Profile</li>
         <li><SiGoogleforms />&nbsp;&nbsp;&nbsp;Request &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissertation Form</li>
+        <Link to='/chatlogin'>
+        <li><SiGoogleforms />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chatbox</li></Link>
         </ul>
       </div>
 

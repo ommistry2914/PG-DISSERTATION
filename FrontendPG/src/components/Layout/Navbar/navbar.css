@@ -334,7 +334,7 @@ header {
 
 /* === Account Dropdown Menu ===  */
 
-#navbar_profile_account{
+#navbar_profile_account,#navbar_notification{
   position: relative;
 }
 
@@ -371,6 +371,37 @@ header {
 #navbar_account_dropdown_login{
   border: 1px solid burlywood;
   font-weight: bold;
+}
+#navbar_notification>#navbar_notification_dropdown{
+  height: max-content;
+  padding: 2rem 1rem;
+  position: absolute;
+  top: 100%;
+  right: -1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: default;
+  background-color: #fff;
+  box-shadow: 0 6px 8px hsla(220, 68%, 12%, 0.05);
+  transition: all .5s;
+}
+#navbar_notification .dropList{
+  width: max-content;
+  padding: 0.3rem 1.25rem;
+  text-decoration: none;
+  color: unset;
+  line-height: 0.5em;
+  font-size: var(--small-font-size);
+  display: inline-block;
+}
+#navbar_notification button{
+  width: 70px;
+  margin: 2px;
+  height: 20px;
+  font-size: 10px;
+  text-align: center;
+  padding: 0;
 }
 
 /*=============== responsive ===============*/

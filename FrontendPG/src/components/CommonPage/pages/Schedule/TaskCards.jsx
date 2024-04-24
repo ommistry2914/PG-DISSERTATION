@@ -12,7 +12,7 @@ import { Link, useParams } from 'react-router-dom';
 //   { task: 'Task 6', time: '01:00 PM' },
 // ];
 
-const TaskCards = ({ selectedDay, notes }) => {
+const TaskCards = ({ selectedDay, notes, fetchEvents }) => {
   const { studentid, noteid, eventid } = useParams();
   const [editNote, setEditNote] = useState(null);
   const formRef = useRef(null);
@@ -20,7 +20,12 @@ const TaskCards = ({ selectedDay, notes }) => {
   if (!Array.isArray(notes)) {
     return <div>No notes available</div>;
   }
-  const handleDelete = (noteid, type) => {
+
+  useEffect(() => {
+    fetchEvents(selectedDay);
+  }, [notes, selectedDay, fetchEvents]);
+
+  const handleDelete = async (noteid, type) => {
     let deletePath = '';
     if (type === 'event') {
       deletePath = `http://localhost:8080/${studentid}/studentguide/schedule/events/${noteid}`;
@@ -28,53 +33,54 @@ const TaskCards = ({ selectedDay, notes }) => {
       deletePath = `http://localhost:8080/${studentid}/studentguide/schedule/notes/${noteid}`;
     }
 
-    fetch(deletePath, {
-      method: 'DELETE'
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('Deleted successfully');
-        } else {
-          console.error('Failed to delete event');
-        }
-      })
-      .catch(error => {
-        console.error('Error deleting event:', error);
+    try {
+      const response = await fetch(deletePath, {
+        method: 'DELETE'
       });
+
+      if (response.ok) {
+        console.log('Deleted successfully');
+      } else {
+        console.error('Failed to delete event');
+      }
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
   };
 
-  const handleEventDone = (noteId) => {
-    fetch(`http://localhost:8080/${studentid}/studentguide/schedule/events/${noteId}/complete`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => {
+
+  const handleEventDone = async (noteId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule/events/${noteId}/complete`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
       if (!response.ok) {
         throw new Error('Failed to mark note as done');
       }
-      // Handle success response
-    }).catch(error => {
-      // Handle error
+    } catch (error) {
       console.error('Error marking note as done:', error);
-    });
+    }
   };
 
-  const handleNoteDone = (noteId) => {
-    fetch(`http://localhost:8080/${studentid}/studentguide/schedule/notes/${noteId}/complete`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => {
+  const handleNoteDone = async (noteId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule/notes/${noteId}/complete`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
       if (!response.ok) {
         throw new Error('Failed to mark note as done');
       }
-      // Handle success response
-    }).catch(error => {
-      // Handle error
+    } catch (error) {
       console.error('Error marking note as done:', error);
-    });
+    }
   };
 
 
@@ -86,26 +92,26 @@ const TaskCards = ({ selectedDay, notes }) => {
     setEditNote(null);
   };
 
-  const handleSubmitEdit = (editedNote) => {
-    const { id, ...rest } = editedNote;
-    fetch(`http://localhost:8080/${studentid}/studentguide/schedule/${editedNote.event ? 'events' : 'notes'}/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(rest)
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('Note or event updated successfully!');
-          setEditNote(null);
-        } else {
-          console.error('Failed to update note or event');
-        }
-      })
-      .catch(error => {
-        console.error('Error updating note or event:', error);
+  const handleSubmitEdit = async (editedNote) => {
+    try {
+      const { id, ...rest } = editedNote;
+      const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule/${editedNote.event ? 'events' : 'notes'}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(rest)
       });
+
+      if (response.ok) {
+        console.log('Note or event updated successfully!');
+        setEditNote(null);
+      } else {
+        console.error('Failed to update note or event');
+      }
+    } catch (error) {
+      console.error('Error updating note or event:', error);
+    }
   };
 
 
@@ -113,7 +119,8 @@ const TaskCards = ({ selectedDay, notes }) => {
   return (
     <div ref={formRef} className="common-pg-task-cards common-pg-calender-container-col col-sm-12 col-lg-6 col-md-6">
       <h3>Tasks</h3>
-      {notes.map((note) => (
+      {notes.length > 0 ? (
+      notes.map((note) => (
         <div key={note.id} className="common-pg-task-card">
           {editNote && editNote.id === note.id ? (
             <div className="common-pg-edit-form">
@@ -153,8 +160,8 @@ const TaskCards = ({ selectedDay, notes }) => {
               <div className="row">
                 <div className="col-6">   <button className='common-pg-schedule-btns' onClick={() => handleSubmitEdit(editNote)}>Save</button></div>
                 <div className="col-6"> <button className='common-pg-schedule-btns' onClick={handleCancelEdit}>Cancel</button></div>
-             
-               
+
+
               </div></div>
           ) : (
             <>
@@ -199,7 +206,9 @@ const TaskCards = ({ selectedDay, notes }) => {
             </>
           )}
         </div>
-      ))}
+      )) ) : (
+        <p>No notes for this day.</p>
+      )}
     </div>
 
   );
