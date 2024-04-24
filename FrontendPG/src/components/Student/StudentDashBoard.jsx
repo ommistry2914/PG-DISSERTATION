@@ -36,6 +36,8 @@ const StudentDashboard = () => {
         <li><HiTrendingUp />&nbsp;&nbsp;&nbsp;Trending Topics</li>
         <li><FaUserEdit />&nbsp;&nbsp;&nbsp;Edit Profile</li>
         <li><SiGoogleforms />&nbsp;&nbsp;&nbsp;Request &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissertation Form</li>
+        <Link to='/chatlogin'>
+        <li><SiGoogleforms />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chatbox</li></Link>
         </ul>
       </div>
 

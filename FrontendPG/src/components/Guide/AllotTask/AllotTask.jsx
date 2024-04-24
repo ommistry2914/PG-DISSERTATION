@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import '../ResearchWorkForm/researchWorkForm.css'
-import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
+import { useParams,useLocation, Link } from 'react-router-dom';
+import { useAuth } from '../../../AuthContext';
 
-function UpdateAllotedTask() {
+function AllotTask() {
+  
+  const [notification,setNotification]=useState(null);
   const [formData, setFormData] = useState({
     taskName: '',
     taskDescription: '',
@@ -14,8 +17,9 @@ function UpdateAllotedTask() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
-  const { studentid, taskid } = useParams();
+  const {email}=useParams();
 
+  const {authenticated,useremail}=useAuth();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,12 +27,32 @@ function UpdateAllotedTask() {
       [name]: value
     });
   };
-
-
-  //Submit updated form
-  const onSubmitForm = (e) => {
+  const today=new Date();
+  const location = useLocation();
+  const receivedData = location.state;
+  const [sendSuccess,setSendSuccess]=useState(false);
+  const [sendError,setSendError]=useState(false);
+  const onSubmitForm = async (e) => {
     e.preventDefault();
-
+    
+    const notification={
+        senderId:useremail,
+        receiverId:email,
+        createdAT:today,
+        type:'Task Alloted',
+        link:`http://localhost:5173/${email}/studentguide/submit-for`
+    }
+    const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+        if((await response).status===200){
+          console.log('Notification send');
+          setSendSuccess(true);
+          setSendError(false);
+    }
+    else{
+      setSendError(true);
+      setSendSuccess(false);
+    }
+    console.log(notification);
     const formData = {
       taskName: e.target.taskName.value,
       taskDescription: e.target.taskDescription.value,
@@ -38,8 +62,8 @@ function UpdateAllotedTask() {
       maxCredits: e.target.maxCredits.value
     };
 
-    fetch(`http://localhost:8080/allottask/${studentid}/update/${taskid}`, {
-      method: 'PUT',
+    fetch(`http://localhost:8080/allottask/${email}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -68,51 +92,35 @@ function UpdateAllotedTask() {
         console.error('Error adding task:', error);
         setShowSuccessAlert(false);
         setShowErrorAlert(true);
-      });
+      }); 
   };
 
-  //Form Data to edit
-  useEffect(() => {
-    const fetchTasks = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/${studentid}/progress`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch tasks');
-            }
-            const data = await response.json();
-            const taskToUpdate = data.find(task => task.id === taskid);
-            if (taskToUpdate) {
-                setFormData({
-                    taskName: taskToUpdate.taskName,
-                    taskDescription: taskToUpdate.taskDescription,
-                    startDate: new Date(taskToUpdate.startDate).toISOString().slice(0, 16),
-                    endDate: new Date(taskToUpdate.endDate).toISOString().slice(0, 16),
-                    priority: taskToUpdate.priority,
-                    maxCredits: taskToUpdate.maxCredits
-                });
-            }
-        } catch (error) {
-            console.error('Error fetching tasks:', error);
-        }
-    };
-
-    fetchTasks();
-}, [studentid, taskid]);
-
- 
   return (
     <div className="common-pg-contents">
-     <div className="common-pg-forms">
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item"><a href="#">Home</a></li>
+          <li className="breadcrumb-item"><a href="#">Student</a></li>
+          <li className="breadcrumb-item active" aria-current="page">Allocate Task</li>
+        </ol>
+      </nav>
+      <div className="common-pg-forms">
         <form onSubmit={onSubmitForm} className='common-pg-add-work-form'>
-          <h4 style={{ alignSelf: 'center', color: 'purple' }}>Task Updating Form</h4>
-          {showSuccessAlert && (
+          <h4 style={{ alignSelf: 'center', color: 'purple' }}>Task Allotment Form</h4>
+          
+          {sendError && (
+            <div className="alert alert-danger" role="alert">
+              Failed to send notification.
+            </div>
+          )}
+          {showSuccessAlert && sendSuccess&& (
             <div className="alert alert-success" role="alert">
-              Updated successfully!
+              Task added and notification sent successfully!
             </div>
           )}
           {showErrorAlert && (
             <div className="alert alert-danger" role="alert">
-              Update Unsuccessful!
+              Failed to add task.
             </div>
           )}
           <div className="row"><div className="col-12"> <label>
@@ -174,11 +182,12 @@ function UpdateAllotedTask() {
             <div className="col-6"><label>
               Maximum Credits<sup className='common-pg-necessary-sup'>*</sup>
            </label>    <input
-                type="text"
+                type="number"
                 name="maxCredits"
                 className='form-control'
                 value={formData.maxCredits}
                 onChange={handleChange}
+                step="0.1"
                 required
               />
            </div></div>
@@ -187,10 +196,11 @@ function UpdateAllotedTask() {
 
 
           <button type="submit" className='submit'>Submit</button>
+          <Link to={'alloted'}><button  className='submit'>Edit</button></Link>
         </form>
-      </div>
-    </div>
+
+      </div></div>
   );
 }
 
-export default UpdateAllotedTask;
+export default AllotTask;

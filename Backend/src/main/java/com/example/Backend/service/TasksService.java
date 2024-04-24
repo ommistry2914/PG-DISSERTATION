@@ -1,9 +1,5 @@
 package com.example.Backend.service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +8,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.example.Backend.model.Notification;
 import com.example.Backend.model.Tasks;
 import com.example.Backend.repository.TasksRepository;
 
@@ -104,6 +102,37 @@ public class TasksService {
         }
 
         mongoTemplate.updateFirst(query, update, Tasks.class);
+    }
+
+    @Scheduled(fixedRate = 60000)
+    public void getExpiredTask(){
+        List<Tasks> tasks= taskRepo.findByEndDate(new Date());
+        for (Tasks task : tasks) {
+            if (!isNotificationSent(task.getId())) {
+                sendNotification(task);
+            }
+            System.out.println("Notification not sent");
+        };
+    }
+
+    private boolean isNotificationSent(String senderId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("senderId").is(senderId));
+System.err.println("error");
+        return mongoTemplate.exists(query, Notification.class);
+        
+    }
+
+    private void sendNotification(Tasks task){
+        Notification notification = new Notification();
+        notification.setsenderId(task.getId());
+        notification.setReceiverId(task.getUserId());
+        notification.setType("Missed the date!");
+        notification.setCreatedAt(new Date());
+        notification.setRead(false);
+        notification.setLink("http://localhost:5137/" + task.getUserId()+ "/studentguide/schedule");
+
+        mongoTemplate.save(notification, "notification");
     }
     
 }

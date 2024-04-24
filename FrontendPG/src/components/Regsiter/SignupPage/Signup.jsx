@@ -43,7 +43,7 @@ const Signup = () => {
       const response = await axios.post('http://localhost:8080/api/auth/student', payload);
 
       console.log('Student saved:', response.data);
-      navigate('/mentorprofile');
+      navigate('/studentdashboard');
       setLoading(false); 
     } catch (error) {
       console.error('Error saving student:', error);

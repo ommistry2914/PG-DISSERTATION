@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react'
 import React from 'react'
 import './GuideDashboard.css'
 import axios from 'axios';
-
+import { useAuth } from '../../../AuthContext';
+import {useParams} from 'react-router-dom';
 const GuideDashboard = () => {
     const [guides,setGuides]=useState(null);
     const [loading, setLoading] = useState(true);
+    const {useremail}=useAuth();
     useEffect(()=>{
         const fetchData=async()=>{
             setLoading(true)
             try {
-                const response=await axios.get("http://localhost:8080/api/auth/guide")
+                const response=await axios.get(`http://localhost:8080/api/auth/guide/guideEmail/${useremail}`)
                 setGuides(response.data);
+                console.log(response);
             } catch (error) {
                 console.log(error)
             }
@@ -24,6 +27,7 @@ const GuideDashboard = () => {
     
     }
     return (
+        
         <>
             <div className='guide_dashboard'>
                 
@@ -31,6 +35,7 @@ const GuideDashboard = () => {
                     {/*<div className='guide_head'>
                     </div>*/}
                     {guides.map(guides=>(
+                        <div key={guides.id}>
                         <div className='guide_content'>
                         <div className="guide_profile">
                             <div className="guide_img">
@@ -63,6 +68,7 @@ const GuideDashboard = () => {
                             </div>
    
                         </div>
+                    </div>
                     </div>
                     ))}
                     
