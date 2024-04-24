@@ -15,16 +15,17 @@ import UpdateForm from './pages/ResearchWorkForm/UpdateForm'
 import Submissions from './pages/Submissions/Submissions';
 import LatestDetailedSubmission from './pages/Submissions/LatestDetailedSubmission';
 import PastDetailedSubmission from './pages/Submissions/PastDetailedSubmission';
+import { sidebardata } from './UI/Sidebar/sidebardata';
 
 // import SidebarOm from './UI/Sidebar/SidebarOm';
 
 const StuGuideDashboard = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
 
       <div className='d-flex'>
-        <Sidebar />
+        <Sidebar sidebarData={sidebardata} />
         <div>
           <Routes>
             <Route path="/" element={<Dashboard />} />

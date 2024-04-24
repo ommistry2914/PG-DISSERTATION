@@ -1,14 +1,15 @@
 .sidebar {
   padding-top: 70px !important;
   height: 100vh;
-  width: 80px;
+  width: 90px;
   flex-shrink: 0;
-  background-color: var(--primary-color);
-  box-shadow: 1px 1px 10px var(--secondary-color-1);
-  transition: .3s;
+  /* background-color: var(--primary-color); */
+  background-color: var(--secondary-color-2);
+  /* box-shadow: 1px 1px 10px var(--secondary-color-1); */
+  transition: .5s;
   position: sticky;
   top: 0;
-  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 2rem);
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) );
   /* overflow-y: scroll; */
 }
 
@@ -60,9 +61,7 @@
 }
 
 
-.sidebar {
-  
-}
+
 
 .sidebarSvgIcon {
   font-size: larger;
@@ -105,6 +104,7 @@
   cursor: pointer;
   z-index: 2;
   position: fixed;
+  color: var(--secondary-color-2);
 }
 
 .hamburger-menu::before,
@@ -154,7 +154,7 @@
 
 .hamburger-menu:has(input:checked)+.sidebar {
   transition: .3s;
-  width: 200px;
+  width: 210px;
 }
 
 
@@ -222,20 +222,33 @@
 
 .hamburger-menu:has(input:checked)+.sidebar .sidebarAddWork{
  border-radius: 25px;
+ width: 90%;
+ display: flex;
+ align-items: center;
+ margin-left: 0.3rem;
+ padding: 0;
+
 }
 
 
 .sidebarAddWork{
   margin: 2rem 0.2rem 1rem 0.2rem;
-  background: var(--secondary-color-3);
-  font-size: 1rem;
+  background: var(--secondary-color-2);
+  background: white;
+  /* font-size: 1rem; */
   display: flex;
+  justify-content: center;
   align-items: center;
-  border-radius: 100%;
-  box-shadow: 1px 1px 5px black;
+  border-radius: 50%;
+  /* box-shadow: 1px 1px 5px black; */
+  /* box-shadow: var(--secondary-color-1) 0px 8px 24px; */
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  width: 70%;
+  margin-left: 0.5rem;
+  padding-left: 1.3rem;
 }
 
-.sidebarAddWork:hover{
+/* .sidebarAddWork:hover{
   background: linear-gradient(to right, rgb(255, 187, 0), var(--secondary-color-2));
   color: var(--text-color-black);
-}
+} */
