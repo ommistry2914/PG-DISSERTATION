@@ -16,11 +16,11 @@ const Statistics = () => {
   };
 
   return (
-    <>
-      <h1 className='heading-expert'>Our Statistics</h1>
+    <div className='stat-main'>
+      <h3 className='heading-expert'>Our Statistics</h3>
 
       <div className='stat-bg'>
-      {showConfetti && <Confetti />} 
+      {/* {showConfetti && <Confetti />}  */}
 
         <div className='stat-card'>
           <CountUp
@@ -32,7 +32,7 @@ const Statistics = () => {
             onEnd={handleAnimationEnd}
           />
           <span className='statfont'>+</span>
-          <p>Disserations Approved</p>
+          <p className='statfont1'>Disserations Approved</p>
         </div>
 
         <div className='stat-card'>
@@ -45,7 +45,7 @@ const Statistics = () => {
             onEnd={handleAnimationEnd}
           />
           <span className='statfont'>+</span>
-          <p>Experts and Mentors</p>
+          <p className='statfont1'>Experts and Mentors</p>
         </div>
 
         <div className='stat-card'>
@@ -58,10 +58,10 @@ const Statistics = () => {
             onEnd={handleAnimationEnd}
           />
           <span className='statfont'>+</span>
-          <p>Students</p>
+          <p className='statfont1'>Students</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

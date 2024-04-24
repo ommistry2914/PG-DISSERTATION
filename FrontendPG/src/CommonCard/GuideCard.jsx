@@ -3,84 +3,38 @@ import './Guidecard.css';
 import img1 from '../assests/techo-home.png'
 
 const GuideCard = () => {
- 
   return (
-    <>
-          <h1 className='heading-expert'>Our Top Experts</h1>
-    <div className='guide-main'>
-      <div className='guide-card'>
-        <div className='guide-card-content'>
-          <img src={img1} alt="name" className='guide-img'></img>
-          <div className="content">
-            <h4>MSU Teacher</h4>
-            <br/>
-            <div>
-              <span className='spancss'>Assistant Professor</span>
+    <div className='main-bobwork'>
+      <h2>Our Top Experts</h2>
+      <div className='guide-main'>
+        <div className='guide-card-container'>
+          {/* Render 4 cards */}
+          {[...Array(4)].map((_, index) => (
+            <div className='guide-card' key={index}>
+              <div className='guide-card-content'>
+                <img src={img1} alt="name" className='guide-img'></img>
+                <div className="content">
+                  <h4>MSU Teacher</h4>
+                  
+                  <div className='pcss'>
+                    <p>Expertise in AI and ML </p>
+                    <p>with experience of 3+ years</p>
+                  </div>
+                  <div className="button-container">
+                    <button className='button'>Details</button>
+                    <button className='button'>Request</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <br/>
-            <div className='pcss'>
-            <p>Expertise in AI and ML with experience of 3+ years and also loves Web Development</p>
-            </div>
-            <div className="button-container">
-              <button className='button'>Details</button>
-              <button className='button'>Request</button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-
-      <div className='guide-card'>
-        <div className='guide-card-content'>
-          <img src={img1} alt="name" className='guide-img'></img>
-          <div className="content">
-            <h4>MSU Teacher</h4>
-            <br/>
-            <div>
-              <span className='spancss'>Assistant Professor</span>
-            </div>
-            <br/>
-            <div className='pcss'>
-            <p>Expertise in AI and ML with experience of 3+ years and is also gold medalist</p>
-            </div>
-            <div className="button-container">
-              <button className='button'>Details</button>
-              <button className='button'>Request</button>
-            </div>
-          </div>
-        </div>
+      <div className='viewmore'>
+        <button className='button-view'>View More</button>
       </div>
-
-      <div className='guide-card'>
-        <div className='guide-card-content'>
-          <img src={img1} alt="name" className='guide-img'></img>
-          <div className="content">
-            <h4>MSU Teacher</h4>
-            <br/>
-            <div>
-              <span className='spancss'>Assistant Professor</span>
-            </div>
-            <br/>
-            <div className='pcss'>
-            <p>Expertise in AI and ML with experience of 3+ years and loves to program in multiple languages</p>
-            </div>
-            <div className="button-container">
-              <button className='button'>Details</button>
-              <button className='button'>Request</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-     
-      
-      
     </div>
-    <div className='viewmore'>
-      <button className='button-view'>View More</button>
-    </div>
-    </>
   );
 }
 
 export default GuideCard;
-

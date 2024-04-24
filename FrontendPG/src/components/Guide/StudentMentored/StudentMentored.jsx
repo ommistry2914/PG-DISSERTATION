@@ -182,8 +182,8 @@ const StudentMentored = () => {
     ];
 
     return (
-        <div id="Stu_Mentored">
-            <div className="stumentored_head">
+        <div id="New_request">
+            {/* <div className="stumentored_head">
                 <div className="stumentored_img">
                     <img src="https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97" alt="" />
                 </div>
@@ -191,23 +191,23 @@ const StudentMentored = () => {
                     <h2>Abc </h2>
                     <p>Phd in Phycology</p>
                 </div>
-            </div>
+            </div> */}
             <h2>Student Mentored</h2>
-            <div className="stu_mentored">
+            <div className="new_requests">
                 {studentsMentoredData.map((student, index) => (
-                    <div className="student_mentored" key={index}>
-                        <div className="studentm_img">
+                    <div className="new_request" key={index}>
+                        <div className="student_img">
                             <img src={student.imgSrc} alt="" />
                         </div>
                         <div className="greq_head">
                             <h3>{student.name}</h3>
                             <p>{student.desc}</p>
                         </div>
-                        <div className="greq_contact">
-                            <p>Email: {student.email}</p>
+                        <div className="greq_button">
+                            {/* <p>Email: {student.email}</p>
                             <p>Mobile: {student.mobile}</p>
                             <p>Applied on: {student.appliedDate}</p>
-                            <p>Submitted on: {student.submittedDate}</p>
+                            <p>Submitted on: {student.submittedDate}</p> */}
                             <button>View More</button>
                         </div>
                     </div>

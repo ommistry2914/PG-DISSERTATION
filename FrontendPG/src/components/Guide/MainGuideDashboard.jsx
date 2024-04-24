@@ -9,13 +9,21 @@ import AllotTask from './AllotTask/AllotTask';
 import AllotedTasks from './AllotTask/AllotedTasks';
 import UpdateAllotedTask from './AllotTask/UpdateAllotedTask';
 // import Sidebar from '../CommonPage/UI/Sidebar/Sidebar';
-import SidebarOm from '../CommonPage/UI/Sidebar/SidebarOm';
-import { GuideSidebar } from "../CommonPage/UI/Sidebar/sidebardata";
+
+
 import SidebarG from './SidebarG';
+
+import Sidebar from '../CommonPage/UI/Sidebar/Sidebar';
+import { guidebardata } from '../CommonPage/UI/Sidebar/sidebardata';
+
+
+
+
 import axios from 'axios';
 import { useAuth } from '../../AuthContext';
 import Navbar from '../Layout/Navbar/navbar';
 import '../Layout/Navbar/navbar.css'
+
 const MainGuideDashboard = () => {
 
   const {authenticated, useremail}=useAuth();
@@ -24,7 +32,8 @@ const MainGuideDashboard = () => {
     <div>
         <div className='d-flex'>
         {/* <SidebarOm sidebarData={GuideSidebar} /> */}
-        <SidebarG/>
+        {/* <SidebarG/> */}
+        <Sidebar sidebarData={guidebardata}/>
         <div>
           <Routes>
           <Route path="/" element={<GuideDashboard />} />
