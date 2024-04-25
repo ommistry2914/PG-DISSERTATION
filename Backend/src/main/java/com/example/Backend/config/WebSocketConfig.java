@@ -14,7 +14,7 @@ import org.springframework.web.filter.CorsFilter;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();
+        registry.addEndpoint("/ws").setAllowedOriginPatterns("http://localhost:5173").withSockJS();
     }
 
     @Override
@@ -23,18 +23,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.enableSimpleBroker("/chatroom","/user");
         registry.setUserDestinationPrefix("/user");
     }
-    @Bean
-    public CorsFilter webSocketCorsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        
-        // Configuration for /ws endpoint
-        CorsConfiguration wsConfig = new CorsConfiguration();
-        wsConfig.addAllowedOrigin("*"); // Allow requests from any origin
-        wsConfig.addAllowedMethod("*"); // Allow all HTTP methods
-        wsConfig.addAllowedHeader("*"); // Allow all headers
-        source.registerCorsConfiguration("/ws", wsConfig);
-        
-        return new CorsFilter(source);
-    }
+   
 }
 

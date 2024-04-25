@@ -1,41 +1,33 @@
-.main-bobwork{
-    width: 100%;
-    padding: 2rem;
-    padding-left: 5rem;
-    padding-right: 5rem;
-    /* margin-bottom: 3rem; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.main-bobwork h2{
-    margin-bottom: 2rem;
-}
-
-/* Existing CSS */
-
 /* PastWork.css */
 
 /* Existing CSS */
 
-/* Add media query for mobile devices */
-@media screen and (max-width: 600px) {
-    .main-bobwork {
-      padding: 1rem; /* Adjust padding for smaller screens */
-    }
-  
-    .main-bobwork h2 {
-      margin-bottom: 1rem; /* Adjust margin for smaller screens */
-      font-size: 1.5rem; /* Adjust font size for smaller screens */
-      text-align: center; /* Center align heading on smaller screens */
-    }
-  
-    .main_class {
-      display: flex;
-      flex-direction: column; /* Stack cards vertically on smaller screens */
-      align-items: center; /* Center align cards on smaller screens */
-    }
-  }
-  
-  
+.main-bobworkkk {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-bobwork h2 {
+  margin-bottom: 2rem;
+}
+
+.main_class_p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px; /* Adjust max-width as needed */
+  width: 100%; /* Ensure the container takes full width */
+}
+
+.student-card {
+  flex-basis: calc(25% - 1rem); /* Set each card to occupy 25% of the container width with margins */
+  margin-bottom: 1rem; /* Add bottom margin to create space between rows */
+}
+
+/* Additional Styles */
+.student-card img {
+  width: 100%; /* Ensure images fill their container */
+}

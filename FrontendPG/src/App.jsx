@@ -27,7 +27,13 @@ import RequestGuide from "./components/RequestConnection/RequestGuide";
 import ViewRDF from "./components/RequestConnection/ViewRDF";
 import ProfilePage from "./components/Student/ProfilePage";
 // import Form from "./components/CommonPage/pages/ResearchWorkForm/Form";
-// import Dashboard from "./components/ChatBot/Chatt";
+import AuthPage from "./components/ChatBot/Chatlogin";
+import ChatsPage from "./components/ChatBot/Chat";
+import PastStudentData from "./components/PastWork/PastStudentData";
+import OurGuideData from "./components/PastWork/OurGuideData";
+import PastPage from "./components/PastWork/PastPage";
+import Template from "./components/Template/Template"
+import Experts from "./components/PastWork/Experts";
 const App = () => {
   const [user, setUser] = useState();
   const { authenticated, userRole, useremail } = useAuth();
@@ -88,6 +94,15 @@ const App = () => {
         <Route exact path="/rdfActions/viewrdf/:stdid"  element={<ViewRDF />} ></Route>
         <Route exact path="/editprofilepage"  element={<ProfilePage />} ></Route>
     
+        <Route exact path="/paststudentdata"  element={<PastStudentData />} ></Route>
+        <Route exact path="/ourguidedata"  element={<OurGuideData />} ></Route>
+        <Route exact path="/pastpage"  element={<PastPage />} ></Route>
+        <Route exact path="/templates"  element={<Template />} ></Route>
+
+        <Route exact path="/experts"  element={<Experts />} ></Route>
+
+
+
 
       </Routes>
     </Router>

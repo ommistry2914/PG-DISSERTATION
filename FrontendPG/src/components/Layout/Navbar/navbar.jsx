@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../../AuthContext';
 
 const Navbar = () => {
-    const { authenticated, userRole, login, logout, useremail } = useAuth();
+    const { authenticated, userRole, login, logout,useremail,token } = useAuth();
 
     const [menuVisible, setMenuVisible] = useState(false);
     const [searchDropdownVisible, setSearchDropdownVisible] = useState(false);
@@ -30,10 +30,19 @@ const Navbar = () => {
             console.error('Error fetching notifications:', error);
         }
     };
-    if (useremail && !notification) {
+    useEffect(() => {
+        if(useremail && !notification){
         fetchNotifications();
-    };
-    const markAsRead = async (id, notification) => {
+    }; 
+    const intervalId = setInterval(() => {
+        fetchNotifications();
+        console.log('refresh');
+      }, 2 * 60 * 1000); // Refresh every 2 minutes
+  
+      // Clean up interval when component unmounts
+      return () => clearInterval(intervalId);
+    }, [useremail, notification]);
+    const markAsRead =async (id,notification) => {
         // Update the notifications array to mark the notification as read
         await axios.put(`http://localhost:8080/api/auth/notification/${id}`, notification)
 
@@ -121,7 +130,7 @@ const Navbar = () => {
 
                         </li>
                         <li class="dropdown__item">
-                        <Link to="/">  <span class="nav__link dropdown__button">
+                        <Link to="/pastpage">  <span class="nav__link dropdown__button">
                                 Pastwork 
 
                             </span></Link>
@@ -134,7 +143,7 @@ const Navbar = () => {
 
                         </li>
                         <li class="dropdown__item">
-                        <Link to="/">    <span class="nav__link dropdown__button">
+                        <Link to="/templates">    <span class="nav__link dropdown__button">
                                Templates 
                                 {/* <span class="material-symbols-rounded dropdown__arrow"> expand_more </span> */}
                             </span> </Link>

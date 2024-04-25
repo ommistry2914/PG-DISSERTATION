@@ -203,10 +203,12 @@ const DetailedSubmission = () => {
             <div className="common-pg-sub-details">{submission.references}</div>
             <p><strong>File:</strong></p>
             <div className="common-pg-sub-details">
-              <p>{submission.fileSubmitted}
-                <button className="common-pg-add-work-submit"><a download="" href={`C://Users/ommis/AppData/Local/Temp/tomcat.8080.7384810754046742084/work/Tomcat/localhost/ROOT/assets/${submission.fileSubmitted}`} >download</a> </button>
-              </p>
-            </div>
+  <p>
+    <a href={submission.fileSubmitted} target="_blank" rel="noopener noreferrer">Work</a>
+    <button onClick={() => window.open(submission.fileSubmitted, '_blank')} className="common-pg-add-work-submit">Open</button>
+  </p>
+</div>
+
           </div>
 
           <div className="common-pg-latest-sub-form">

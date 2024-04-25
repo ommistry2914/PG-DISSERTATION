@@ -1,107 +1,91 @@
-.main-bobwork1{
-    width: 100%;
-    padding: 2rem;
-    /* padding-left: 5rem; */
-    /* padding-right: 5rem; */
-    /* margin-bottom: 3rem; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.main-bobwork h2{
-    margin-bottom: 2rem;
+
+
+.topResearches {
+  background: var(--background-color);
+  padding: 2rem;
+  font-size: 1.2em;
+  color: var(--text-color-black);
+  width: 100%;
+  padding-left: 6rem;
+  padding-right: 6rem;
+  margin-bottom: 3rem;
 }
 
-  .guide-main {
-    background-color: var(--background-color);
-    padding: 20px;
+.trContents {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 1em auto;
+  padding: 0;
+}
+
+.trContent {
+  width: calc(24% - 1em); /* Adjust width for responsiveness */
+  /* background: #d9bff7; */
+  background: none;
+  position: relative;
+  text-align: center;
+  padding: 0.5em;
+  border-radius: 10px;
+  margin-bottom: 1em; /* Add margin between items */
+  margin-top: 2rem;
+}
+
+.trContent img {
+  width: 100%;
+  border-radius: 10px; 
+  height: 240px;
+}
+
+.trContent p {
+  margin: 0.5em 0; 
+}
+
+.trContent button {
+  font-size: 1em;
+  width: 100%;
+  background-color: var(--secondary-color-1);
+  color: var(--text-color-white);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.5em;
+  border: none; /* Remove border */
+  transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+.trContent button:hover {
+  background-color: var(--background-color);
+  color: var(--text-color-black);
+}
+
+.trview_more {
+  background: var(--secondary-color-1);
+  border: none;
+  color: var(--text-color-white);
+  font-size: 1rem;
+  padding: 0.7em 1.5em;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 auto; /* Center button */
+  display: block; /* Ensure button takes full width */
+  margin-top: 1em; /* Add margin from top */
+  float: right;
+}
+
+@media screen and (max-width: 1270px) {
+  .trContent {
+    width: calc(30% - 1em); /* Adjust width for responsiveness */
   }
-  
-  .guide-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+}
+
+@media screen and (max-width: 1090px) {
+  .trContent {
+    width: calc(45% - 1em); /* Adjust width for responsiveness */
   }
-  
-  .guide-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.5);
-    /* width: calc(25%);  */
-    width: 23%;
-    max-width: 250px;
-    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 730px) {
+  .trContent {
+    width: calc(90% - 1em); /* Adjust width for responsiveness */
   }
-  
-  .guide-card-content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 30px;
-  }
-  
-  .guide-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  
-  .content {
-    margin-top: 10%;
-  }
-  
-  .spancss {
-    background-color: var(--secondary-color-2);
-    color: black;
-    font-size: 18px;
-    text-align: center;
-    padding: 10px;
-    margin: 2%;
-    border-radius: 5px;
-  }
-  
-  .pcss {
-    height: 20%;
-  }
-  
-  .pcss p {
-    font-size: 15px;
-  }
-  
-  
-  .viewmore {
-    margin-bottom: 20px;
-  }
-  
-  .button-view {
-    padding: 10px 20px;
-    margin-top: 5px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 13px;
-    width: 10%;
-    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .button-view:hover {
-    background-color: var(--borderColor);
-    color: black;
-    transform: scale(1.05);
-  }
-  
-  @media (max-width: 768px) {
-    .guide-card {
-      width: calc(50% - 40px); /* Adjust the width for smaller screens */
-    }
-  
-    .button-view {
-      width: 20%;
-    }
-  }
-  
+}
