@@ -6,7 +6,7 @@ import './App.css'
 import { useState } from "react";
 import Navbar from './components/Layout/Navbar/navbar';
 import Home from './screens/home';
-import ChatRoom from "./components/ChatBot/ChatRoom";
+import ChatRoom from "./components/ChatBot/ChatBox";
 import MainSignUp from './components/Regsiter/SignupPage/MainSignUp';
 import Signup from './components/Regsiter/SignupPage/Signup';
 import Login from './components/Regsiter/LoginPage/Login';
@@ -44,7 +44,9 @@ const App = () => {
     <Routes>
       
       <Route path="/" element={<Home />} />
-      <Route path="/chatroom" element={<ChatsPage/>} />
+      {/* <Route path="/chatlogin" element={<AuthPage onAuth={(user) => setUser(user)} />} /> */}
+      {/* <Route path="/chatroom" element={<ChatsPage/>} /> */}
+      <Route path="/chatroom" element={<ChatRoom/>} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
 
@@ -84,6 +86,7 @@ const App = () => {
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
+        <Route exact path="/chatroom" element={<ChatRoom />}></Route>
 
 
         <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
@@ -106,10 +109,10 @@ const App = () => {
   );
 };
 
-const ChatRoomPage = () => {
-  let { username } = useParams();
+// const ChatRoomPage = () => {
+//   let { username } = useParams();
 
-  return <ChatsPage user={username} />;
-};
+//   return <ChatsPage user={username} />;
+// };
 
 export default App;

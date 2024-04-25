@@ -28,6 +28,7 @@ const NewGuideRequest = () => {
               `http://localhost:8080/rdfActions/getrdfdetails/from/${request.reqStudent}`
             );
             const studentDetails = studentResponse.data;
+            console.log(studentDetails);
 
             const studentemail = await axios.get(
               `http://localhost:8080/api/auth/student/getstudentemail/for/${request.reqStudent}`

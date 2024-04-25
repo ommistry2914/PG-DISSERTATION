@@ -91,15 +91,16 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .authorizeHttpRequests(request -> request
             .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/api/test/**")).permitAll()
-            .requestMatchers(new AntPathRequestMatcher("/ws/**")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/ws/*")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/chat/**")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/app/**")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/user/**")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/chatroom/**")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/notification/**")).permitAll()           // Allow access to endpoints with query parameters using antMatchers            
-            .requestMatchers(new AntPathRequestMatcher("/guides/**")).permitAll()           // Allow access to endpoints with query parameters using antMatchers
-            // .requestMatchers("/api/auth/guide/email/.*").permitAll()
-            // Add more antMatchers for other endpoints with query parameters as needed
+            .requestMatchers(new AntPathRequestMatcher("/guides/**")).permitAll()
+           
             .anyRequest().permitAll()
+
         )
         .authenticationProvider(authenticationProvider())
         .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
