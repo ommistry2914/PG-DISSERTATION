@@ -59,8 +59,9 @@ public class ChatController {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
+    
     private MessageService messageService;
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = "*")
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
     public Message receiveMessage(@Payload Message message){
@@ -70,7 +71,7 @@ public class ChatController {
         // Broadcast the message to other users
         return message;
     }
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = "*")
     @MessageMapping("/private-message")
     public Message recMessage(@Payload Message message){
         // Save the message to the database

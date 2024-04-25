@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './researchWorkForm.css';
 import { Link, useParams } from 'react-router-dom';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../../firebase";
+import { v4 } from "uuid";
 
 function UpdateForm() {
   const { studentid, taskid, submissionid } = useParams();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [fileUrl, setFileUrl] = useState('');
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [formData, setFormData] = useState({
     taskName: '',
@@ -22,20 +26,27 @@ function UpdateForm() {
     });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      file: e.target.files[0]
-    });
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    setFileUrl('');
+    if (file) {
+      const imageRef = ref(storage, `images/${file.name + v4()}`);
+      await uploadBytes(imageRef, file);
+      const downloadURL = await getDownloadURL(imageRef);
+      setFileUrl(downloadURL);
+      console.log(fileUrl);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const currentDate = new Date().toISOString();
     const formData = {
         taskName: e.target.taskName.value,
         summary: e.target.abstract.value,
-        references: e.target.references.value
+        references: e.target.references.value,
+        fileSubmitted: fileUrl,
+      dateofsubmission: currentDate
     };
 
     console.log('Form Data:', formData);

@@ -151,7 +151,7 @@ export default function Submissions() {
                         <tbody>
                           {selectedTask.submissions.slice(1).map((submission) => (
                             <tr key={submission.id}>
-                              <td>{submission.fileSubmitted} <sub className='common-pg-details-link'><Link to={`${submission.taskId}/${submission.id}/past`}>Details</Link></sub></td>
+                              <td>Work <sub className='common-pg-details-link'><Link to={`${submission.taskId}/${submission.id}/past`}>Details</Link></sub></td>
                               <td>{new Date(submission.dateOfSubmission).toLocaleDateString('en-US', {
                                 day: 'numeric',
                                 month: 'long',
