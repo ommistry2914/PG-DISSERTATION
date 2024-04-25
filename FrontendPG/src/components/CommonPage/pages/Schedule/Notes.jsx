@@ -3,7 +3,7 @@ import './calender.css';
 
 function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [eventDetails, setEventDetails] = useState({ title: '', date: '', from: '',to: '',   description: '' });
+  const [eventDetails, setEventDetails] = useState({ title: '', date: '', From: '',to: '',   description: '' });
   const [notify, setNotify] = useState('');
 
   const handleFlip = () => {
@@ -15,7 +15,7 @@ function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent })
     setEventDetails({ ...eventDetails, [name]: value });
   };
 
-
+ 
   const handleSubmitEvent = (e) => {
     e.preventDefault();
     // Handle submit event
@@ -39,24 +39,24 @@ function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent })
               <div className="row">
                 <div className="col-sm-12">
                   <label>Title:</label>
-                  <input type="text" name="title" placeholder="Title" value={eventDetails.title} onChange={handleInputChange} />
+                  <input type="text" name="title" placeholder="Title" value={eventDetails.title} onChange={handleInputChange} required/>
                 </div>
               </div>
 
               <div className="row">
                 <div className="col-sm-6">
                   <label>From:</label>
-                  <input type="datetime-local" name="From" value={eventDetails.from} onChange={handleInputChange} />
+                  <input type="datetime-local" name="From" value={eventDetails.from} onChange={handleInputChange} required/>
                 </div>
                 <div className="col-sm-6">
                   <label>To:</label>
-                  <input type="datetime-local" name="to" value={eventDetails.to} onChange={handleInputChange} />
+                  <input type="datetime-local" name="to" value={eventDetails.to} onChange={handleInputChange} required/>
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-12">
                   <label>Description:</label>
-                  <input type="text" name="description" placeholder="Description" value={eventDetails.description} onChange={handleInputChange} />
+                  <input type="text" name="description" placeholder="Description" value={eventDetails.description} onChange={handleInputChange} required/>
                 </div>
               </div>
               <div className="row">
@@ -86,7 +86,7 @@ function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent })
              
               <div className="row">
                 <div className="col-sm-12">
-                  <textarea name="note" placeholder="Write your note here" value={note} onChange={(e) => onNoteChange(e.target.value)} />
+                  <textarea name="note" placeholder="Write your note here" value={note} onChange={(e) => onNoteChange(e.target.value)} required/>
                 </div>
               </div>
               <div className="row">

@@ -15,7 +15,7 @@ function UpdateAllotedTask() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
-  const { email, taskid } = useParams();
+  const { email, taskid, studentid } = useParams();
   const {useremail}=useAuth();
   const today=new Date();
   const handleChange = (e) => {
@@ -40,7 +40,7 @@ function UpdateAllotedTask() {
       maxCredits: e.target.maxCredits.value
     };
 
-    fetch(`http://localhost:8080/allottask/${email}/update/${taskid}`, {
+    fetch(`http://localhost:8080/allottask/${studentid}/update/${taskid}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ function UpdateAllotedTask() {
             receiverId:email,
             createdAT:today,
             type:'Task Updated',
-            link:`http://localhost:5173/${email}/studentguide/submit-for`
+            link:`http://localhost:5173/${studentid}/studentguide/submit-for`
         }
         const response=axios.post('http://localhost:8080/api/auth/notification',notification);
             if((await response).status===200){
@@ -92,7 +92,7 @@ function UpdateAllotedTask() {
   useEffect(() => {
     const fetchTasks = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/${email}/progress`);
+            const response = await fetch(`http://localhost:8080/${studentid}/progress`);
             if (!response.ok) {
                 throw new Error('Failed to fetch tasks');
             }

@@ -19,9 +19,9 @@ const StudentCard = ({profile, name, desc, link1, link2, img}) => {
             </Link>
           </div>
           <div className="days">
-          <Link to='/'>
+          {/* <Link to='/'>
             <button>Open</button>
-            </Link>
+            </Link> */}
           </div>
         </div>
         

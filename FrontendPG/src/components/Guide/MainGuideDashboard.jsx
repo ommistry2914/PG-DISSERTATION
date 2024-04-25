@@ -41,9 +41,9 @@ const MainGuideDashboard = () => {
           <Route path="/ongoing" element={<OngoingGuideDissertation />} />
           <Route path="/pastStudents" element={<StudentMentored />} />
           <Route path="/edit" element={<EditGuide />} />
-          <Route path={`/ongoing/allottask/:email`} element={<AllotTask />}></Route>
-          <Route path={`/ongoing/allottask/:email/alloted`} element={<AllotedTasks />}></Route>
-          <Route path={`/ongoing/allottask/:email/update/:taskid`} element={<UpdateAllotedTask />}></Route>
+          <Route path={`/ongoing/allottask/:stduentid`} element={<AllotTask />}></Route>
+          <Route path={`/ongoing/allottask/:studentid/alloted`} element={<AllotedTasks />}></Route>
+          <Route path={`/ongoing/allottask/:studentid/update/:taskid`} element={<UpdateAllotedTask />}></Route>
         </Routes>
         </div>
       </div>

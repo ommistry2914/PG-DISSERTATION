@@ -49,20 +49,20 @@ public class NotificationService {
         return notificationRepository.save(existingNotification);
     }
 
-    public Notification checkAndSendNotifications() {
-        List<Tasks> pendingTasks = tasksRepository.findByStatusAndEndDateBefore("pending", new Date());
-        for (Tasks task : pendingTasks) {
-            // Send notification to user
-            saveNotification(task.getUserId(), "Task overdue: " + task.getTaskName());
+    // public Notification checkAndSendNotifications() {
+    //     List<Tasks> pendingTasks = tasksRepository.findByStatusAndEndDateBefore("pending", new Date());
+    //     for (Tasks task : pendingTasks) {
+    //         // Send notification to user
+    //         saveNotification(task.getUserId(), "Task overdue: " + task.getTaskName());
 
-            // Store notification info in MongoDB
-            Notification notification = new Notification();
-            notification.setsenderId(task.getUserId());
-            notification.setType("Task overdue: " + task.getTaskName());
+    //         // Store notification info in MongoDB
+    //         Notification notification = new Notification();
+    //         notification.setsenderId(task.getUserId());
+    //         notification.setType("Task overdue: " + task.getTaskName());
             
-        }
-        return notificationRepository.save(notification);
-    }
+    //     }
+    //     return notificationRepository.save(notification);
+    // }
 
     public void saveNotification(String userId, String message) {
         Notification notification = new Notification();

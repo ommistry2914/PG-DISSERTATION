@@ -28,6 +28,7 @@
     "react-scroll-trigger": "^0.6.14",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.5",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3"
   },

@@ -57,7 +57,7 @@ function Footer() {
             className="footer_Item col-sm-12 col-lg-4"
             id="footer_div_contact">
 
-            <header className="header">
+            <header className="header_ft">
               <h2 className="footer_header" id="head_CI">
                 USEFUL LINKS
               </h2>
@@ -122,7 +122,7 @@ function Footer() {
           <div
             className="footer_Item col-sm-6 col-lg-4"
             id="footer_div_newsLetter">
-            <header className="header head_NL">
+            <header className="header_ft">
               <h2 className="footer_header" id="head_NL">
                 NEWS LETTER
               </h2>
