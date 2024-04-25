@@ -57,6 +57,7 @@ function UpdateForm() {
                 file: null
             });
             console.log('Updated successfully!');
+            fetchSubmission();
             setShowSuccessAlert(true);
             setShowErrorAlert(false);
         } else {
@@ -99,7 +100,6 @@ function UpdateForm() {
     <div className="common-pg-contents">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide/submissions`}>Submissions</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Update Submission</li>
@@ -107,15 +107,15 @@ function UpdateForm() {
       </nav>
       <div className="common-pg-forms">
         <form onSubmit={handleSubmit} className='common-pg-add-work-form'>
-          <h4 style={{ alignSelf: 'center', color: 'purple' }}>Research Work Submission</h4>
+          <h4 style={{ alignSelf: 'center', color: 'purple' }}>Submission Update</h4>
           {showSuccessAlert && (
             <div className="alert alert-success" role="alert">
-              Added successfully!
+              Updated successfully!
             </div>
           )}
           {showErrorAlert && (
             <div className="alert alert-danger" role="alert">
-              Add Unsuccessful!
+              Update Unsuccessful!
             </div>
           )}
           <div className="row">

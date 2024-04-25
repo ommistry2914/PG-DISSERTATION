@@ -104,16 +104,16 @@ public class TasksService {
         mongoTemplate.updateFirst(query, update, Tasks.class);
     }
 
-    @Scheduled(fixedRate = 60000)
-    public void getExpiredTask(){
-        List<Tasks> tasks= taskRepo.findByEndDate(new Date());
-        for (Tasks task : tasks) {
-            if (!isNotificationSent(task.getId())) {
-                sendNotification(task);
-            }
-            System.out.println("Notification not sent");
-        };
-    }
+    // @Scheduled(fixedRate = 60000)
+    // public void getExpiredTask(){
+    //     List<Tasks> tasks= taskRepo.findByEndDate(new Date());
+    //     for (Tasks task : tasks) {
+    //         if (!isNotificationSent(task.getId())) {
+    //             sendNotification(task);
+    //         }
+    //         System.out.println("Notification not sent");
+    //     };
+    // }
 
     private boolean isNotificationSent(String senderId) {
         Query query = new Query();
@@ -123,16 +123,16 @@ System.err.println("error");
         
     }
 
-    private void sendNotification(Tasks task){
-        Notification notification = new Notification();
-        notification.setsenderId(task.getId());
-        notification.setReceiverId(task.getUserId());
-        notification.setType("Missed the date!");
-        notification.setCreatedAt(new Date());
-        notification.setRead(false);
-        notification.setLink("http://localhost:5137/" + task.getUserId()+ "/studentguide/schedule");
+    // private void sendNotification(Tasks task){
+    //     Notification notification = new Notification();
+    //     notification.setsenderId(task.getId());
+    //     notification.setReceiverId(task.getUserId());
+    //     notification.setType("Missed the date!");
+    //     notification.setCreatedAt(new Date());
+    //     notification.setRead(false);
+    //     notification.setLink("http://localhost:5137/" + task.getUserId()+ "/studentguide/schedule");
 
-        mongoTemplate.save(notification, "notification");
-    }
+    //     mongoTemplate.save(notification, "notification");
+    // }
     
 }
