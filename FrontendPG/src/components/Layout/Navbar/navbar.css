@@ -139,6 +139,9 @@ header {
   align-items: center;
   transition: background-color 0.3s;
 }
+.nav__link span{
+  margin-top: 5rem;
+}
 .nav__link:hover {
   background-color: var(--first-color-lighten);
 }
@@ -369,7 +372,8 @@ header {
 }
 
 #navbar_account_dropdown_login{
-  border: 1px solid burlywood;
+  /* border: 1px solid burlywood; */
+  /* border-bottom: 1px solid var(--first-color); */
   font-weight: bold;
 }
 #navbar_notification>#navbar_notification_dropdown{
@@ -514,6 +518,7 @@ header {
     color: var(--first-color);
   }
   .dropdown__item {
+    padding-top: 1.2rem;
     cursor: pointer;
   }
   .dropdown__item:hover .dropdown__arrow {

@@ -177,7 +177,6 @@ export default function Schedule() {
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Schedule</li>
         </ol>

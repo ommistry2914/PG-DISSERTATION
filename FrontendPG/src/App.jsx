@@ -1,5 +1,4 @@
 
-// import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 import { BrowserRouter as Router, Route, Routes ,Navigate, useParams} from "react-router-dom";
 
@@ -41,6 +40,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       {/* <Route path="/chatlogin" element={<AuthPage onAuth={(user) => setUser(user)} />} /> */}
       {/* <Route path="/chatroom" element={<ChatsPage/>} /> */}
+      <Route path="/chatroom" element={<ChatRoom/>} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
 

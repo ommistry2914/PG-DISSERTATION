@@ -6,17 +6,16 @@ import { FaChevronRight, FaCaretRight } from "react-icons/fa";
 import Photo1 from '../../images/photo1.png';
 import Lottie from 'react-lottie';
 import animationData from './Student.json';
-// import ProgressService from "../../../../service/ProgressService";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
-  const [tasks,setTasks]=useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(null);
+  const [progress, setProgress] = useState([]);
   const [completeTasks, setCompleteTasks] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
-  const [credits,setCredits]=useState(0);
-  const [totalCredits,setTotalCredits]=useState(0);
+  const [credits, setCredits] = useState(0);
+  const [totalCredits, setTotalCredits] = useState(0);
   const { studentid } = useParams();
   const MyLottieAnimation = () => {
     const defaultOptions = {
@@ -34,25 +33,10 @@ const Profile = () => {
 
   const day = 75;
   const totalDays = 300;
-  
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await ProgressService.getProgress();
-  //       setProgress(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, []);
-
 
   const fetchEvents = async () => {
     try {
-      const currentDate = new Date("2024-04-05"); // Get the current date
+      const currentDate = new Date(); // Get the current date
       const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule`);
       const data = await response.json();
 
@@ -115,8 +99,8 @@ const Profile = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch tasks');
         }
-        const data = await response.json();
-        setTasks(data);
+        const progresses = await response.json();
+        setProgress(progresses);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
@@ -124,36 +108,31 @@ const Profile = () => {
 
     fetchTasks();
   }, [studentid]);
-  useEffect(()=>{
-    let total=tasks.length;
-    let complete=0;
-    let credit=0;
-    let totalCredit=0
+  useEffect(() => {
+    let total = progress.length;
+
+    let complete = 0;
+    let credit = 0;
+    let totalCredit = 0
     tasks.forEach(task => {
       if (task.approvalStage === 'Approved') {
         complete++;
       }
-      credit+=task.revCredits;
-      totalCredit+=task.maxCredits;
+      credit += task.revCredits;
+      totalCredit += task.maxCredits;
       setTotalCredits(totalCredit);
       setCredits(credit);
       setCompleteTasks(complete);
       setTotalTasks(total);
     });
-   })
-  
+  })
 
- const pendingTasks = totalTasks - completeTasks;
- const completeProgress = (completeTasks / totalTasks) * 100 || 0;
- const pendingProgress = (pendingTasks / totalTasks) * 100 || 0;
- const creditProgress=(credits/totalCredits)*100 || 0;
- const overallProgress= (((completeProgress)+(pendingProgress*0.5)+(creditProgress*2))/3).toFixed(2);
+  const pendingTasks = totalTasks - completeTasks;
+  const completeProgress = (completeTasks / totalTasks) * 100 || 0;
+  const pendingProgress = (pendingTasks / totalTasks) * 100 || 0;
+  const creditProgress = (credits / totalCredits) * 100 || 0;
+  const overallProgress = (((completeProgress) + (pendingProgress * 0.5) + (creditProgress * 2)) / 3).toFixed(2);
 
-
- if (loading) {
-  return <div>Loading...</div>;
-
-}
   return <div className="common-pg-contents">
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
@@ -199,27 +178,32 @@ const Profile = () => {
               <div class="common-pg-lid two"></div>
               <div class="common-pg-envelope">Overall Progress</div>
               <div class="common-pg-letter">
-                {progress.map(progress => (
-                  <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={progress.overallProgressRate} /></p>
-                ))}
+
+                <p style={{ display: 'flex', justifyContent: 'center' }}><CircularProgressBar percentage={overallProgress} /></p>
+
               </div>
             </div>
           </div>
-          <div className=" common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
+          <div className="common-pg-todays-task col-sm-12 col-md-6 col-lg-6">
             <h6>Todays Schedule</h6>
-            <ul className='common-pg-today-task-ul'>
-              {task.map((task) => (
-                task.event ? (
-                  <li key={task.id}><FaCaretRight/><span>{task.event}, {task.description} &nbsp; &nbsp; {new Date(task.from).toISOString().slice(11, 16)} to {new Date(task.to).toISOString().slice(11, 16)}</span></li>
-                ) : (
-                  <li key={task.id}><FaCaretRight/><span>{task.notes}</span></li>
-                )
-
-              ))}
-
-            </ul>
-            <Link to={`schedule`}><button className="common-pg-view-all">View all <FaChevronRight /></button></Link>
+            {tasks.length > 0 ? (
+              <ul className='common-pg-today-task-ul'>
+                {tasks.map((task) => (
+                  task.event ? (
+                    <li key={task.id}><FaCaretRight /><span>{task.event}, {task.description} &nbsp; &nbsp; {new Date(task.from).toISOString().slice(11, 16)} to {new Date(task.to).toISOString().slice(11, 16)}</span></li>
+                  ) : (
+                    <li key={task.id}><FaCaretRight /><span>{task.notes}</span></li>
+                  )
+                ))}
+              </ul>
+            ) : (
+              <p>No events for today</p>
+            )}
+            {tasks.length > 0 && (
+              <Link to={`schedule`}><button className="common-pg-view-all">View all <FaChevronRight /></button></Link>
+            )}
           </div>
+
         </div>
       </div>
     </div></div>;

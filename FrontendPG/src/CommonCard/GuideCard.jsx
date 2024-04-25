@@ -4,7 +4,7 @@ import img1 from '../assests/techo-home.png'
 
 const GuideCard = () => {
   return (
-    <div className='main-bobwork'>
+    <div className='main-bobwork1'>
       <h2>Our Top Experts</h2>
       <div className='guide-main'>
         <div className='guide-card-container'>
@@ -20,10 +20,10 @@ const GuideCard = () => {
                     <p>Expertise in AI and ML </p>
                     <p>with experience of 3+ years</p>
                   </div>
-                  <div className="button-container">
+                  {/* <div className="button-container">
                     <button className='button'>Details</button>
                     <button className='button'>Request</button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
