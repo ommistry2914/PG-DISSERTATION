@@ -57,7 +57,7 @@ function Footer() {
             className="footer_Item col-sm-12 col-lg-4"
             id="footer_div_contact">
 
-            <header className="header">
+            <header className="header_ft">
               <h2 className="footer_header" id="head_CI">
                 USEFUL LINKS
               </h2>
@@ -69,7 +69,7 @@ function Footer() {
                     className="footer_P_hover"
                     target="_blank"
                     id="address"
-                    href="">
+                    href="/experts">
                       Experts
                   </a>
                 </div>
@@ -80,7 +80,7 @@ function Footer() {
                     <a
                       id="mail-link-1"
                       className="footer_P_hover"
-                      href=""
+                      href="/trending"
                     >
                       Trending Topic
                     </a>
@@ -97,7 +97,7 @@ function Footer() {
 
               <div className="footer_InDetail">
                 <div>
-                    <a className="footer_P_hover" href="">
+                    <a className="footer_P_hover" href="/templates">
                       Templates
                     </a>
                 </div>
@@ -122,7 +122,7 @@ function Footer() {
           <div
             className="footer_Item col-sm-6 col-lg-4"
             id="footer_div_newsLetter">
-            <header className="header head_NL">
+            <header className="header_ft">
               <h2 className="footer_header" id="head_NL">
                 NEWS LETTER
               </h2>
@@ -156,7 +156,7 @@ function Footer() {
               </div>
             </div>
             <div id="div_teambtn" className="webteam_btn">
-                <a href="/webTeamPage">
+                <a href="/webteam" target="_blank">
                   <button className="footer_btn" id="webTeamBtn">
                     WebTeam
                   </button>

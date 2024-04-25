@@ -12,8 +12,11 @@ export default function Schedule() {
   const [note, setNote] = useState('');
   const [task, setTasks] = useState([]);
 
+
+  const [eventDetails, setEventDetails] = useState({ title: '', date: '', From: '', to: '',description: '' });
   const { studentid, taskId } = useParams();
   const [events, setEvents] = useState([]);
+  
   const formattedDate = selectedDay.toLocaleDateString(undefined, {
     day: 'numeric',
     month: 'long',
@@ -52,7 +55,10 @@ export default function Schedule() {
 
       data.forEach(item => {
         if (item.notes) {
+          // const noteDate = new Date(item.date);
+          // eventDates.push(noteDate.toDateString());
           const noteDate = new Date(item.date);
+          noteDate.setDate(noteDate.getDate() - 1); // Subtract one day
           eventDates.push(noteDate.toDateString());
         }
       });
@@ -134,7 +140,7 @@ export default function Schedule() {
         console.log('Event added successfully!');
         setSelectedDay(new Date());
         await fetchEvents(new Date());
-        e.target.title.value = '';
+        setEventDetails({title: '', date: '', From: '', to: '',description: '' });
       } else {
         console.error('Failed to add event');
       }
@@ -149,14 +155,17 @@ export default function Schedule() {
     e.preventDefault();
 
     try {
+      const nextDay = new Date(selectedDay);
+nextDay.setDate(selectedDay.getDate() + 1);
       const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule/notes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ date: selectedDay, notes: note })
+        body: JSON.stringify({ date: nextDay, notes: note })
       });
 
+      console.log(selectedDay)
       if (response.ok) {
         await fetchEvents(new Date());
         setNote('');
@@ -173,11 +182,16 @@ export default function Schedule() {
 
 
 
+   const handleInputChange = (e) => {
+     const { name, value } = e.target;
+     setEventDetails({ ...eventDetails, [name]: value });
+   };
+
+
   return (
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Schedule</li>
         </ol>
@@ -190,7 +204,7 @@ export default function Schedule() {
           events={events}
         />
         {selectedDay && (
-          <Notes selectedDay={selectedDay} note={note} onNoteChange={onNoteChange} onSubmitNote={onSubmitNote} onSubmitEvent={onSubmitEvent} />
+          <Notes selectedDay={selectedDay} note={note} eventDetails={eventDetails} handleInputChange={handleInputChange} onNoteChange={onNoteChange} onSubmitNote={onSubmitNote} onSubmitEvent={onSubmitEvent} />
 
         )}
       </div>

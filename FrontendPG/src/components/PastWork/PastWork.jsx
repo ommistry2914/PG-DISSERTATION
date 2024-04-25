@@ -3,36 +3,36 @@ import StudentCard from '../../CommonCard/StudentCard'; // Assuming StudentCard 
 import './PastWork.css';
 const DummyData = [
   {
-    profile: "",
+    profile: "https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
     name: 'John Doe',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     link1: '/',
     link2: '/',
-    img: "",
+    img: "https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
   },
   {
-    profile:"",
+    profile:"https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
     name: 'Jane Smith',
     desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     link1: '/',
     link2: '/',
-    img: "",
+    img: "https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
   },
   {
-    profile: "",
+    profile: "https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
     name: 'Jane Smith',
     desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     link1: '/',
     link2: '/',
-    img: "",
+    img: "https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
   },
   {
-    profile:"",
+    profile:"https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
     name: 'Jane Smith',
     desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     link1: '/',
     link2: '/',
-    img: "",
+    img: "https://cdn-images.zety.com/pages/4_pdf_word_resume_modern_1.jpg?1648454089",
   },
   // Add more dummy data as needed
 ];

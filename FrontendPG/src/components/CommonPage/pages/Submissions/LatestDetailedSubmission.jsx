@@ -5,7 +5,7 @@ import axios from "axios";
 import { useAuth } from "../../../../AuthContext";
 
 const DetailedSubmission = () => {
-  const {useremail}=useAuth();
+  const { useremail } = useAuth();
   const [submission, setSubmission] = useState(null);
   const [task, setTask] = useState(null);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -19,8 +19,8 @@ const DetailedSubmission = () => {
   const [approvalStatus, setApprovalStatus] = useState('');
   const [credits, setCredits] = useState('');
 
-  const [notification,setNotification]=useState(null);
-  
+  const [notification, setNotification] = useState(null);
+
   useEffect(() => {
     const fetchSubmission = async () => {
       try {
@@ -38,6 +38,7 @@ const DetailedSubmission = () => {
 
     fetchSubmission();
   }, [studentid, submissionid, taskid]);
+
 
 
   useEffect(() => {
@@ -68,37 +69,37 @@ const DetailedSubmission = () => {
     });
   };
 
-  
+
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
 
-    const today=new Date();
+    const today = new Date();
     try {
-      const notification={
-        senderId:useremail,
-        receiverId:studentid,
-        createdAt:today,
-        type:'Task Feedback',
-        link:`http://localhost:5173/${studentid}/studentguide/submissions`
-    }
-      const formData = new FormData();
-      formData.append('guideFeedback', feedback);
+      const notification = {
+        senderId: useremail,
+        receiverId: studentid,
+        createdAt: today,
+        type: 'Task Feedback',
+        link: `http://localhost:5173/${studentid}/studentguide/submissions`
+      }
+      // const formData = new FormData();
+      // formData.append('guideFeedback', feedback);
 
       await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}/feedback`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: formData
+        body:  feedback
       });
       setFeedback('');
       setShowSuccessAlert(true);
       setShowErrorAlert(false);
       console.log('Feedback submitted successfully');
-      const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+      const response = axios.post('http://localhost:8080/api/auth/notification', notification);
       console.log((await response).data);
-      if(response.OK){
+      if (response.OK) {
         console.log("Notification added!")
       }
     } catch (error) {
@@ -108,65 +109,66 @@ const DetailedSubmission = () => {
     }
   };
   const today = new Date();
-  const handleApprovalSubmit =async (e) => {
+  const handleApprovalSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(e.target);
     const credits = formData.get('credits');
     const creditsValue = approvalStatus === 'Approved' ? credits : 0;
     console.log(`${approvalStatus} ${credits}`);
-    const notification={
-      senderId:useremail,
-      receiverId:studentid,
-      createdAt:today,
-      type:'Approval status',
-      link:`http://localhost:5173/${studentid}/studentguide/submissions`
-  }    
-   try{
-        // Use submissionDate in the fetch request
-        const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`, {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              approvalStage: approvalStatus,
-              revCredits: creditsValue
-          })
+    const notification = {
+      senderId: useremail,
+      receiverId: studentid,
+      createdAt: today,
+      type: 'Approval status',
+      link: `http://localhost:5173/${studentid}/studentguide/submissions`
+    }
+    try {
+      // Use submissionDate in the fetch request
+      const response = await fetch(`http://localhost:8080/${studentid}/submissions/${taskid}/${submissionid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          approvalStage: approvalStatus,
+          revCredits: creditsValue
+        })
       });
-         
-            if (response.ok) {
-            
-              setCredits('');
-              setApprovalStatus('');
-              console.log('Guide updated status!');
-              console.log('Work added successfully!');
-              try{const sendNotification=axios.post('http://localhost:8080/api/auth/notification',notification);
-              console.log('Notification send');
-            }
-            catch(e){
-              console.log(e);
-            }
-              setShowSuccessAlert(true);
-              setShowErrorAlert(false);
-            } else {
-              console.error('Failed to add work');
-              setShowSuccessAlert(false);
-              setShowErrorAlert(true);
-            }
-          }
-          catch(error){
-            console.error('Error adding work:', error);
-            setShowSuccessAlert(false);
-            setShowErrorAlert(true);
-          }
 
-        };
+      if (response.ok) {
 
+        setCredits('');
+        setApprovalStatus('');
+        console.log('Guide updated status!');
+        console.log('Work added successfully!');
+        try {
+          const sendNotification = axios.post('http://localhost:8080/api/auth/notification', notification);
+          console.log('Notification send');
+        }
+        catch (e) {
+          console.log(e);
+        }
+        setShowSuccessAlert(true);
+        setShowErrorAlert(false);
+      } else {
+        console.error('Failed to add work');
+        setShowSuccessAlert(false);
+        setShowErrorAlert(true);
+      }
+    }
+    catch (error) {
+      console.error('Error adding work:', error);
+      setShowSuccessAlert(false);
+      setShowErrorAlert(true);
+    }
 
-  const handleDownload = () => {
-    alert('Downloading file...');
   };
+
+
+  // const handleDownload = () => {
+  //   alert('Downloading file...');
+  // };
 
 
   if (!submission) {
@@ -177,7 +179,6 @@ const DetailedSubmission = () => {
     <div className="common-pg-contents">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide/submissions`}>Submissions</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Detailed Submission</li>
@@ -202,10 +203,12 @@ const DetailedSubmission = () => {
             <div className="common-pg-sub-details">{submission.references}</div>
             <p><strong>File:</strong></p>
             <div className="common-pg-sub-details">
-              <p>{submission.fileSubmitted}
-                <button onClick={handleDownload} className="common-pg-add-work-submit"><FaDownload /> </button>
-              </p>
-            </div>
+  <p>
+    <a href={submission.fileSubmitted} target="_blank" rel="noopener noreferrer">Work</a>
+    <button onClick={() => window.open(submission.fileSubmitted, '_blank')} className="common-pg-add-work-submit">Open</button>
+  </p>
+</div>
+
           </div>
 
           <div className="common-pg-latest-sub-form">
@@ -246,8 +249,8 @@ const DetailedSubmission = () => {
                     checked={approvalStatus === "Approved"}
                     onChange={() => setApprovalStatus("Approved")}
                     required
-                  /> 
-                  &nbsp; Approved</div>
+                  />
+                    &nbsp; Approved</div>
                   <div className="col-12"> <input
                     type="radio"
                     name="approvalStage"
@@ -265,7 +268,7 @@ const DetailedSubmission = () => {
                     onChange={() => setApprovalStatus("Pending")}
                     required
                   />
-                     &nbsp; Request Revisions
+                    &nbsp; Request Revisions
                   </div>
 
 

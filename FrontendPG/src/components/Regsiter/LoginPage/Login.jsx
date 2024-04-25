@@ -23,16 +23,20 @@ const Login = () => {
         username: values.username,
         password: values.password,
       });
-  
+  console.log(response);
      
       if (response.status === 200) {
+        const jwtToken = response.data.token;
+      console.log('JWT Token:', jwtToken);
         
+        // const { username, roles, email, token } = response.data;
         const { username, roles, email , id } = response.data;
   
       
         const role = roles.includes('ROLE_GUIDE') ? 'guide' : 'student';
   
        
+        // login({ username, role, email, token });
         login({ username, role, email , id});
         console.log('Login successful with id:', id);
   

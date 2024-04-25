@@ -45,8 +45,8 @@ public List<Notification> getNotificationByReceiverId(@PathVariable String recei
 public Notification markAsRead(@RequestBody Notification notification) {
     return notificationService.markAsRead(notification);
 }
-@PostMapping("/send")
-    public Notification sendNotifications() {
-        return notificationService.checkAndSendNotifications();
-    }
+// @PostMapping("/send")
+//     public Notification sendNotifications() {
+//         return notificationService.checkAndSendNotifications();
+//     }
 }

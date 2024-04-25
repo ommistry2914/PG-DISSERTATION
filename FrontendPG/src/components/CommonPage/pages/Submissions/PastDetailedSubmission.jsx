@@ -35,7 +35,6 @@ const PastDetailedSubmission = () => {
     <div className="common-pg-contents">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide/submissions`}>Submissions</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Detailed Submission</li>
@@ -58,8 +57,13 @@ const PastDetailedSubmission = () => {
             <p><strong>References:</strong></p>
             <div className="common-pg-sub-details">{submission.references}</div>
             <p><strong>File:</strong></p>
-            <div className="common-pg-sub-details"><p>{submission.fileSubmitted} <button onClick={handleDownload} className="common-pg-add-work-submit"><FaDownload /></button></p>
-            </div>  </div>
+            <div className="common-pg-sub-details">
+  <p>
+    <a href={submission.fileSubmitted} target="_blank" rel="noopener noreferrer">Work</a>
+    <button onClick={() => window.open(submission.fileSubmitted, '_blank')} className="common-pg-add-work-submit">Open</button>
+  </p>
+</div>
+  </div>
         </div>
       </div>
     </div>

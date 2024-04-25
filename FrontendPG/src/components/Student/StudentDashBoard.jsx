@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import "./StudentDashboard.css";
 import img1 from "../../assests/techo-home.png";
 import { FaChalkboardTeacher, FaUserEdit } from "react-icons/fa";
@@ -6,15 +7,18 @@ import { PiStudentFill } from "react-icons/pi";
 import { HiTrendingUp } from "react-icons/hi";
 import { GrTemplate } from "react-icons/gr";
 import { SiGoogleforms } from "react-icons/si";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import {Link} from 'react-router-dom';
+import { useParams } from "react-router-dom";
+
 
 import NewSBar from "../CommonPage/UI/Sidebar/NewSBar";
 import { studentbardata } from "../CommonPage/UI/Sidebar/sidebardata";
 
 const StudentDashboard = () => {
   const [showCalendar, setShowCalendar] = useState(true);
+  const [notify,setNotify]=useState([]);
+  const [events,setEvents]=useState([]);
   const [details, setDetails] = useState();
   const [greeting, setGreeting] = useState();
   const [notification , setNotification] = useState();
@@ -30,11 +34,68 @@ const StudentDashboard = () => {
   const hideCalendar = () => {
     setShowCalendar(false);
   };
-
+  const today = new Date();
   const showCalendarAgain = () => {
     setShowCalendar(true);
   };
+  let count=0;
+  useEffect(()=>{
+    const fetchNotification=async ()=>{
+       try {
+            const res=await axios.get('http://localhost:8080/xyz/studentguide/schedule/events');
+            setEvents(res.data);
+            console.log(events.length)
+            events.forEach(async date=>{
+              const to=new Date(date.to);
+              //const formattedDate = `${today.getFullYear()}-${(today.getMonth()+1) < 10 ? '0' : ''}${(today.getMonth()+1)}-${today.getDate() < 10 ? '0' : ''}${today.getDate()}`;
+              if(today>to && !date.completionStatus && date.notify){
+                console.log(date.completionStatus)
+                console.log(date.notify);
+                console.log(date.event);
+                 count++;
+                const notification={
+                  senderId:'xyz',
+                  receiverId:'xyz',
+                  createdAt:today,
+                  type:`${date.event} date passed!!`,
+                  link:`Event added`
+              }
 
+              try {
+                const getNotification=async()=>{
+                  const res=await axios.get('http://localhost:8080/api/auth/notification/receiverId/abc@gmail.com');
+                  setNotify(res.data);
+                  console.log(notify);
+                  notify.forEach(async send=>{
+                     console.log(send.type);
+                  });
+                }
+               getNotification();
+              } catch (error) {
+                console.log(error)
+              }
+              
+
+              /**notify.forEach(async data=>{
+                 if(data.type==(`${date.event} date passes!!`)){
+                  const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+                  console.log((await response).data);       
+                    console.log('notify!!');
+                 }
+              }); */
+              
+              }
+              console.log(count);
+            })
+      } catch (error) {
+        console.log(error);
+      }
+  
+    };
+    fetchNotification();
+    
+  },[])
+  
   useEffect(() => {
     console.log("Loading Student Dashboard Details.......");
     console.log("UseEffect mein se values are sabse pehle :",t1,t2,t3,t4);

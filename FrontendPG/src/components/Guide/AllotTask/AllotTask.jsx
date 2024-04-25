@@ -40,7 +40,7 @@ function AllotTask() {
         receiverId:email,
         createdAT:today,
         type:'Task Alloted',
-        link:`http://localhost:5173/${email}/studentguide/submit-for`
+        link:`http://localhost:5173/${studentid}/studentguide/submit-for`
     }
     const response=axios.post('http://localhost:8080/api/auth/notification',notification);
         if((await response).status===200){
@@ -62,7 +62,7 @@ function AllotTask() {
       maxCredits: e.target.maxCredits.value
     };
 
-    fetch(`http://localhost:8080/allottask/${email}`, {
+    fetch(`http://localhost:8080/allottask/${studentid}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ function AllotTask() {
 
 
           <button type="submit" className='submit'>Submit</button>
-          <Link to={'alloted'}><button  className='submit'>Edit</button></Link>
+          {/* <Link to={'alloted'}><button  className='submit'>Edit</button></Link> */}
         </form>
 
       </div></div>
