@@ -96,6 +96,7 @@
 
 import React from 'react';
 import './TopResearcher.css';
+import { Link } from 'react-router-dom';
 
 const TopResearcher = () => {
   // Sample data for demonstration
@@ -135,11 +136,15 @@ const TopResearcher = () => {
             <img src={research.image} alt={`Research ${research.id}`} className="research-image" />
             <p>-by {research.author}</p>
             <p>-guided by {research.guide}</p>
-            <button>Details</button>
+            <button>
+            <a download=""  href="/src/assests/sampleTemplate">Download</a>
+            </button>
           </div>
         ))}
       </div>
-      <button className="trview_more">View More</button>
+      <button className="trview_more">
+        <Link to="/templates">View More</Link>
+      </button>
     </div>
   );
 };
