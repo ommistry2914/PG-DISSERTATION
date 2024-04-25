@@ -72,7 +72,7 @@ public class AvailController {
                 return ResponseEntity.ok().body("Occupied");
             }
         } else {
-            return ResponseEntity.ok().body("hai hi nahi wala Occupied");
+            return ResponseEntity.ok().body("Guide has no details in guide availablity");
         }
     }
 

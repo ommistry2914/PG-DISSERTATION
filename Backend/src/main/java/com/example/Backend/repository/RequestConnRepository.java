@@ -13,4 +13,6 @@ public interface RequestConnRepository extends MongoRepository<RequestConn,Strin
     Optional<RequestConn> findByReqStudentAndReqGuide(String stdId, String gId);
 
     List<RequestConn> findByReqStudent(String reqStudent);
+
+    List<RequestConn> findByReqStudentAndReqStatusNot(String stdId, String accept);
 }

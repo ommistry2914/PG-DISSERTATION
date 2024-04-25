@@ -1,8 +1,12 @@
 package com.example.Backend.service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.codecs.jsr310.LocalDateTimeCodec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -104,16 +108,16 @@ public class TasksService {
         mongoTemplate.updateFirst(query, update, Tasks.class);
     }
 
-    // @Scheduled(fixedRate = 60000)
-    // public void getExpiredTask(){
-    //     List<Tasks> tasks= taskRepo.findByEndDate(new Date());
-    //     for (Tasks task : tasks) {
-    //         if (!isNotificationSent(task.getId())) {
-    //             sendNotification(task);
-    //         }
-    //         System.out.println("Notification not sent");
-    //     };
-    // }
+    @Scheduled(fixedRate = 60000)
+    public void getExpiredTask(){
+        List<Tasks> tasks= taskRepo.findByEndDate(new Date());
+        for (Tasks task : tasks) {
+            if (!isNotificationSent(task.getId())) {
+                sendNotification(task);
+            }
+            System.out.println("Notification not sent");
+        };
+    }
 
     private boolean isNotificationSent(String senderId) {
         Query query = new Query();
@@ -123,16 +127,19 @@ System.err.println("error");
         
     }
 
-    // private void sendNotification(Tasks task){
-    //     Notification notification = new Notification();
-    //     notification.setsenderId(task.getId());
-    //     notification.setReceiverId(task.getUserId());
-    //     notification.setType("Missed the date!");
-    //     notification.setCreatedAt(new Date());
-    //     notification.setRead(false);
-    //     notification.setLink("http://localhost:5137/" + task.getUserId()+ "/studentguide/schedule");
+    private void sendNotification(Tasks task){
+        Notification notification = new Notification();
+        notification.setsenderId(task.getId());
+        notification.setReceiverId(task.getUserId());
+        notification.setType("Missed the date!");
+        Date date = new Date();
+        Instant instant = date.toInstant();
+        LocalDateTime localDateTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+        notification.setCreatedAt(localDateTime);
+        notification.setRead(false);
+        notification.setLink("http://localhost:5137/" + task.getUserId()+ "/studentguide/schedule");
 
-    //     mongoTemplate.save(notification, "notification");
-    // }
-    
+        mongoTemplate.save(notification, "notification");
+    }
+       
 }

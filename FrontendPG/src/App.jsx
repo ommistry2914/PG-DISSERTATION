@@ -82,8 +82,8 @@ const App = () => {
           <Route path="/studentguide/*" element={<StuGuideDashboard />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/trending" element={<MainLayout />} />
-          <Route exact path="/studentdashboard" element={<StudentDashBoard />} ></Route>
-        <Route exact path="/requestform" element={<RequestForm />}></Route>
+          <Route exact path="/studentdashboard/:studentId" element={<StudentDashBoard />} ></Route>
+        <Route exact path="/requestform/:sid" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
         <Route exact path="/chatroom" element={<ChatRoom />}></Route>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -43,5 +44,32 @@ public class DissertationController {
         newD.setDrtstartDate(new Date());
         dissrepo.save(newD);
         return new ResponseEntity<Dissertation>(newD,HttpStatus.CREATED);
+    }
+
+    //accessing the dissertation by student id
+    @GetMapping("/getmydissertation/{stdid}")
+    public ResponseEntity<?> getmydrt(@PathVariable("stdid") String id)
+    {
+        Optional<Dissertation> dissertation = dissrepo.findByStudentId(id);
+
+        if(dissertation.isPresent())
+        {
+            return new ResponseEntity<Dissertation>(dissertation.get(),HttpStatus.OK);
+        }
+        return new ResponseEntity<>("NO DISSERTATION",HttpStatus.OK);
+    }
+
+    //get ongoing dissertations of the guide by guideid
+    @GetMapping("/getmyguidedissertation/{guideid}")
+    public ResponseEntity<?> getguidediss(@PathVariable("guideid") String gid)
+    {
+        List<Dissertation> check = dissrepo.findByGuideId(gid);
+
+        if(check.size() > 0)
+        {
+            return new ResponseEntity<List<Dissertation>>(check, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("No Record Available Currently", HttpStatus.OK);
     }
 }

@@ -67,27 +67,22 @@ public class RequestConnController
 
     //change status of the request from newGuideRequest Page
     @PutMapping("/changeStatus/{stdid}/{gid}/{stat}")
-    public ResponseEntity<?> changeStat(@PathVariable("stdid") String stdId,@PathVariable("gid") String gId,@PathVariable("stat") String status)
-    {
-        Optional<RequestConn> exist = rcrepo.findByReqStudentAndReqGuide(stdId,gId);
+    public ResponseEntity<?> changeStat(@PathVariable("stdid") String stdId,@PathVariable("gid") String gId,@PathVariable("stat") String status) {
+        Optional<RequestConn> exist = rcrepo.findByReqStudentAndReqGuide(stdId, gId);
 
-        if(exist.isPresent())
-        {
+        if (exist.isPresent()) {
             RequestConn newRConn = exist.get();
 
             newRConn.setReqStatus(status);
             rcrepo.save(newRConn);
 
-            if(status.equals("Accept"))
-            {
+            if (status.equals("Accept")) {
                 Optional<GuideAvailibility> statcheck = arepo.findByGuideId(newRConn.getReqGuide());
 
-                if(statcheck.isPresent())
-                {
+                if (statcheck.isPresent()) {
                     GuideAvailibility look = statcheck.get();
 
-                    if(look.getCount() < 5)
-                    {
+                    if (look.getCount() < 5) {
                         Optional<RequestDForm> imm = rdfrepo.findByStudentId(newRConn.getReqStudent());
 
                         RequestDForm immi = imm.get();
@@ -104,22 +99,36 @@ public class RequestConnController
 
                         dissrepo.save(drt);
 
-                        look.setCount(look.getCount()+1);
+                        look.setCount(look.getCount() + 1);
 
                         arepo.save(look);
-                    }
-                    else{
+                    } else {
 
                         newRConn.setReqStatus("Decline");
                         rcrepo.save(newRConn);
                         return ResponseEntity.ok("Couldn't Accept as you already reached the maximum limit of students");
 
                     }
-                }
-            }
-            return ResponseEntity.ok("Successfully Status Changed for your request");
-        }
 
+
+                }
+
+                // Retrieve all pending requests from other guides for the same student
+                List<RequestConn> pendingRequests = rcrepo.findByReqStudent(stdId);
+
+                for (RequestConn request : pendingRequests) {
+                    // Check if the request is not from the current guide
+                    if (!request.getReqGuide().equals(gId)) {
+                        // Update status to "Decline" for pending requests from other guides
+                        request.setReqStatus("Decline");
+                        rcrepo.save(request);
+                    }
+                }
+                return ResponseEntity.ok("Successfully Status Changed for your request");
+            }
+
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.notFound().build();
     }
 

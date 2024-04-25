@@ -123,63 +123,63 @@ import './StudentMentored.css';
 
 const StudentMentored = () => {
     // Dummy data representing students mentored
-    const studentsMentoredData = [
-        {
-            name: 'Abc',
-            desc: 'Impact of Environment on Mental health',
-            email: 'abc@gmail.com',
-            mobile: 7418529630,
-            appliedDate: '20-7-2023',
-            submittedDate: '25-12-2023',
-            imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
-        },
-        {
-            name: 'Abc',
-            desc: 'Impact of Environment on Mental health',
-            email: 'abc@gmail.com',
-            mobile: 7418529630,
-            appliedDate: '20-7-2023',
-            submittedDate: '25-12-2023',
-            imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
-        },
-        {
-            name: 'Abc',
-            desc: 'Impact of Environment on Mental health',
-            email: 'abc@gmail.com',
-            mobile: 7418529630,
-            appliedDate: '20-7-2023',
-            submittedDate: '25-12-2023',
-            imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
-        },
-        {
-            name: 'Abc',
-            desc: 'Impact of Environment on Mental health',
-            email: 'abc@gmail.com',
-            mobile: 7418529630,
-            appliedDate: '20-7-2023',
-            submittedDate: '25-12-2023',
-            imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
-        },
-        {
-            name: 'Abc',
-            desc: 'Impact of Environment on Mental health',
-            email: 'abc@gmail.com',
-            mobile: 7418529630,
-            appliedDate: '20-7-2023',
-            submittedDate: '25-12-2023',
-            imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
-        },
-        {
-            name: 'Abc',
-            desc: 'Impact of Environment on Mental health',
-            email: 'abc@gmail.com',
-            mobile: 7418529630,
-            appliedDate: '20-7-2023',
-            submittedDate: '25-12-2023',
-            imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
-        },
-        // Add more student objects as needed
-    ];
+    // const studentsMentoredData = [
+    //     {
+    //         name: 'Abc',
+    //         desc: 'Impact of Environment on Mental health',
+    //         email: 'abc@gmail.com',
+    //         mobile: 7418529630,
+    //         appliedDate: '20-7-2023',
+    //         submittedDate: '25-12-2023',
+    //         imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
+    //     },
+    //     {
+    //         name: 'Abc',
+    //         desc: 'Impact of Environment on Mental health',
+    //         email: 'abc@gmail.com',
+    //         mobile: 7418529630,
+    //         appliedDate: '20-7-2023',
+    //         submittedDate: '25-12-2023',
+    //         imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
+    //     },
+    //     {
+    //         name: 'Abc',
+    //         desc: 'Impact of Environment on Mental health',
+    //         email: 'abc@gmail.com',
+    //         mobile: 7418529630,
+    //         appliedDate: '20-7-2023',
+    //         submittedDate: '25-12-2023',
+    //         imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
+    //     },
+    //     {
+    //         name: 'Abc',
+    //         desc: 'Impact of Environment on Mental health',
+    //         email: 'abc@gmail.com',
+    //         mobile: 7418529630,
+    //         appliedDate: '20-7-2023',
+    //         submittedDate: '25-12-2023',
+    //         imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
+    //     },
+    //     {
+    //         name: 'Abc',
+    //         desc: 'Impact of Environment on Mental health',
+    //         email: 'abc@gmail.com',
+    //         mobile: 7418529630,
+    //         appliedDate: '20-7-2023',
+    //         submittedDate: '25-12-2023',
+    //         imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
+    //     },
+    //     {
+    //         name: 'Abc',
+    //         desc: 'Impact of Environment on Mental health',
+    //         email: 'abc@gmail.com',
+    //         mobile: 7418529630,
+    //         appliedDate: '20-7-2023',
+    //         submittedDate: '25-12-2023',
+    //         imgSrc: 'https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97'
+    //     },
+    //     // Add more student objects as needed
+    // ];
 
     return (
         <div id="New_request">

@@ -31,9 +31,9 @@ public class RDFController {
 
         String id = newRDF.getStudentId();
 
-        Student std = srepo.findByEmail(id);
-        String newId = std.getId();
-        Optional<RequestDForm> check = rdfrepo.findByStudentId(newId);
+//        Student std = srepo.findByEmail(id);
+//        String newId = std.getId();
+        Optional<RequestDForm> check = rdfrepo.findByStudentId(id);
 
         if(check.isPresent())
         {
@@ -48,7 +48,7 @@ public class RDFController {
         else {
             newRDF.setRdfId(UUID.randomUUID().toString().split("-")[0]);
 
-            newRDF.setStudentId(newId);
+            newRDF.setStudentId(id);
 
             rdfs.saveRdf(newRDF);
             return ResponseEntity.ok("Form submitted successfully");
