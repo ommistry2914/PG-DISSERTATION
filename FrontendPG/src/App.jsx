@@ -1,5 +1,4 @@
 
-// import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 import { BrowserRouter as Router, Route, Routes ,Navigate, useParams} from "react-router-dom";
 

@@ -1,4 +1,4 @@
-.trigger {
+/* .trigger {
     font-size: 18px;
     line-height: 64px;
     padding: 0 24px;
@@ -19,4 +19,74 @@
 
 .site-layout .site-layout-background {
     background: #fff;
+} */
+
+/* Layout.css */
+
+/* Sidebar Trigger */
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+/* Logo */
+.logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+}
+
+/* Site Layout Background */
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+/* Additional Styles for Search Input */
+.ant-input-group-wrapper.ant-input-search-enter-button {
+    width: 100%;
+}
+
+.ant-input-search.ant-input-affix-wrapper {
+    width: 100%;
+}
+
+.ant-input-search-enter-button {
+    width: auto;
+    height: auto;
+}
+
+/* Adjusting Content Padding */
+.site-layout .site-layout-background .ant-layout-content {
+    padding: 24px;
+    overflow: initial;
+}
+
+/* Adjusting Layout for Collapsed Sidebar */
+.ant-layout-sider-collapsed .logo {
+    margin: 16px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.ant-layout-sider-collapsed .ant-menu-inline,
+.ant-layout-sider-collapsed .ant-menu-item,
+.ant-layout-sider-collapsed .ant-menu-item-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ant-layout-sider-collapsed .ant-menu-item-icon {
+    margin-right: 0;
+}
+
+.ant-layout-sider-collapsed .ant-menu-inline .ant-menu-item::after {
+    display: none;
 }

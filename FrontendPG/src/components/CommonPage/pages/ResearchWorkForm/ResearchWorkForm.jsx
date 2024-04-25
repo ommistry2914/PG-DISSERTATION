@@ -9,11 +9,13 @@ import axios from 'axios';
 function ResearchWorkForm() {
   const { studentid, taskid } = useParams();
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [File, setFile] = useState(null);
   const [formData, setFormData] = useState({
     taskName: '',
     abstract: '',
     references: '',
-    file: null
+    file: '',
   });
   const [notification,setNotification]=useState(null);
 
@@ -26,13 +28,12 @@ function ResearchWorkForm() {
   };
 
   const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      file: e.target.files[0]
-    });
+   setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
+
+  
     e.preventDefault();
     const currentDate = new Date();
     const currentDateTimeString = currentDate.toISOString();
@@ -40,12 +41,26 @@ function ResearchWorkForm() {
         taskName: e.target.taskName.value,
         summary: e.target.abstract.value,
         references: e.target.references.value,
+        fileSubmitted: e.target.file.value,
         dateofsubmission: currentDateTimeString
     };
 
     console.log('Form Data:', formData);
 
     try {
+
+      const formDatas = new FormData();
+      formDatas.append('file', File);
+
+     
+      const fileResponse = await axios.post('http://localhost:8080/api/auth/upload', formDatas);
+      if(fileResponse.ok){
+        console.log("success");
+      }
+      else{
+        console.log("error");
+      }
+
         const response = await fetch(`http://localhost:8080/${studentid}/submit-for/${taskid}/add-work`, {
             method: 'POST',
             headers: {
@@ -70,12 +85,12 @@ function ResearchWorkForm() {
           console.log(e);
         }
         console.log(notification);
-        window.location.href = `/${studentid}/submit-for`;
+        // window.location.href = `/${studentid}/submit-for`;
           setFormData({
             taskName: '',
             abstract: '',
             references: '',
-            file: null
+            file: ''
           });
           console.log('Work added successfully!');
           setShowSuccessAlert(true);
@@ -104,7 +119,8 @@ function ResearchWorkForm() {
         </ol>
       </nav>
       <div className="common-pg-forms">
-        <form onSubmit={handleSubmit} className='common-pg-add-work-form'>
+      <form encType='multipart/form-data' onSubmit={handleSubmit} className='common-pg-add-work-form'>
+
           <h4 style={{ alignSelf: 'center', color: 'purple' }}>Research Work Submission</h4>
           {showSuccessAlert && (
             <div className="alert alert-success" role="alert">
@@ -154,12 +170,24 @@ function ResearchWorkForm() {
             Attach Research Paper<sup className='common-pg-necessary-sup'>*</sup>
             <input
               type="file"
-              name="file"
+              name="files"
               className='form-control'
               onChange={handleFileChange}
               required
             />
           </label></div>
+          <div className="row">
+            <label>
+              File Name<sup className='common-pg-necessary-sup'>*</sup>
+              <input
+              type='text'
+                name="file"
+                className='form-control'
+                value={formData.filename}
+                onChange={handleChange}
+                required
+              />
+            </label></div>
           <button type="submit" className='submit'>Submit</button>
         </form>
       </div>

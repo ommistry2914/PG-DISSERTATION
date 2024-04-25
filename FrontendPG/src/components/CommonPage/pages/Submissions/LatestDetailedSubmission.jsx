@@ -39,6 +39,7 @@ const DetailedSubmission = () => {
     fetchSubmission();
   }, [studentid, submissionid, taskid]);
 
+  
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -164,9 +165,9 @@ const DetailedSubmission = () => {
         };
 
 
-  const handleDownload = () => {
-    alert('Downloading file...');
-  };
+  // const handleDownload = () => {
+  //   alert('Downloading file...');
+  // };
 
 
   if (!submission) {
@@ -203,7 +204,7 @@ const DetailedSubmission = () => {
             <p><strong>File:</strong></p>
             <div className="common-pg-sub-details">
               <p>{submission.fileSubmitted}
-                <button onClick={handleDownload} className="common-pg-add-work-submit"><FaDownload /> </button>
+                <button  className="common-pg-add-work-submit"><a download="" href={`C://Users/ommis/AppData/Local/Temp/tomcat.8080.7384810754046742084/work/Tomcat/localhost/ROOT/assets/${submission.fileSubmitted}`} >download</a> </button>
               </p>
             </div>
           </div>

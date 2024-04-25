@@ -40,38 +40,16 @@ html {
 }
 
 .card-img {
+  height: 200px;
   display: flex;
   border-radius: 12px;
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
 }
 
 .card-img img {
   width: 100%;
-  display: block;
-}
-
-.img-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: hsla(178, 100%, 50%, 0.5);
-  display: none;
-}
-
-.img-view img {
-  position: absolute;
-  width: 50px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.card-img:hover .img-view {
-  display: block;
-  cursor: pointer;
+  /* display: block; */
 }
 
 
