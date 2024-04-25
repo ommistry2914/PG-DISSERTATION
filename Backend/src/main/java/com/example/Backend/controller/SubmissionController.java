@@ -86,5 +86,18 @@ public class SubmissionController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/submissions/{stdid}")
+    public String getandshow(@PathVariable("stdid") String sid)
+    {
+        Optional<Submission> check = submissionRepo.findByUserId(sid);
+
+        if(check.isPresent())
+        {
+            return "Submission Exist";
+        }
+
+        return "Submission Not available";
+    }
+
 }
 

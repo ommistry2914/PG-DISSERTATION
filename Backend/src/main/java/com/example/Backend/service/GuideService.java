@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.Backend.model.Guide;
 import com.example.Backend.repository.GuideRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class GuideService {
      @Autowired
@@ -26,14 +28,15 @@ public class GuideService {
         return guideRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     public Guide saveGuide(Guide guide) {
 
-        // GuideAvailibility ag = new GuideAvailibility();
+         GuideAvailibility ag = new GuideAvailibility();
 
-        // ag.setAvailId(UUID.randomUUID().toString());
-        // ag.setGuideId(guide.getGuideId());
-        // ag.setCount(0);
-        // arepo.save(ag);
+         ag.setAvailId(UUID.randomUUID().toString());
+         ag.setGuideId(guide.getId());
+         ag.setCount(0);
+         arepo.save(ag);
 
          return guideRepository.save(guide);
     }

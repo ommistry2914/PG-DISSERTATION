@@ -138,7 +138,8 @@
 
 import React from 'react';
 import './Guidecard.css';
-import { Link } from 'react-router-dom';
+
+import  { Link } from "react-router-dom";
 
 const GuideCard = () => {
   // Sample data for demonstration
@@ -181,9 +182,9 @@ const GuideCard = () => {
           </div>
         ))}
       </div>
-      <button className="trview_more">
-        <Link to="/experts">View More</Link>
-      </button>
+      <div className='viewmore'>
+      <Link to="/requestguidepage"><button className='button-view'>View More</button></Link>
+      </div>
     </div>
   );
 };
