@@ -12,8 +12,11 @@ export default function Schedule() {
   const [note, setNote] = useState('');
   const [task, setTasks] = useState([]);
 
+
+  const [eventDetails, setEventDetails] = useState({ title: '', date: '', From: '', to: '',description: '' });
   const { studentid, taskId } = useParams();
   const [events, setEvents] = useState([]);
+  
   const formattedDate = selectedDay.toLocaleDateString(undefined, {
     day: 'numeric',
     month: 'long',
@@ -137,10 +140,7 @@ export default function Schedule() {
         console.log('Event added successfully!');
         setSelectedDay(new Date());
         await fetchEvents(new Date());
-        e.target.title.value = '';
-        e.target.From.value = '';
-        e.target.to.value = '';
-        e.target.description.value = '';
+        setEventDetails({title: '', date: '', From: '', to: '',description: '' });
       } else {
         console.error('Failed to add event');
       }
@@ -182,6 +182,12 @@ nextDay.setDate(selectedDay.getDate() + 1);
 
 
 
+   const handleInputChange = (e) => {
+     const { name, value } = e.target;
+     setEventDetails({ ...eventDetails, [name]: value });
+   };
+
+
   return (
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
@@ -198,7 +204,7 @@ nextDay.setDate(selectedDay.getDate() + 1);
           events={events}
         />
         {selectedDay && (
-          <Notes selectedDay={selectedDay} note={note} onNoteChange={onNoteChange} onSubmitNote={onSubmitNote} onSubmitEvent={onSubmitEvent} />
+          <Notes selectedDay={selectedDay} note={note} eventDetails={eventDetails} handleInputChange={handleInputChange} onNoteChange={onNoteChange} onSubmitNote={onSubmitNote} onSubmitEvent={onSubmitEvent} />
 
         )}
       </div>

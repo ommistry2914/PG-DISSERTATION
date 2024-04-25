@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import './calender.css';
 
-function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent }) {
+function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent, eventDetails, handleInputChange }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [eventDetails, setEventDetails] = useState({ title: '', date: '', From: '',to: '',   description: '' });
+  // const [eventDetails, setEventDetails] = useState({ title: '', date: '', From: '', to: '',description: '' });
   const [notify, setNotify] = useState('');
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEventDetails({ ...eventDetails, [name]: value });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setEventDetails({ ...eventDetails, [name]: value });
+  // };
 
  
   const handleSubmitEvent = (e) => {
@@ -39,14 +39,14 @@ function Notes({ selectedDay, note, onNoteChange, onSubmitNote, onSubmitEvent })
               <div className="row">
                 <div className="col-sm-12">
                   <label>Title:</label>
-                  <input type="text" name="title" placeholder="Title" value={eventDetails.title} onChange={handleInputChange} required/>
+                  <input type="text" name="title" placeholder="Title" value={eventDetails.title} onChange={handleInputChange}  required/>
                 </div>
               </div>
 
               <div className="row">
                 <div className="col-sm-6">
                   <label>From:</label>
-                  <input type="datetime-local" name="From" value={eventDetails.from} onChange={handleInputChange} required/>
+                  <input type="datetime-local" name="From" value={eventDetails.From} onChange={handleInputChange} required/>
                 </div>
                 <div className="col-sm-6">
                   <label>To:</label>
