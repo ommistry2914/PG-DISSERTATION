@@ -27,8 +27,6 @@ import RequestGuide from "./components/RequestConnection/RequestGuide";
 import ViewRDF from "./components/RequestConnection/ViewRDF";
 import ProfilePage from "./components/Student/ProfilePage";
 // import Form from "./components/CommonPage/pages/ResearchWorkForm/Form";
-import AuthPage from "./components/ChatBot/Chatlogin";
-import ChatsPage from "./components/ChatBot/Chat";
 import PastStudentData from "./components/PastWork/PastStudentData";
 import OurGuideData from "./components/PastWork/OurGuideData";
 import PastPage from "./components/PastWork/PastPage";
@@ -86,7 +84,7 @@ const App = () => {
         <Route exact path="/requestform/:sid" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
-        <Route exact path="/chatroom" element={<ChatRoom />}></Route>
+        {/* <Route exact path="/chatroom" element={<ChatRoom />}></Route> */}
 
 
         <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>

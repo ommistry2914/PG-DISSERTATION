@@ -15,15 +15,10 @@ const Profile = () => {
   const [progress, setProgress] = useState([]);
   const [completeTasks, setCompleteTasks] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
-<<<<<<< HEAD
-  const [credits, setCredits] = useState(0);
-  const [totalCredits, setTotalCredits] = useState(0);
-=======
   const [credits,setCredits]=useState(0);
   const [totalCredits,setTotalCredits]=useState(0);
   const [studentDetails , setStudentDetails] = useState({});
 
->>>>>>> 0d3707c70884fe93c4a586826908bfb9a33d5ffc
   const { studentid } = useParams();
   const MyLottieAnimation = () => {
     const defaultOptions = {
