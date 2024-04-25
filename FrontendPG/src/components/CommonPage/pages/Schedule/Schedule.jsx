@@ -52,7 +52,10 @@ export default function Schedule() {
 
       data.forEach(item => {
         if (item.notes) {
+          // const noteDate = new Date(item.date);
+          // eventDates.push(noteDate.toDateString());
           const noteDate = new Date(item.date);
+          noteDate.setDate(noteDate.getDate() - 1); // Subtract one day
           eventDates.push(noteDate.toDateString());
         }
       });
@@ -135,6 +138,9 @@ export default function Schedule() {
         setSelectedDay(new Date());
         await fetchEvents(new Date());
         e.target.title.value = '';
+        e.target.From.value = '';
+        e.target.to.value = '';
+        e.target.description.value = '';
       } else {
         console.error('Failed to add event');
       }
@@ -149,14 +155,17 @@ export default function Schedule() {
     e.preventDefault();
 
     try {
+      const nextDay = new Date(selectedDay);
+nextDay.setDate(selectedDay.getDate() + 1);
       const response = await fetch(`http://localhost:8080/${studentid}/studentguide/schedule/notes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ date: selectedDay, notes: note })
+        body: JSON.stringify({ date: nextDay, notes: note })
       });
 
+      console.log(selectedDay)
       if (response.ok) {
         await fetchEvents(new Date());
         setNote('');
