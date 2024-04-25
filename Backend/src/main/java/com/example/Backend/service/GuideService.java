@@ -28,14 +28,14 @@ public class GuideService {
 
     public Guide saveGuide(Guide guide) {
 
-        GuideAvailibility ag = new GuideAvailibility();
+         GuideAvailibility ag = new GuideAvailibility();
 
-        ag.setAvailId(UUID.randomUUID().toString());
-        ag.setGuideId(guide.getGuideId());
-        ag.setCount(0);
-        arepo.save(ag);
+         ag.setAvailId(UUID.randomUUID().toString());
+         ag.setGuideId(guide.getGuideId());
+         ag.setCount(0);
+         arepo.save(ag);
 
-        return guideRepository.save(guide);
+         return guideRepository.save(guide);
     }
 
     public void deleteGuideById(String id) {
