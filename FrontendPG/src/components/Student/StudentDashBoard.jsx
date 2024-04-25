@@ -8,6 +8,11 @@ import { HiTrendingUp } from "react-icons/hi";
 import { GrTemplate } from "react-icons/gr";
 import { SiGoogleforms } from "react-icons/si";
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+
+
+import Sidebar from '../CommonPage/UI/Sidebar/Sidebar';
+import {  studentbardata } from '../CommonPage/UI/Sidebar/sidebardata';
 
 const StudentDashboard = () => {
   const [showCalendar, setShowCalendar] = useState(true);
@@ -82,6 +87,8 @@ const StudentDashboard = () => {
 
   return (
     <div className="sd-main-bg">
+        <Sidebar sidebarData={studentbardata}/>
+
 
       <div className="sd-sidebar" style={{ width: showCalendar ? '20%' : '25%' }}>
         <h6 className="sd-heading">
@@ -90,10 +97,13 @@ const StudentDashboard = () => {
         <ul className="sd-navlist">
         <li><GrTemplate />&nbsp;&nbsp;&nbsp;Templates</li>
         <li><PiStudentFill />&nbsp;&nbsp;&nbsp;Past Work</li>
-        <li><FaChalkboardTeacher />&nbsp;&nbsp;&nbsp;Request Guide</li>
+        <li><FaChalkboardTeacher />&nbsp;&nbsp;&nbsp;Request Guide
+        </li>
         <li><HiTrendingUp />&nbsp;&nbsp;&nbsp;Trending Topics</li>
         <li><FaUserEdit />&nbsp;&nbsp;&nbsp;Edit Profile</li>
         <li><SiGoogleforms />&nbsp;&nbsp;&nbsp;Request &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissertation Form</li>
+        <Link to='/chatlogin'>
+        <li><SiGoogleforms />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chatbox</li></Link>
         </ul>
       </div>
 

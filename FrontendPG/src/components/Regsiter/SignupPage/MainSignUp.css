@@ -23,12 +23,14 @@
   justify-content: center;
   padding: 0 2rem;
   padding-left: 7rem;
+  height: 800px;
+
 }
 
 .form-content {
   width: 85%;
   padding: 2rem 0;
-  height: 90%;
+  height: 100%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
@@ -57,7 +59,9 @@
 }
 
 .signup-button {
-  width: calc(100% - 4rem);
+  width: calc(100% - 4.7rem);
+  float: left;
+  margin-left: 1.9rem;
   background-color: var(--secondary-color-1);
 }
 

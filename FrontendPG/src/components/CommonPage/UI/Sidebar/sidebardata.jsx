@@ -22,24 +22,47 @@ export const sidebardata = [
   { path: "schedule", text: "Schedule", icon: <FaIcons.FaCalendar /> }
 ];
 
-export const GuideSidebar = [
+
+export const guidebardata = [
   { path: "/mentorprofile/", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
   {
      text: "student list", icon: <FaIcons.FaChalkboardTeacher />, subMenu: [
       {
         text: 'student mentored',
-        path: '/mentorprofile/studentmentored',
+        path: '/mentorprofile/pastStudents',
         icon: <FaIcons.FaUsers />,
       },
       {
         text: 'new request',
-        path: '/mentorprofile/newrequest',
+        path: '/mentorprofile/request',
         icon: <FaIcons.FaUser />,
       },
     ],
   },
-  { path: "/mentorprofile/ongoingdis", text: "Progress", icon: <FaIcons.FaChartBar /> },
-  { path: "/studentguide/schedule", text: "Schedule", icon: <FaIcons.FaCalendar /> }
+  { path: "/mentorprofile/ongoing", text: "Ongoing ", icon: <FaIcons.FaChartBar /> },
+  { path: "/studentguide/edit", text: "edit", icon: <FaIcons.FaCalendar /> }
 
 ];
+
+export const studentbardata = [
+  { path: "/mentorprofile/", text: "Dashboard", icon: <FaIcons.FaFoursquare /> },
+  {
+     text: "student list", icon: <FaIcons.FaChalkboardTeacher />, subMenu: [
+      {
+        text: 'student mentored',
+        path: '/mentorprofile/pastStudents',
+        icon: <FaIcons.FaUsers />,
+      },
+      {
+        text: 'new request',
+        path: '/mentorprofile/request',
+        icon: <FaIcons.FaUser />,
+      },
+    ],
+  },
+  { path: "/mentorprofile/ongoing", text: "Ongoing ", icon: <FaIcons.FaChartBar /> },
+  { path: "/studentguide/edit", text: "edit", icon: <FaIcons.FaCalendar /> }
+
+];
+
 

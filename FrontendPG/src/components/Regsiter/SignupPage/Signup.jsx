@@ -43,7 +43,7 @@ const Signup = () => {
       const response = await axios.post('http://localhost:8080/api/auth/student', payload);
 
       console.log('Student saved:', response.data);
-      navigate('/mentorprofile');
+      navigate('/studentdashboard');
       setLoading(false); 
     } catch (error) {
       console.error('Error saving student:', error);
@@ -102,7 +102,8 @@ const Signup = () => {
                     name="image"
                     rules={[{ required: true, message: 'Please upload your image!' }]}
                   >
-                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                    <input type="file" accept="image/*" onChange={handleImageChange}
+                    style={{marginTop : '-10px', borderColor: '#D1AEF9',size:'10px'}} />
                   </Form.Item>
             {/* <Form.Item
               label="Upload Image :"
