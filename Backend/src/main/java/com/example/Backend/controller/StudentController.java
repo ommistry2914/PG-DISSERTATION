@@ -92,7 +92,7 @@ public ResponseEntity<Map<String, Boolean>> checkStudentEmail(@PathVariable Stri
             return ResponseEntity.ok(std.get());
         }
         else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("No data");
         }
     }
 
@@ -144,6 +144,19 @@ public ResponseEntity<Map<String, Boolean>> checkStudentEmail(@PathVariable Stri
                 return ResponseEntity.ok("Profile updated successfully");
             }
 return  ResponseEntity.ok("Profile not found ");
+    }
+
+    @GetMapping("/getuserid/{email}")
+            public String getuserid(@PathVariable("email") String mail)
+    {
+        Optional<User> u = urepo.findByEmail(mail);
+
+        if(u.isPresent())
+        {
+            return u.get().getId();
+        }
+
+        return "No user";
     }
 }
 

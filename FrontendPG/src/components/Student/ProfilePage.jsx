@@ -93,7 +93,7 @@ const ProfilePage = () => {
     branch: '',
     prn: '',
     image: '',
-    phone: '',
+    phoneNumber: '',
     id : ''
   });
   const [editMode, setEditMode] = useState(false);
@@ -101,10 +101,10 @@ const ProfilePage = () => {
 
   const [editedUser, setEditedUser] = useState({
     name: '',
-    phone: ''
+    phoneNumber: ''
   });
 
-  const { authenticated, useremail } = useAuth();
+  const { authenticated, useremail , id } = useAuth();
 
   useEffect(() => {
     fetchDetails();
@@ -119,12 +119,12 @@ const ProfilePage = () => {
         branch: response.data.branch,
         prn: response.data.prn,
         image: response.data.image_url,
-        phone: response.data.phoneNumber,
+        phoneNumber: response.data.phoneNumber,
         id : response.data._id
       });
       setEditedUser({
         name: response.data.name,
-        phone: response.data.phoneNumber
+        phoneNumber: response.data.phoneNumber
       });
     } catch (error) {
       console.error('Error fetching profile details:', error);
@@ -139,14 +139,14 @@ const ProfilePage = () => {
     try {
       // Perform save operation here
       const response = await axios.get(`http://localhost:8080/api/auth/student/getstd/${useremail}`);
-      const sid = response.data._id;
+      const sid = response.data.id;
       const newdata = await axios.put(`http://localhost:8080/api/auth/student/editprofile/${sid}`, editedUser);
       setSubmitMessage(newdata.data);
       // For demonstration purposes, just updating state
       setUser({
         ...user,
         name: editedUser.name,
-        phone: editedUser.phone
+        phoneNumber: editedUser.phoneNumber
       });
 
       // Show success message
@@ -164,7 +164,7 @@ const ProfilePage = () => {
   };
 
   const handlePhoneChange = (e) => {
-    setEditedUser({ ...editedUser, phone: e.target.value });
+    setEditedUser({ ...editedUser, phoneNumber: e.target.value });
   };
 
   return (
@@ -179,8 +179,8 @@ const ProfilePage = () => {
               <img src={user.image} alt="name" className="rg-dp" />
             </div>
             <div>
-              <h4 className="rg-name">Name :</h4>
-              {editMode ? (
+              <p className="rg-name">Name :</p>
+              
                 <input
                   type="text"
                   name="name"
@@ -188,27 +188,26 @@ const ProfilePage = () => {
                   onChange={handleNameChange}
                   className='form-control'
                 />
-              ) : (
-                <p className="rg-name">{user.name}</p>
-              )}
+              
               <p className="rg-name">Branch :</p>
-              <p className="rg-name">{user.branch}</p>
+              <input type='text' value={user.branch} className='form-control' readOnly></input>
+              {/* //<p className="rg-name">{user.branch}</p> */}
               <p className="rg-name">PRN :</p>
-              <p className="rg-name">{user.prn}</p>
-              <h4 className="rg-name">Phone Number :</h4>
-              {editMode ? (
+              <input type='text' value={user.prn} className='form-control' readOnly></input>
+              {/* //<p className="rg-name">{user.prn}</p> */}
+              <p className="rg-name">Phone Number :</p>
+              
                 <input
                   type="text"
                   name="phone"
-                  value={editedUser.phone}
+                  value={editedUser.phoneNumber}
                   onChange={handlePhoneChange}
                   className='form-control'
                 />
-              ) : (
-                <p className="rg-name">{user.phone}</p>
-              )}
+              
               <p className="rg-name">Email :</p>
-              <p className="rg-name">{user.email}</p>
+              <input type='text' value={user.email} className='form-control' readOnly></input>
+              {/* //<p className="rg-name">{user.email}</p> */}
               <div className="rg-buttonCont">
                 {!editMode ? (
                   <button className="rg-btn" id="rg-guide-details" onClick={handleEdit}>

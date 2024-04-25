@@ -55,9 +55,9 @@ public class RDFController {
         }
     }
 
-    @GetMapping("/getRDF/{rdfid}")
-    public ResponseEntity<RequestDForm> getRDF(@PathVariable("rdfid") String rdfId) {
-        Optional<RequestDForm> form = rdfrepo.findById(rdfId);
+    @GetMapping("/getRDF/{sid}")
+    public ResponseEntity<RequestDForm> getRDF(@PathVariable("sid") String sId) {
+        Optional<RequestDForm> form = rdfrepo.findByStudentId(sId);
         if (!form.isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -67,7 +67,7 @@ public class RDFController {
 
     @PutMapping("/editRDF/{rdfid}")
     public ResponseEntity<String> updateRDF(@PathVariable("rdfid") String rdfId, @RequestBody RequestDForm updatedRDF) {
-        Optional<RequestDForm> form = rdfrepo.findById(rdfId);
+        Optional<RequestDForm> form = rdfrepo.findByStudentId(rdfId);
         if (!form.isPresent()) {
             return ResponseEntity.notFound().build();
         }

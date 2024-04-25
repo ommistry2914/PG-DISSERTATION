@@ -199,11 +199,11 @@ setT2(1);
 setT3(1);
 setT4(1);
 
-console.log("IN TIMELINE 1");
-console.log("t1 : ",t1);
-console.log("t2 : ",t2);
-console.log("t3 : ",t3);
-console.log("t4 : ",t4);
+// console.log("IN TIMELINE 1");
+// console.log("t1 : ",t1);
+// console.log("t2 : ",t2);
+// console.log("t3 : ",t3);
+// console.log("t4 : ",t4);
     }
     else
     {
@@ -241,11 +241,11 @@ setT2(1);
 setT3(1);
 setT4(1);
 
-console.log("IN TIMELINE 2");
-console.log("t1 : ",t1);
-console.log("t2 : ",t2);
-console.log("t3 : ",t3);
-console.log("t4 : ",t4);
+// console.log("IN TIMELINE 2");
+// console.log("t1 : ",t1);
+// console.log("t2 : ",t2);
+// console.log("t3 : ",t3);
+// console.log("t4 : ",t4);
       }
     }
 
@@ -280,11 +280,11 @@ setT2(1);
 setT3(1);
 setT4(1);
 
-console.log("IN TIMELINE 3");
-console.log("t1 : ",t1);
-console.log("t2 : ",t2);
-console.log("t3 : ",t3);
-console.log("t4 : ",t4);
+// console.log("IN TIMELINE 3");
+// console.log("t1 : ",t1);
+// console.log("t2 : ",t2);
+// console.log("t3 : ",t3);
+// console.log("t4 : ",t4);
       }
     }
 
@@ -311,11 +311,11 @@ console.log("t4 : ",t4);
       setT3(1);
       setT4(1);
 
-      console.log("IN TIMELINE 4");
-console.log("t1 : ",t1);
-console.log("t2 : ",t2);
-console.log("t3 : ",t3);
-console.log("t4 : ",t4);
+//       console.log("IN TIMELINE 4");
+// console.log("t1 : ",t1);
+// console.log("t2 : ",t2);
+// console.log("t3 : ",t3);
+// console.log("t4 : ",t4);
     }
     else
     {
@@ -332,11 +332,11 @@ setT2(1);
 setT3(1);
 setT4(1);
 
-console.log("IN TIMELINE 4");
-console.log("t1 : ",t1);
-console.log("t2 : ",t2);
-console.log("t3 : ",t3);
-console.log("t4 : ",t4);
+// console.log("IN TIMELINE 4");
+// console.log("t1 : ",t1);
+// console.log("t2 : ",t2);
+// console.log("t3 : ",t3);
+// console.log("t4 : ",t4);
       }
     }
 

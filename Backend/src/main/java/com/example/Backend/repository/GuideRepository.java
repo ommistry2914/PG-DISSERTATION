@@ -12,4 +12,6 @@ public interface GuideRepository extends MongoRepository<Guide, String> {
     List<Guide> getGuidesByEmail(String email);
 
     Optional<Guide> findByEmail(String gmail);
+
+    Optional<Guide> findByGuideId(String gId);
 }
