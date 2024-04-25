@@ -1,5 +1,6 @@
 package com.example.Backend.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -14,5 +15,6 @@ public interface TasksRepository extends MongoRepository<Tasks, String>{
 
     List<Tasks> findByEndDate(java.util.Date date);
 
+    List<Tasks> findByStatusAndEndDateBefore(String pending, Date date);
 }
 

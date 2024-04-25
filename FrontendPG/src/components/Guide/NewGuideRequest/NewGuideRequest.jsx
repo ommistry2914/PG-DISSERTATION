@@ -8,7 +8,7 @@ const NewGuideRequest = () => {
   const [submitMessage, setSubmitMessage] = useState('');
   const [refresh, setRefresh] = useState(false); // State to trigger page refresh
 
-  const guideId = "G30";
+  const guideId = "0987654321";
 
   useEffect(() => {
     fetchRequests();

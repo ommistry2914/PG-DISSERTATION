@@ -1,6 +1,7 @@
 import React from 'react';
 import './Guidecard.css';
 import img1 from '../assests/techo-home.png'
+import  { Link } from "react-router-dom";
 
 const GuideCard = () => {
   return (
@@ -31,7 +32,7 @@ const GuideCard = () => {
         </div>
       </div>
       <div className='viewmore'>
-        <button className='button-view'>View More</button>
+      <Link to="/requestguidepage"><button className='button-view'>View More</button></Link>
       </div>
     </div>
   );

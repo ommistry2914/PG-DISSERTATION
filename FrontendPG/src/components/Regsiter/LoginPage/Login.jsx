@@ -27,13 +27,14 @@ const Login = () => {
      
       if (response.status === 200) {
         
-        const { username, roles, email } = response.data;
+        const { username, roles, email , id } = response.data;
   
       
         const role = roles.includes('ROLE_GUIDE') ? 'guide' : 'student';
   
        
-        login({ username, role, email });
+        login({ username, role, email , id});
+        console.log('Login successful with id:', id);
   
        
         if (role === "guide") {
@@ -58,7 +59,7 @@ const Login = () => {
   
             if (checkResponse.status === 200 && checkResponse.data.exists) {
              
-              navigate('/studentdashboard');
+              navigate(`/studentdashboard/${id}`);
             } else {
               
               navigate('/signup/student');

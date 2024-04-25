@@ -1,9 +1,9 @@
 package com.example.Backend.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.example.Backend.model.GuideAvailibility;
+import com.example.Backend.repository.GuideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +23,9 @@ public class GuideController {
 
     @Autowired
     private GuideService guideService;
+
+    @Autowired
+    private GuideRepository grepo;
 
     @GetMapping
     public List<Guide> getAllGuides() {
@@ -55,4 +58,24 @@ public List<Guide> getGuideByEmail(@PathVariable String email){
  return guideService.getGuidesByEmail(email);
 }
 
+    @GetMapping("/getidbymail/{gmail}")
+    public String giveid(@PathVariable("gmail") String gm)
+    {
+        Optional<Guide> g = grepo.findByEmail(gm);
+
+        if(g.isPresent())
+        {
+            return g.get().getId();
+        }
+
+        return "KUCH NAHI MILA";
+    }
+
+    @GetMapping("/getmailfromid/{gid}")
+    public String getmail(@PathVariable("gid") String gId)
+    {
+        Optional<Guide> guide = grepo.findById(gId);
+
+        return guide.get().getEmail();
+    }
 }

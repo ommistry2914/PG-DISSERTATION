@@ -1,6 +1,7 @@
 package com.example.Backend.service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,15 +52,16 @@ public class NotificationService {
 
     public Notification checkAndSendNotifications() {
         List<Tasks> pendingTasks = tasksRepository.findByStatusAndEndDateBefore("pending", new Date());
+        Notification notification = null;
         for (Tasks task : pendingTasks) {
             // Send notification to user
             saveNotification(task.getUserId(), "Task overdue: " + task.getTaskName());
 
             // Store notification info in MongoDB
-            Notification notification = new Notification();
+            notification = new Notification();
             notification.setsenderId(task.getUserId());
             notification.setType("Task overdue: " + task.getTaskName());
-            
+
         }
         return notificationRepository.save(notification);
     }

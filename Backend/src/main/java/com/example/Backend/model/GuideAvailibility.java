@@ -43,4 +43,5 @@ public class GuideAvailibility
     public void setCount(int count) {
         this.count = count;
     }
+
 }
