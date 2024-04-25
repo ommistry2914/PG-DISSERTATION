@@ -2,45 +2,47 @@ import React, { useEffect, useState } from "react";
 import "./RequestGuide.css";
 import img1 from "../../assests/techo-home.png";
 import axios from "axios";
-//import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; 
 import { useAuth } from "../../AuthContext";
 
 const RequestGuide = () => {
     const [submitMessage, setSubmitMessage] = useState('');
     const [successGuide, setSuccessGuide] = useState('');
     const [guides, setGuides] = useState([]);
-    // const [sendSuccess,setSendSuccess]=useState(false);
-    // const [sendError,setSendError]=useState(false);
+    const [sendSuccess,setSendSuccess]=useState(false);
+    const [sendError,setSendError]=useState(false);
+    const [notification,setNotification]=useState({});
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const{authenticated, id} = useAuth();
+    const{authenticated, id , useremail} = useAuth();
     console.log(authenticated);
     console.log("ID FROM PARAMS : ",id);
+    console.log("MAIL CHECK : ",useremail);
 
-    const stdid = id;
-
-    // useEffect(() => {
-    //     // if (!authenticated) {
-    //     //     // If the user is not authenticated, redirect to the login page
-    //     //     navigate('/login');
-    //     // } else {
-    //         fetchGuides();
-    //     // }
-    // }, []);
+    //const stdid = id;
 
     useEffect(() => {
-        console.log("Authenticated:", authenticated);
-        console.log("ID:", id);
-        fetchGuides();
-    }, [authenticated, id]);
+        if (!authenticated) {
+            // If the user is not authenticated, redirect to the login page
+            navigate('/login');
+        } else {
+            fetchGuides();
+        }
+    }, [id]);
+
+    // useEffect(() => {
+    //     // console.log("Authenticated:", authenticated);
+    //     // console.log("ID:", id);
+    //     fetchGuides();
+    // }, [authenticated, id]);
     
     const fetchGuides = async () => {
         try {
             const response = await axios.get('http://localhost:8080/api/auth/guide');
 
             const updatedGuides = await Promise.all(response.data.map(async (guide) => {
-                const guideStatus = await axios.get(`http://localhost:8080/checkAvailability/checkfor/${guide.guideId}`);
+                const guideStatus = await axios.get(`http://localhost:8080/checkAvailability/checkfor/${guide.id}`);
                 const availability = guideStatus.data;
                 return { ...guide, status: availability };
             }));
@@ -54,46 +56,51 @@ const RequestGuide = () => {
 
     const handleRequest = async (e, gid) => {
         e.preventDefault();
+        console.log("Hello from handle");
         try {
-//             const stdid = "660d6064d7d9702a3b6d8851";
-// const stdid = "662935252502165c28b30121";
 
+            const std = await axios.get(`http://localhost:8080/api/auth/student/getuserid/${useremail}`);
+ const stdid = std.data;
+ console.log("LE BHAI : ",stdid);
+console.log("Hello from handle p1");
             const rdf = await axios.get(`http://localhost:8080/rdfActions/getrdf/from/${stdid}`);
             const rdfresponse = rdf.data;
+            console.log("RDF : ",rdfresponse);
 
             const requestBody = {
                 ReqStudent: stdid,
                 RdfId: rdfresponse,
                 ReqGuide: gid
             };
-
+            console.log(requestBody)
+            console.log("Hello from handle p2");
             await axios.post(`http://localhost:8080/requestConnection/addReqBy/${stdid}/with/${rdfresponse}/to/${gid}`, requestBody);
             console.log("Request Sent");
 
-//             const res = await axios.get(`http://localhost:8080/api/auth/guide/getmailfromid/${gid}`);
+            const res = await axios.get(`http://localhost:8080/api/auth/guide/getmailfromid/${gid}`);
 
-//             let today=new Date();
-//     const {useremail}=useAuth();
+            let today=new Date();
     
-//     const [notification,setNotification]=useState({
-//         senderId:useremail,
-//         receiverId:res.data,
-//         createdAt:today,
-//         type:'New Request',
-//         link:'http://localhost:5173/mentorprofile/request'
-// });
+    
+    setNotification({
+        senderId:useremail,
+        receiverId:res.data,
+        createdAt:today,
+        type:'New Request',
+        link:'http://localhost:5173/mentorprofile/request'
+});
 
-//         const response=axios.post('http://localhost:8080/api/auth/notification',notification);
-//         if((await response).status===200){
-//           console.log('Notification send');
-//           setSendSuccess(true);
-//           setSendError(false);
-//         }
-//         else{
-//             setSendError(true);
-//             setSendSuccess(false);
-//         }
-//         console.log(notification);
+        const response=axios.post('http://localhost:8080/api/auth/notification',notification);
+        if((await response).status===200){
+          console.log('Notification send');
+          setSendSuccess(true);
+          setSendError(false);
+        }
+        else{
+            setSendError(true);
+            setSendSuccess(false);
+        }
+        console.log(notification);
         
     
 
@@ -123,7 +130,7 @@ const RequestGuide = () => {
 
                                 <button className="rg-btn" id="rg-guide-details">Details</button>
                                 {guide.status !== "Occupied" && (
-                                    <button className="rg-btn" id="rg-guide-connect" onClick={(e) => handleRequest(e, guide.guideId)}>Connect</button>
+                                    <button className="rg-btn" id="rg-guide-connect" onClick={(e) => handleRequest(e, guide.id)}>Connect</button>
                                 )}
                                 {guide.status === "Occupied" && (
                                     <button className="rg-btn-disabled" id="rg-guide-connect" disabled>Connect</button>
@@ -137,7 +144,7 @@ const RequestGuide = () => {
                                     </div>
                                 )}
 
-{/* {sendSuccess && (
+{sendSuccess && (
             <div className="alert alert-success" role="alert">
               Notification sent successfully!
             </div>
@@ -146,7 +153,7 @@ const RequestGuide = () => {
             <div className="alert alert-danger" role="alert">
               Failed to send notification.
             </div>
-                    )} */}
+                    )}
                         </div>
                     </div>
                     </div>

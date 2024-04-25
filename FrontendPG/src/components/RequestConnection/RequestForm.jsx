@@ -43,22 +43,32 @@ const RequestForm = () => {
     };
 
     const handleEditClick = async (id) => {
+        //this is student id
         setIsEditing(true);
         try {
             const response = await axios.get(`http://localhost:8080/rdfActions/getRDF/${id}`);
             const latestSubmission = response.data;
-            setFormData(latestSubmission);
+            console.log("LATEST : ",latestSubmission);
+             setFormData(latestSubmission);
+
+            // const stdid = response.data.studentId;
+
+            const studentResponse = await axios.get(`http://localhost:8080/api/auth/student/getuseremail/${id}`);
+            const newdata = await axios.get(`http://localhost:8080/api/auth/student/getstd/${studentResponse.data}`);
+            const studentData = newdata.data;
+            console.log("STUDENT : ",studentData);
+
+           
             setEditId(id);
 
-const stdid = response.data.studentId;
-            const studentResponse = await axios.get(`http://localhost:8080/api/auth/student/${stdid}`);
-                    const studentData = studentResponse.data;
-                    setFormData(prevState => ({
-                        ...prevState,
-                        bname: studentData.branch ,
-                        studentId : id,
-                        stdemail : studentData.email,
-                    }));
+            setFormData(prevState => ({
+                ...prevState,
+                 // Ensure the initial value is defined
+                bname: studentData.branch || '', // Ensure the initial value is defined
+                studentId : id, // Ensure the initial value is defined
+                stdemail : studentData.email || '', // Ensure the initial value is defined
+            }));
+            console.log("FORM : ",formData);
         } catch (error) {
             console.error('Error loading latest submission:', error);
         }
