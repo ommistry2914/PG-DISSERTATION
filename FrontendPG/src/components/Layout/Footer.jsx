@@ -69,7 +69,7 @@ function Footer() {
                     className="footer_P_hover"
                     target="_blank"
                     id="address"
-                    href="">
+                    href="/experts">
                       Experts
                   </a>
                 </div>
@@ -80,7 +80,7 @@ function Footer() {
                     <a
                       id="mail-link-1"
                       className="footer_P_hover"
-                      href=""
+                      href="/trending"
                     >
                       Trending Topic
                     </a>
@@ -97,7 +97,7 @@ function Footer() {
 
               <div className="footer_InDetail">
                 <div>
-                    <a className="footer_P_hover" href="">
+                    <a className="footer_P_hover" href="/templates">
                       Templates
                     </a>
                 </div>
@@ -156,7 +156,7 @@ function Footer() {
               </div>
             </div>
             <div id="div_teambtn" className="webteam_btn">
-                <a href="/webTeamPage">
+                <a href="/webteam" target="_blank">
                   <button className="footer_btn" id="webTeamBtn">
                     WebTeam
                   </button>

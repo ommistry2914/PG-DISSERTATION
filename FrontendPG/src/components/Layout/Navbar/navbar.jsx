@@ -130,7 +130,7 @@ const Navbar = () => {
 
                         </li>
                         <li class="dropdown__item">
-                        <Link to="/">  <span class="nav__link dropdown__button">
+                        <Link to="/pastpage">  <span class="nav__link dropdown__button">
                                 Pastwork 
 
                             </span></Link>
@@ -143,7 +143,7 @@ const Navbar = () => {
 
                         </li>
                         <li class="dropdown__item">
-                        <Link to="/">    <span class="nav__link dropdown__button">
+                        <Link to="/templates">    <span class="nav__link dropdown__button">
                                Templates 
                                 {/* <span class="material-symbols-rounded dropdown__arrow"> expand_more </span> */}
                             </span> </Link>
