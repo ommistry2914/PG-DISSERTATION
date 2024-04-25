@@ -122,6 +122,11 @@
     font-size: 13px;
 }
 
+.faqs-details summary, .faqs-details p{
+    display: flex;
+    justify-content: left;
+}
+/* 
 .faqs-question{
     width: 300px;
     background: var(--surface-color);
@@ -145,4 +150,4 @@
     outline: none;
     border: none;
     transform: scale(1.1);
-}
+} */

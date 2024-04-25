@@ -30,7 +30,7 @@ const Faqs = () => {
           ))}
         </div>
         <div className="faqs-content">
-          <form action="" className='faqs-question-form'>
+          {/* <form action="" className='faqs-question-form'>
             <label>
               <input
                 type="text"
@@ -42,7 +42,7 @@ const Faqs = () => {
               />
             </label>
             <button id='faqs-ask'>Ask</button>
-          </form>
+          </form> */}
           {selectedOption && faqs.find(faqGroup => faqGroup.option === selectedOption)?.faqs.map((faq, index) => (
             <details key={index} className='faqs-details'>
               <summary>{faq.summary}</summary>
