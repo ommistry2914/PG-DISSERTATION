@@ -61,7 +61,7 @@ const RequestGuide = () => {
 
             const std = await axios.get(`http://localhost:8080/api/auth/student/getuserid/${useremail}`);
  const stdid = std.data;
- console.log("LE BHAI : ",stdid);
+ console.log("Check : ",stdid);
 console.log("Hello from handle p1");
             const rdf = await axios.get(`http://localhost:8080/rdfActions/getrdf/from/${stdid}`);
             const rdfresponse = rdf.data;
