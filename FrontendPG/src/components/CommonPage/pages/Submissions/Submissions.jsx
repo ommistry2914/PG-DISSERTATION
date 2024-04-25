@@ -72,7 +72,6 @@ export default function Submissions() {
     <div className='common-pg-contents'>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="#">Student</a></li>
           <li className="breadcrumb-item"><Link to={`/${studentid}/studentguide`}>Dissertation</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Submissions</li>
         </ol>
@@ -109,7 +108,7 @@ export default function Submissions() {
                     <tbody>
                       <tr key={selectedTask.submissions[0].id}>
                         <td>{selectedTask.submissions[0].taskName}
-                        {/* <sub className='common-pg-details-link'> 
+                        <sub className='common-pg-details-link'> 
                         { userRole === 'guide' ? (
                             <Link to={`${selectedTask.submissions[0].taskId}/${selectedTask.submissions[0].id}/latest`}>Details</Link>
 
@@ -117,8 +116,8 @@ export default function Submissions() {
                           <Link to={`${selectedTask.submissions[0].taskId}/${selectedTask.submissions[0].id}/past`}>Details</Link>
 
                         )}
-                        </sub> */}
-                        <sub className='common-pg-details-link'> <Link to={`${selectedTask.submissions[0].taskId}/${selectedTask.submissions[0].id}/latest`}>Details</Link> </sub>
+                        </sub>
+                        {/* <sub className='common-pg-details-link'> <Link to={`${selectedTask.submissions[0].taskId}/${selectedTask.submissions[0].id}/latest`}>Details</Link> </sub> */}
                         </td>
                         <td>{new Date(selectedTask.submissions[0].dateOfSubmission).toLocaleDateString('en-US', {
                           day: 'numeric',
