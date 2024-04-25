@@ -21,7 +21,7 @@ text-align: center;
 {
     max-width: 100%;
     /* background-color: var(--secondary-color-1); */
-    background-color: var(--borderColor);
+    background-color: var(--surface-color);
 
     display: flex;
     flex-direction: row;

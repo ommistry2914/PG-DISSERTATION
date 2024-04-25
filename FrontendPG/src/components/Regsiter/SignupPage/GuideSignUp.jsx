@@ -43,7 +43,7 @@ const GuideSignUp = () => {
         image_url: imageUrl 
       };
 
-      const response = await axios.post('http://localhost:8080/api/auth/guide', payload);
+      const response = await axios.post('http://localhost:8080/api/auth/guide/addGuide', payload);
 
       console.log('Student saved:', response.data);
       navigate('/mentorprofile');
@@ -52,7 +52,7 @@ const GuideSignUp = () => {
 
       console.error('Error saving student:', error);
       setLoading(false); 
-      message.error('Failed to save student. Please try again later.');
+      message.error('Failed to save guide. Please try again later.');
     }
   };
 

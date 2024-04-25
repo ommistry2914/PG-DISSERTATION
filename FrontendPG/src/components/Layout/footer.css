@@ -1,7 +1,7 @@
 /* *************   Styling in Footer(Contact) *************** */
 
 #footer {
-    background-color: whitesmoke;
+    background-color: var(--bg-color);
     border: 1px solid #3a343461;
     margin-top: 2rem;
   color: var(--color-lavender);
@@ -213,13 +213,18 @@
   .footer_Item {
     padding: 1.56em;
   }
-/*   
+
+  .header_ft{
+    background-color: var(--bg-color);
+  }
+  
   .footer_header {
     color: black;
     font-size: 2.3em;
     letter-spacing: 3px;
-    padding-bottom: 5px;
-  } */
+    /* padding-bottom: 5px; */
+    background-color: var(--bg-color);
+  }
   
   .footer_InDetail {
     width: 85%;

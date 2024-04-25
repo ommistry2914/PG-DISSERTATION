@@ -57,7 +57,9 @@ const PastDetailedSubmission = () => {
             <p><strong>References:</strong></p>
             <div className="common-pg-sub-details">{submission.references}</div>
             <p><strong>File:</strong></p>
-            <div className="common-pg-sub-details"><p>{submission.fileSubmitted} <button onClick={handleDownload} className="common-pg-add-work-submit"><FaDownload /></button></p>
+            <div className="common-pg-sub-details"><p>{submission.fileSubmitted}
+                <button  className="common-pg-add-work-submit"><a download="" href={`C://Users/ommis/AppData/Local/Temp/tomcat.8080.7384810754046742084/work/Tomcat/localhost/ROOT/assets/${submission.fileSubmitted}`} >download</a> </button>
+              </p>
             </div>  </div>
         </div>
       </div>

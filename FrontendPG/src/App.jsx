@@ -1,5 +1,4 @@
 
-// import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 import { BrowserRouter as Router, Route, Routes ,Navigate, useParams} from "react-router-dom";
 
@@ -7,7 +6,7 @@ import './App.css'
 import { useState } from "react";
 import Navbar from './components/Layout/Navbar/navbar';
 import Home from './screens/home';
-import ChatRoom from "./components/ChatBot/ChatRoom";
+import ChatRoom from "./components/ChatBot/ChatBox";
 import MainSignUp from './components/Regsiter/SignupPage/MainSignUp';
 import Signup from './components/Regsiter/SignupPage/Signup';
 import Login from './components/Regsiter/LoginPage/Login';
@@ -28,8 +27,7 @@ import RequestGuide from "./components/RequestConnection/RequestGuide";
 import ViewRDF from "./components/RequestConnection/ViewRDF";
 import ProfilePage from "./components/Student/ProfilePage";
 // import Form from "./components/CommonPage/pages/ResearchWorkForm/Form";
-import AuthPage from "./components/ChatBot/Chatlogin";
-import ChatsPage from "./components/ChatBot/Chat";
+// import Dashboard from "./components/ChatBot/Chatt";
 const App = () => {
   const [user, setUser] = useState();
   const { authenticated, userRole, useremail } = useAuth();
@@ -41,7 +39,8 @@ const App = () => {
       
       <Route path="/" element={<Home />} />
       {/* <Route path="/chatlogin" element={<AuthPage onAuth={(user) => setUser(user)} />} /> */}
-      <Route path="/chatroom" element={<ChatsPage/>} />
+      {/* <Route path="/chatroom" element={<ChatsPage/>} /> */}
+      <Route path="/chatroom" element={<ChatRoom/>} />
         <Route path="/signup" element={<MainSignUp />} />
         <Route path="/login" element={<Login />} />
 
@@ -81,6 +80,7 @@ const App = () => {
         <Route exact path="/requestform" element={<RequestForm />}></Route>
         <Route exact path="/statistics" element={<Statistics />}></Route>
         <Route exact path="/showguide" element={<GuideCard />}></Route>
+        <Route exact path="/chatroom" element={<ChatRoom />}></Route>
 
 
         <Route exact path="/webteam"  element={<WebTeamMain />} ></Route>
@@ -94,10 +94,10 @@ const App = () => {
   );
 };
 
-const ChatRoomPage = () => {
-  let { username } = useParams();
+// const ChatRoomPage = () => {
+//   let { username } = useParams();
 
-  return <ChatsPage user={username} />;
-};
+//   return <ChatsPage user={username} />;
+// };
 
 export default App;
