@@ -87,6 +87,7 @@ const Progress = () => {
 
     fetchTasks();
   }, [studentid]);
+
  useEffect(()=>{
   let total=tasks.length;
   let complete=0;
@@ -134,7 +135,7 @@ const Progress = () => {
               <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={pendingProgress} />Pending Tasks</div>
               <div className='common-pg-progress-ring col-sm-3'><CircularProgressBar percentage={completeProgress} />Completed Tasks</div>
             </div>
-            <div className="common-pg-timeline-div  col-sm-12 col-md-12 col-lg-12">
+            {/* <div className="common-pg-timeline-div  col-sm-12 col-md-12 col-lg-12">
               <div className="common-pg-time-line">
                 <ul>
                   <li data-escena="Intro" className="checkpoint">
@@ -172,7 +173,7 @@ const Progress = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
             <div className="common-pg-progress-table-div col-sm-12">
               <table className='common-pg-progress-table'>
                 <thead>

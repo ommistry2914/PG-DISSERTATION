@@ -2,20 +2,27 @@ import React, { useState, useEffect } from "react";
 import "./NewGuideRequest.css";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { useAuth } from "../../../AuthContext";
 
 const NewGuideRequest = () => {
   const [requests, setRequests] = useState([]);
   const [submitMessage, setSubmitMessage] = useState('');
   const [refresh, setRefresh] = useState(false); // State to trigger page refresh
 
-  const guideId = "0987654321";
+  const {authenticated , useremail} = useAuth();
+  console.log("mail check : ",useremail);
+
+  //const guideId = "0987654321";
 
   useEffect(() => {
     fetchRequests();
-  }, [refresh]); // Refresh page when 'refresh' state changes
+  }, [refresh,useremail]); // Refresh page when 'refresh' state changes
 
   const fetchRequests = async () => {
     try {
+
+      const check = await axios.get(`http://localhost:8080/api/auth/guide/getidbymail/${useremail}`);
+      const guideId = check.data;
       const response = await axios.get(
         `http://localhost:8080/requestConnection/getmyrequests/${guideId}`
       );

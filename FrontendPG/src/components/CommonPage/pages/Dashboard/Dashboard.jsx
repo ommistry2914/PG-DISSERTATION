@@ -8,6 +8,7 @@ import Lottie from 'react-lottie';
 import animationData from './Student.json';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from '../../../../AuthContext';
 
 const Profile = () => {
   const [tasks, setTasks] = useState([]);
@@ -20,6 +21,9 @@ const Profile = () => {
   const [studentDetails , setStudentDetails] = useState({});
 
   const { studentid } = useParams();
+  const{userRole} = useAuth();
+  console.log("Role : ",userRole);
+  console.log("student id coming from dashboard : ",studentid);
   const MyLottieAnimation = () => {
     const defaultOptions = {
       loop: true,
@@ -36,7 +40,7 @@ const Profile = () => {
     fetchStudent();
   }, [studentid]);
 
-  const fetchStudent = async  ()=>{
+  const fetchStudent = async()=>{
     try
     {
       console.log("Checking id : ",studentid);
@@ -44,6 +48,7 @@ const Profile = () => {
       console.log(dissresp.data);
 
       const studentval = dissresp.data.studentId;
+      console.log("STUDENT FROM DISSERTATION : ",studentval);
 
       const stdresp = await axios.get(`http://localhost:8080/api/auth/student/getmongoid/${studentval}`);
       console.log(stdresp.data);
@@ -60,6 +65,7 @@ const timeDifference = endDate.getTime() - new Date().getTime();
 
 // Convert milliseconds to days
 const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+console.log("TIME : ",daysRemaining);
 
 setStudentDetails({
   name : stdresp.data.name,
@@ -68,7 +74,8 @@ setStudentDetails({
   ddesc : dissresp.data.dissertationDesc,
   dstart : dissresp.data.drtstartDate,
   dend : endDate,
-  drem : daysRemaining
+  drem : daysRemaining,
+  image : stdresp.data.image_url
 });
 
     }
@@ -110,8 +117,11 @@ setStudentDetails({
 
         const filteredNotes = data.filter(item => {
           if (item.notes) {
+            // const noteDate = new Date(item.date);
+            // return formattedDateForComparison === noteDate.toISOString().slice(0, 10);
             const noteDate = new Date(item.date);
-            return formattedDateForComparison === noteDate.toISOString().slice(0, 10);
+            noteDate.setDate(noteDate.getDate() - 1); // Subtract one day
+            eventDates.push(noteDate.toDateString());
           }
           return false;
         }).slice(0, 3);
@@ -184,7 +194,16 @@ setStudentDetails({
   return <div className="common-pg-contents">
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
-        <li className="breadcrumb-item"><Link to={`/studentdashboard/${studentid}`}>Student</Link></li>
+        <li className="breadcrumb-item">
+          {/* <Link to={`/studentdashboard/${studentid}`}>Student</Link> */}
+          { userRole === 'guide' ? (
+                            <Link to="#">Student</Link>
+
+                        ) : (
+                          <Link to={`/studentdashboard/${studentid}`}>Student</Link>
+
+                        )}
+          </li>
         <li className="breadcrumb-item active" aria-current="page">Dissertation</li>
       </ol>
     </nav>
@@ -192,7 +211,7 @@ setStudentDetails({
 
       <div className=' common-pg-project-div row'>
         <div className=" common-pg-student-name col-sm-12 col-md-4 col-lg-4">
-          <div className="common-pg-profile-img"><img src={Photo1} alt="" className="common-pg-profile-pic" /></div>
+          <div className="common-pg-profile-img"><img src={studentDetails.image} alt="" className="common-pg-profile-pic" /></div>
           <div className="common-pg-profile-detail">
             <h4>{studentDetails.name}</h4>
             <p id="common-pg-field">{studentDetails.branch}</p>

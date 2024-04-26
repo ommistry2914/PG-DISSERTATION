@@ -52,8 +52,10 @@ public class DissertationController {
     {
         Optional<Dissertation> dissertation = dissrepo.findByStudentId(id);
 
+        System.out.println("DHUNDHO BAHI");
         if(dissertation.isPresent())
         {
+            System.out.println("DHUNDHO BAHI snfjgdfja");
             return new ResponseEntity<Dissertation>(dissertation.get(),HttpStatus.OK);
         }
         return new ResponseEntity<>("NO DISSERTATION",HttpStatus.OK);
@@ -71,5 +73,29 @@ public class DissertationController {
         }
 
         return new ResponseEntity<>("No Record Available Currently", HttpStatus.OK);
+    }
+
+//    @GetMapping("/getmyguidedissertation/check/{guideid}")
+//    public ResponseEntity<?> getguidedisscheck(@PathVariable("guideid") String gid)
+//    {
+//        List<Dissertation> check = dissrepo.findByGuideId(gid);
+//
+//        if(check.size() > 0)
+//        {
+//            return new ResponseEntity<List<Dissertation>>(check, HttpStatus.OK);
+//        }
+//
+//        return new ResponseEntity<>("No Record Available Currently", HttpStatus.OK);
+//    }
+
+    @PutMapping("/changedstatus/{stdid}")
+    public String change(@PathVariable("stdid") String sid)
+    {
+        Optional<Dissertation> d = dissrepo.findByStudentId(sid);
+        Dissertation dd = d.get();
+
+        dd.setDissertationStatus("Completed");
+        dissrepo.save(dd);
+        return "STATUS CHANGED FOR DISSERTATION";
     }
 }

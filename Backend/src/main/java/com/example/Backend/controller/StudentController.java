@@ -85,11 +85,13 @@ public ResponseEntity<Map<String, Boolean>> checkStudentEmail(@PathVariable Stri
     @GetMapping("/givenamebranch/{stdid}")
     public ResponseEntity<?> give(@PathVariable("stdid") String stdId)
     {
-        Optional<Student> std = srepo.findById(stdId);
+        Optional<User> std = urepo.findById(stdId);
 
         if (std.isPresent())
         {
-            return ResponseEntity.ok(std.get());
+            String mail = std.get().getEmail();
+            Student student = srepo.findByEmail(mail);
+            return ResponseEntity.ok(student);
         }
         else {
             return ResponseEntity.ok("No data");
@@ -124,9 +126,18 @@ public ResponseEntity<Map<String, Boolean>> checkStudentEmail(@PathVariable Stri
     @GetMapping("/getmongoid/{stdid}")
     public ResponseEntity<?> getstudentbymongo(@PathVariable("stdid") String stdId)
     {
-        Optional<Student> std = srepo.findById(stdId);
+        Optional<User> user = urepo.findById(stdId);
+System.out.println("SDFSVSV");
+        if(user.isPresent())
+        {
+            System.out.println("jldjlj");
+            String email = user.get().getEmail();
 
-        return new ResponseEntity<Student>(std.get(), HttpStatus.OK);
+            Student std = srepo.findByEmail(email);
+            System.out.println("bnvxbv");
+            return new ResponseEntity<Student>(std, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("NOT AVAILABLE",HttpStatus.OK);
     }
 
     @PutMapping("/editprofile/{stdid}")
