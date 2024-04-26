@@ -1,6 +1,6 @@
 .container-desc {
     position: relative;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
 }
 
 
@@ -44,7 +44,8 @@
     width: 0%;
     word-break: break-all;
     overflow: hidden;
-    color: var(--secondary-color-1);
+    /* color: var(--secondary-color-1); */
+    color: rgb(67, 64, 64);
     /* border:2px solid green; */
     animation: t 6s linear infinite alternate;
 }
@@ -70,7 +71,8 @@
     text-align: justify;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--secondary-color-1);
+    /* color: var(--secondary-color-1); */
+    color: rgb(31, 30, 30);
 }
 
 /* .read-link1{
