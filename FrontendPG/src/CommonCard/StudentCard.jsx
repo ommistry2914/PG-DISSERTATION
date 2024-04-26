@@ -15,7 +15,7 @@ const StudentCard = ({profile, name, desc, link1, link2, img}) => {
         <div className="flex">
           <div className="eth">
             <Link to='/'>
-            <button>Profile</button>
+            <button className='trview_more p_button'>Profile</button>
             </Link>
           </div>
           <div className="days">

@@ -11,7 +11,7 @@ text-align: center;
 .stat-main{
     max-width: 100% !important;
     /* background-color: var(--secondary-color-1); */
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
 
 
@@ -20,8 +20,8 @@ text-align: center;
 .stat-bg
 {
     max-width: 100%;
-    /* background-color: var(--secondary-color-1); */
-    background-color: var(--surface-color);
+    /* background-color: var(--secondary-color-2); */
+    /* background-color: var(--surface-color); */
 
     display: flex;
     flex-direction: row;
@@ -33,13 +33,13 @@ text-align: center;
 .stat-card
 {
     /* background-color: white; */
-    /* background-color: var(--secondary-color-1); */
-
-    padding: 5%;
+    /* background-color: var(--secondary-color-2); */
+    /* border: 5px double var(--secondary-color-2); */
+    padding: 2%;
     font-family: Nunito;
-    /* border-radius: 10px; */
-    /* width:30%; */
-    /* width: calc(30% - 20px); */
+    border-radius: 10px;
+    width:30%;
+    width: calc(30% - 20px);
 }
 
 .statfont{

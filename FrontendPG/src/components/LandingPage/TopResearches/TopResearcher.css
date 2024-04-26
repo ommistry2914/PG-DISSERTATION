@@ -10,7 +10,9 @@
     padding-right: 6rem;
     margin-bottom: 3rem;
   }
-  
+  h2{
+    color: var(--secondary-color-1);
+  }
   .trContents {
     display: flex;
     flex-wrap: wrap;
@@ -21,13 +23,14 @@
   
   .trContent {
     width: calc(24% - 1em); /* Adjust width for responsiveness */
-    background: #d9bff7;
+    /* background: #d9bff7; */
     position: relative;
     text-align: center;
     padding: 0.5em;
     border-radius: 10px;
     margin-bottom: 1em; /* Add margin between items */
     margin-top: 2rem;
+    border: 2px solid var(--borderColor);
   }
   
   .trContent img {
@@ -38,17 +41,20 @@
   
   .trContent p {
     margin: 0.5em 0; 
+    font-size: 20px;
+    color: var(--secondary-color-1);
   }
   
   .trContent button {
-    font-size: 1em;
+    font-size: 0.8em;
     width: 100%;
-    background-color: var(--secondary-color-1);
-    color: var(--text-color-white);
+    background-color: white;
+    /* color: var(--text-color-white); */
+    color: black;
     border-radius: 10px;
     cursor: pointer;
-    padding: 0.5em;
-    border: none; /* Remove border */
+    /* padding: 0.5em; */
+    border: 2px solid var(--borderColor);
     transition: background-color 0.3s ease; /* Add transition effect */
   }
   
@@ -62,12 +68,11 @@
     border: none;
     color: var(--text-color-white);
     font-size: 1rem;
-    padding: 0.7em 1.5em;
+    /* padding: 0.7em 1.5em; */
     border-radius: 8px;
     cursor: pointer;
     margin: 0 auto; /* Center button */
-    display: block; /* Ensure button takes full width */
-    margin-top: 1em; /* Add margin from top */
+    display: block; 
     float: right;
   }
   

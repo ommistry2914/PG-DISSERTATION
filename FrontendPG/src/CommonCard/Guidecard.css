@@ -1,4 +1,4 @@
-
+/* 
 
 .topResearches {
   background: var(--background-color);
@@ -20,14 +20,14 @@
 }
 
 .trContent {
-  width: calc(24% - 1em); /* Adjust width for responsiveness */
-  /* background: #d9bff7; */
+  width: calc(24% - 1em); 
+  background: #d9bff7;
   background: none;
   position: relative;
   text-align: center;
   padding: 0.5em;
   border-radius: 10px;
-  margin-bottom: 1em; /* Add margin between items */
+  margin-bottom: 1em; 
   margin-top: 2rem;
 }
 
@@ -49,8 +49,8 @@
   border-radius: 10px;
   cursor: pointer;
   padding: 0.5em;
-  border: none; /* Remove border */
-  transition: background-color 0.3s ease; /* Add transition effect */
+  border: none; 
+  transition: background-color 0.3s ease; 
 }
 
 .trContent button:hover {
@@ -66,26 +66,36 @@
   padding: 0.7em 1.5em;
   border-radius: 8px;
   cursor: pointer;
-  margin: 0 auto; /* Center button */
-  display: block; /* Ensure button takes full width */
-  margin-top: 1em; /* Add margin from top */
+  margin: 0 auto;
+  display: block; 
+  margin-top: 1em; 
   float: right;
 }
 
 @media screen and (max-width: 1270px) {
   .trContent {
-    width: calc(30% - 1em); /* Adjust width for responsiveness */
+    width: calc(30% - 1em);
   }
 }
 
 @media screen and (max-width: 1090px) {
   .trContent {
-    width: calc(45% - 1em); /* Adjust width for responsiveness */
+    width: calc(45% - 1em); 
   }
 }
 
 @media screen and (max-width: 730px) {
   .trContent {
-    width: calc(90% - 1em); /* Adjust width for responsiveness */
+    width: calc(90% - 1em); 
   }
+} */
+
+
+.expert-main{
+  border: none;
 }
+
+.expert-main img{
+  height: 250px;
+}
+
