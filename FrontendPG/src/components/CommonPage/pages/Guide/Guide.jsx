@@ -18,11 +18,10 @@ const Guide = () => {
             <div className="common-pg-banner col-sm-12 col-md-6">
                     <h6>"Navigate your uncertainties with expert guidance, come clear your doubts with your guide!</h6>
                     <div className="common-pg-about-guide">
-                    <div className="common-pg-guide-pic"><img src={Photo1} alt=""/></div>
+                    <div className="common-pg-guide-pic"><img src="https://msu-new-2023-ec2-ubuntu-unzip.s3.ap-south-1.amazonaws.com/asset/storage/staff_pic/701mcp.jpg" alt=""/></div>
                         <div className="common-page-guide-details">
-                            <h4>Name</h4>
-                            <p>Skill</p>
-                            <p>Profession</p>
+                            <h4 className='g-name'>Dr. Mamta C. Padole</h4>
+                            <h5 className='g-name'>Associate Professor</h5>
                         </div>
                     </div>
 

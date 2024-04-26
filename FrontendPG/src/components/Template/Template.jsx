@@ -61,8 +61,8 @@ const Template = () => {
         {researchData.map((research) => (
           <div className="trContent" key={research.id}>
             <img src={research.image} alt={`Research ${research.id}`} className="research-image" />
-            <p>-by {research.author}</p>
-            <p>-guided by {research.guide}</p>
+            <p>-By {research.author}</p>
+            <p>-Guided by {research.guide}</p>
             <button>
             <a download=""  href="/src/assests/sampleTemplate">Download</a>
             </button>
