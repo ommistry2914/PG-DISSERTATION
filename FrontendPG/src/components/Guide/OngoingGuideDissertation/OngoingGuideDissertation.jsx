@@ -115,6 +115,7 @@ const OngoingGuideDissertation = () => {
                 {
                     const dissertationsData = fresp.map(async dissertation => {
                         const stdid = dissertation.studentId;
+                        console.log("Dissertation se id  : ",stdid);
                         const studentResponse = await axios.get(`http://localhost:8080/api/auth/student/givenamebranch/${stdid}`);
                         const studentData = studentResponse.data;
                         return {
@@ -217,7 +218,7 @@ const OngoingGuideDissertation = () => {
                     </div>
                 ))} */}
 
-{dissertation.map((diss, index) => (
+{/*{dissertation.map((diss, index) => (
                     <div className="new_request" key={index}>
                         <div className="student_img">
                             <img src="https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=95&w=145&h=97" alt="" />
@@ -232,7 +233,29 @@ const OngoingGuideDissertation = () => {
                             <Link to={`/${diss.studentId}/studentguide/`}><button>View More</button></Link>
                         </div>
                     </div>
-                ))}
+                ))}*/}
+
+{dissertation ? (
+    dissertation.map((diss, index) => (
+        <div className="new_request" key={index}>
+            <div className="student_img">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=95&w=145&h=97" alt="" />
+            </div>
+            <div className="greq_head">
+                <p>Topic: {diss.dissertationName}</p>
+                <p>Student: {diss.studentName}</p>
+                <p>Branch: {diss.studentBranch}</p>
+            </div>
+            <div className="greq_button">
+                <Link to={`/mentorprofile/ongoing/allottask/${diss.studentId}/alloted`}><button>Allot Task</button></Link>
+                <Link to={`/${diss.studentId}/studentguide/`}><button>View More</button></Link>
+            </div>
+        </div>
+    ))
+) : (
+    <div>No records available</div>
+)}
+
             </div>
         </div>
     );

@@ -40,7 +40,7 @@ const GuideSignUp = () => {
         academicQualification: values.Academic,
         yearOfExperience:values.year,
         areaOfSpecialization:values.area,
-        image_url: imageUrl 
+        image: imageUrl 
       };
 
       const response = await axios.post('http://localhost:8080/api/auth/guide/addGuide', payload);

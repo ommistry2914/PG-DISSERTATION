@@ -7,6 +7,7 @@ function AllotTask() {
   
   const [notification,setNotification]=useState(null);
   const [formData, setFormData] = useState({
+    userId:'',
     taskName: '',
     taskDescription: '',
     startDate: '',
@@ -17,9 +18,14 @@ function AllotTask() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
-  const {email}=useParams();
+  const {email, studentId}=useParams();
+  let studentid = studentId;
 
+  console.log("CAPital check : ",studentId);
   const {authenticated,useremail}=useAuth();
+  console.log("MAIL CHECK AT ALLOT TASK : ",useremail);
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -54,6 +60,7 @@ function AllotTask() {
     }
     console.log(notification);
     const formData = {
+      userId: studentId,
       taskName: e.target.taskName.value,
       taskDescription: e.target.taskDescription.value,
       startDate: e.target.startDate.value,
@@ -61,7 +68,7 @@ function AllotTask() {
       priority: e.target.priority.value,
       maxCredits: e.target.maxCredits.value
     };
-
+console.log(`${studentid}`);
     fetch(`http://localhost:8080/allottask/${studentid}`, {
       method: 'POST',
       headers: {

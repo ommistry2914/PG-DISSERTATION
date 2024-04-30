@@ -34,7 +34,7 @@ public class TasksController {
     @PostMapping("allottask/{userid}")
     public void addTask(@PathVariable("userid") String userid, @RequestBody Tasks task) {
         task.setId(UUID.randomUUID().toString().split("-")[0]);
-        task.setUserId(userid);
+        // task.setUserId(userid);
         task.setStatus("Pending");
 
         System.out.println(userid);

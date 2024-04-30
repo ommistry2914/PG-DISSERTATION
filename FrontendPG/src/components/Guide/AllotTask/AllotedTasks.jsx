@@ -16,7 +16,8 @@ const getPriorityColor = (priority) => {
 
 const AllotedTasks = () => {
     const [tasks, setTasks] = useState([]);
-    const { studentid } = useParams();
+    const { studentId } = useParams();
+    const studentid = studentId;
     const [showDeleteSuccessAlert, setShowDeleteSuccessAlert] = useState(false);
     const [showDeleteErrorAlert, setShowDeleteErrorAlert] = useState(false);
 
@@ -36,7 +37,7 @@ const AllotedTasks = () => {
         };
 
         fetchTasks();
-    }, [email]);
+    }, [studentid]);
 
     //Delete a Task
     const onDelete = async (taskid) => {

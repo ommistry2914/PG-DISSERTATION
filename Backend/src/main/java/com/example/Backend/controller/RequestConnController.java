@@ -12,6 +12,7 @@ import com.example.Backend.repository.RequestDFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -66,6 +67,7 @@ public class RequestConnController
 
 
     //change status of the request from newGuideRequest Page
+    @Transactional
     @PutMapping("/changeStatus/{stdid}/{gid}/{stat}")
     public ResponseEntity<?> changeStat(@PathVariable("stdid") String stdId,@PathVariable("gid") String gId,@PathVariable("stat") String status) {
         Optional<RequestConn> exist = rcrepo.findByReqStudentAndReqGuide(stdId, gId);
@@ -77,41 +79,44 @@ public class RequestConnController
             rcrepo.save(newRConn);
 
             if (status.equals("Accept")) {
-                Optional<GuideAvailibility> statcheck = arepo.findByGuideId(newRConn.getReqGuide());
+                System.out.println("Reachec");
+//                Optional<GuideAvailibility> statcheck = arepo.findByGuideId(newRConn.getReqGuide());
 
-                if (statcheck.isPresent()) {
-                    GuideAvailibility look = statcheck.get();
+                Optional<RequestDForm> imm = rdfrepo.findByStudentId(newRConn.getReqStudent());
+                System.out.println("2");
+                RequestDForm immi = imm.get();
 
-                    if (look.getCount() < 5) {
-                        Optional<RequestDForm> imm = rdfrepo.findByStudentId(newRConn.getReqStudent());
+                Dissertation drt = new Dissertation();
+                drt.setDissertationId(UUID.randomUUID().toString().split("-")[0]);
+                drt.setStudentId(newRConn.getReqStudent());
+                drt.setGuideId(newRConn.getReqGuide());
+                drt.setDissertationName(immi.getDissertationName());
+                drt.setDissertationDesc(immi.getDissertationDesc());
+                drt.setDissertationStatus("Started");
+                drt.setDrtstartDate(new Date());
+                drt.setRdfId(immi.getRdfId());
 
-                        RequestDForm immi = imm.get();
+                dissrepo.save(drt);
 
-                        Dissertation drt = new Dissertation();
-                        drt.setDissertationId(UUID.randomUUID().toString().split("-")[0]);
-                        drt.setStudentId(newRConn.getReqStudent());
-                        drt.setGuideId(newRConn.getReqGuide());
-                        drt.setDissertationName(immi.getDissertationName());
-                        drt.setDissertationDesc(immi.getDissertationDesc());
-                        drt.setDissertationStatus("Started");
-                        drt.setDrtstartDate(new Date());
-                        drt.setRdfId(immi.getRdfId());
-
-                        dissrepo.save(drt);
-
-                        look.setCount(look.getCount() + 1);
-
-                        arepo.save(look);
-                    } else {
-
-                        newRConn.setReqStatus("Decline");
-                        rcrepo.save(newRConn);
-                        return ResponseEntity.ok("Couldn't Accept as you already reached the maximum limit of students");
-
-                    }
-
-
-                }
+//                if (statcheck.isPresent()) {
+//                    GuideAvailibility look = statcheck.get();
+//                    System.out.println("1");
+//                    if (look.getCount() < 5) {
+//
+//                        System.out.println("3");
+//                        look.setCount(look.getCount() + 1);
+//
+//                        arepo.save(look);
+//                    } else {
+//
+//                        newRConn.setReqStatus("Decline");
+//                        rcrepo.save(newRConn);
+//                        return ResponseEntity.ok("Couldn't Accept as you already reached the maximum limit of students");
+//
+//                    }
+//
+//
+//                }
 
                 // Retrieve all pending requests from other guides for the same student
                 List<RequestConn> pendingRequests = rcrepo.findByReqStudent(stdId);

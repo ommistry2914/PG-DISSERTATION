@@ -37,7 +37,7 @@ public class GuideService {
          ag.setGuideId(guide.getId());
          ag.setCount(0);
          arepo.save(ag);
-
+System.out.println("Guide");
          return guideRepository.save(guide);
     }
 

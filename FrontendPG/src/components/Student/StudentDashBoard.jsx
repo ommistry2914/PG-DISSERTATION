@@ -101,7 +101,7 @@ const StudentDashboard = () => {
     console.log("UseEffect mein se values are sabse pehle :",t1,t2,t3,t4);
     fetchDetails();
     console.log("UseEffect mein se values are baadmein :",t1,t2,t3,t4);
-  }, [studentId,t1,t2,t3,t4]);
+  }, [studentId]);
 
   const fetchDetails = async () => {
     try {
@@ -146,7 +146,8 @@ const StudentDashboard = () => {
       dname:dissresp.data.dissertationName,
       dguide : dissresp.data.guideId,
       dstart : dissresp.data.drtstartDate,
-      dstatus : dissresp.data.dissertationStatus
+      dstatus : dissresp.data.dissertationStatus,
+      image : std.data.image_url
     });
 
     const email = await axios.get(`http://localhost:8080/api/auth/student/getstudentemail/for/${studentId}`);
@@ -311,6 +312,8 @@ setT4(1);
       setT3(1);
       setT4(1);
 
+      const ans = await axios.put(`http://localhost:8080/api/auth/dissertations/`)
+
 //       console.log("IN TIMELINE 4");
 // console.log("t1 : ",t1);
 // console.log("t2 : ",t2);
@@ -396,7 +399,7 @@ setT4(1);
         style={{ width: showCalendar ? "60%" : "100%" }}
       >
         <section className="sd-addressing">
-          <img src={img1} alt="userimg" className="sd-userimage"></img>
+          <img src={details ? details.image : "Student"} alt="userimg" className="sd-userimage"></img>
           <h2>Hello {details ? details.stdname : "Student"}, {greeting}</h2>
         </section>
 

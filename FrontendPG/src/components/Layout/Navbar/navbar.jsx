@@ -137,7 +137,7 @@ const Navbar = () => {
 
                         </li>
                         <li class="dropdown__item">
-                        <Link to="/">   <span class="nav__link dropdown__button">
+                        <Link to="/requestguidepage">   <span class="nav__link dropdown__button">
                                 View Expert 
                             </span></Link>
 

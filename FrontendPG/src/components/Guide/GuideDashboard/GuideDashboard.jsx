@@ -39,7 +39,7 @@ const GuideDashboard = () => {
                         <div className='guide_content'>
                         <div className="guide_profile">
                             <div className="guide_img">
-                                <img src="https://tse1.mm.bing.net/th?id=OIP.6h97cyJOLha0BuEZSM6RgwHaE8&pid=Api&rs=1&c=1&qlt=105&w=145&h=97" alt="" />
+                                <img src={guides.image} alt="" />
                             </div>
                             <div className="ghead">
                                 <h2>{guides.name}</h2>
@@ -58,7 +58,7 @@ const GuideDashboard = () => {
                             <div id="gdashboard">
                                 <h3>About</h3>
                                 <div className="guide_about">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio maxime inventore soluta, maiores totam tempore! Veniam voluptatem quae possimus suscipit neque! Quibusdam dolorem iusto, dignissimos repudiandae ut ullam voluptates molestiae.</p>
+                                    <p>Working for the betterment of students' dissertation</p>
                                 </div>
                                 <h3>Details</h3>
                                 <p>Academic Qualifications: <input type="text" name="" id="" value={guides.academicQualification} readOnly /></p>
