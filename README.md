@@ -3,7 +3,7 @@
 
 ## Description
 
-Briefly describe your React project, its purpose, and the main features it offers.
+In a collaborative effort, We developed a PG dissertation management system using Spring Boot and React.js. This system enables end-to-end management of student dissertations, facilitating mentor connectivity and chat functionality via WebSocket integration with the database. Leveraging the extensive libraries and features of Spring Boot, we ensured robust and scalable performance throughout the application.
 
 ## Table of Contents
 
