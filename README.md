@@ -58,4 +58,3 @@ In a collaborative effort, We developed a PG dissertation management system usin
 
 6. Open a pull request on GitHub.
 
-7.
